@@ -21,6 +21,11 @@ namespace RandomEngine {
 		while (_running) {
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			for (Layer* layer : _layerStack) {
+				layer->OnUpdate();
+			}
+
 			_window->OnUpdate();
 		}
 	}
@@ -30,11 +35,26 @@ namespace RandomEngine {
 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+
+		for (auto iterator = _layerStack.end(); iterator != _layerStack.begin(); ) {
+			(*--iterator)->OnEvent(e);
+			if (e.IsHandled()) {
+				break;
+			}
+		}
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e) {
 		_running = false;
 		return true;
+	}
+
+	void Application::PushLayer(Layer* layer) {
+		_layerStack.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* overlay) {
+		_layerStack.PushOverlay(overlay);
 	}
 
 }

@@ -119,6 +119,8 @@
     <ClInclude Include="src\RandomEngine\Events\Event.h" />
     <ClInclude Include="src\RandomEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\RandomEngine\Events\MouseEvent.h" />
+    <ClInclude Include="src\RandomEngine\Layer.h" />
+    <ClInclude Include="src\RandomEngine\LayerStack.h" />
     <ClInclude Include="src\RandomEngine\Log.h" />
     <ClInclude Include="src\RandomEngine\Application.h" />
     <ClInclude Include="src\RandomEngine\Core.h" />
@@ -129,6 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\RandomEngine\Layer.cpp" />
+    <ClCompile Include="src\RandomEngine\LayerStack.cpp" />
     <ClCompile Include="src\RandomEngine\Log.cpp" />
     <ClCompile Include="src\RandomEngine\Application.cpp" />
     <ClCompile Include="src\REPCH.cpp">

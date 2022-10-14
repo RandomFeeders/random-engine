@@ -46,6 +46,8 @@ namespace RandomEngine {
 			inline bool IsInCategory(EventCategory category) {
 				return HAS_FLAG(GetCategoryFlags(), category);
 			}
+
+			inline bool IsHandled() const { return _handled; }
 	};
 
 	class EventDispatcher {

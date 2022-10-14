@@ -5,6 +5,7 @@
 #include "Core.h"
 #include "Window.h"
 #include "Events/ApplicationEvent.h"
+#include "LayerStack.h"
 
 namespace RandomEngine {
 
@@ -13,6 +14,7 @@ namespace RandomEngine {
 		private:
 			bool _running = false;
 			std::unique_ptr<Window> _window;
+			LayerStack _layerStack;
 
 			bool OnWindowClose(WindowCloseEvent& e);
 
@@ -22,6 +24,9 @@ namespace RandomEngine {
 
 			void Run();
 			void OnEvent(Event& e);
+
+			void PushLayer(Layer* layer);
+			void PushOverlay(Layer* overlay);
 	};
 
 	Application* CreateApplication();

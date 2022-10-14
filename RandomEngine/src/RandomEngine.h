@@ -3,6 +3,7 @@
 #include "REPCH.h"
 
 #include "RandomEngine/Application.h"
+#include "RandomEngine/Layer.h"
 #include "RandomEngine/Log.h"
 #include "RandomEngine/Window.h"
 

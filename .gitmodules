@@ -1,0 +1,6 @@
+[submodule "RandomEngine/vendor/spdlog"]
+	path = RandomEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "RandomEngine/vendor/glfw"]
+	path = RandomEngine/vendor/glfw
+	url = https://github.com/glfw/glfw

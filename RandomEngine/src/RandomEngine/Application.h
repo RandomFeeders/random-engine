@@ -4,6 +4,7 @@
 
 #include "Core.h"
 #include "Window.h"
+#include "Events/ApplicationEvent.h"
 
 namespace RandomEngine {
 
@@ -13,11 +14,14 @@ namespace RandomEngine {
 			bool _running = false;
 			std::unique_ptr<Window> _window;
 
+			bool OnWindowClose(WindowCloseEvent& e);
+
 		public:
 			Application();
 			virtual ~Application();
 
 			void Run();
+			void OnEvent(Event& e);
 	};
 
 	Application* CreateApplication();

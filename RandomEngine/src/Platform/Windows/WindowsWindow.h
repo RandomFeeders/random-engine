@@ -26,6 +26,7 @@ namespace RandomEngine {
 			
 
 			virtual void Init(const WindowProps& props);
+			virtual void SetEvents();
 			virtual void Shutdown();
 
 		public:

@@ -6,7 +6,7 @@
 
 namespace RandomEngine {
 
-	class RANDOM_ENGINE_API WindowResizeEvent : public Event {
+	class WindowResizeEvent : public Event {
 
 		protected:
 			unsigned int _width, _height;
@@ -28,7 +28,7 @@ namespace RandomEngine {
 			EVENT_CLASS_CATEGORY(EC_Application)
 	};
 
-	class RANDOM_ENGINE_API WindowCloseEvent : public Event {
+	class WindowCloseEvent : public Event {
 
 		public:
 			WindowCloseEvent() { }
@@ -37,7 +37,7 @@ namespace RandomEngine {
 			EVENT_CLASS_CATEGORY(EC_Application)
 	};
 
-	class RANDOM_ENGINE_API AppTickEvent : public Event {
+	class AppTickEvent : public Event {
 
 		public:
 			AppTickEvent() { }
@@ -46,7 +46,7 @@ namespace RandomEngine {
 			EVENT_CLASS_CATEGORY(EC_Application)
 	};
 
-	class RANDOM_ENGINE_API AppUpdateEvent : public Event {
+	class AppUpdateEvent : public Event {
 
 		public:
 			AppUpdateEvent() { }
@@ -55,7 +55,7 @@ namespace RandomEngine {
 			EVENT_CLASS_CATEGORY(EC_Application)
 	};
 
-	class RANDOM_ENGINE_API AppRenderEvent : public Event {
+	class AppRenderEvent : public Event {
 
 		public:
 			AppRenderEvent() { }

@@ -10,7 +10,7 @@ namespace RandomEngine {
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
@@ -30,7 +30,7 @@ namespace RandomEngine {
 	#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
 
-	class RANDOM_ENGINE_API Event {
+	class Event {
 		friend class EventDispatcher;
 
 		protected:

@@ -6,7 +6,7 @@
 
 namespace RandomEngine {
 
-	class RANDOM_ENGINE_API MouseMovedEvent : public Event {
+	class MouseMovedEvent : public Event {
 		
 		protected:
 			float _mouseX, _mouseY;
@@ -28,7 +28,7 @@ namespace RandomEngine {
 			EVENT_CLASS_CATEGORY(EC_Mouse | EC_Input)
 	};
 
-	class RANDOM_ENGINE_API MouseScrolledEvent : public Event {
+	class MouseScrolledEvent : public Event {
 
 		protected:
 			float _xOffset, _yOffset;
@@ -50,7 +50,7 @@ namespace RandomEngine {
 			EVENT_CLASS_CATEGORY(EC_Mouse | EC_Input)
 	};
 
-	class RANDOM_ENGINE_API MouseButtonEvent : public Event {
+	class MouseButtonEvent : public Event {
 
 		protected:
 			int _button;
@@ -65,7 +65,7 @@ namespace RandomEngine {
 	};
 
 
-	class RANDOM_ENGINE_API MouseButtonPressedEvent : public MouseButtonEvent {
+	class MouseButtonPressedEvent : public MouseButtonEvent {
 
 		public:
 			MouseButtonPressedEvent(int button)
@@ -80,7 +80,7 @@ namespace RandomEngine {
 			EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class RANDOM_ENGINE_API MouseButtonReleasedEvent : public MouseButtonEvent {
+	class MouseButtonReleasedEvent : public MouseButtonEvent {
 
 		public:
 			MouseButtonReleasedEvent(int button)

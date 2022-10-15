@@ -7,6 +7,8 @@
 #include "RandomEngine/Log.h"
 #include "RandomEngine/Window.h"
 
+#include "RandomEngine/GUI/GuiLayer.h"
+
 // -------------- Events ---------------
 #include "RandomEngine/Events/Event.h"
 #include "RandomEngine/Events/ApplicationEvent.h"

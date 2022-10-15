@@ -10,7 +10,7 @@
 
 namespace RandomEngine {
 
-	class RANDOM_ENGINE_API Log
+	class Log
 	{
 		private:
 			static std::shared_ptr<spdlog::logger> _coreLogger;

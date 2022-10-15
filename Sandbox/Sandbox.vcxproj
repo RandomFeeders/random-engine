@@ -58,7 +58,7 @@
       <PreprocessorDefinitions>RE_ENABLE_ASSERTS;RE_PLATFORM_WINDOWS;RE_ENV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)RandomEngine\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)RandomEngine\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -83,7 +83,7 @@
       <PreprocessorDefinitions>RE_PLATFORM_WINDOWS;RE_ENV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)RandomEngine\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)RandomEngine\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <StringPooling>true</StringPooling>
     </ClCompile>
     <Link>
@@ -91,7 +91,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;D:\Programas\VulkanSDK\1.3.224.1\Lib\shaderc_sharedd.lib;D:\Programas\VulkanSDK\1.3.224.1\Lib\spirv-cross-cored.lib;D:\Programas\VulkanSDK\1.3.224.1\Lib\spirv-cross-glsld.lib;$(SolutionDir)Binaries\$(Configuration)-$(Platform)\GLFW\GLFW.lib;$(SolutionDir)Binaries\$(Configuration)-$(Platform)\RandomEngine\RandomEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>
@@ -103,6 +103,15 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dependencies\GLAD\GLAD.vcxproj">
+      <Project>{7b9d9017-825c-47a1-845d-c7ad41d141d4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\GLFW\GLFW.vcxproj">
+      <Project>{d3147191-bc11-4adb-b79c-1c480fa337f8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\ImGui\ImGui.vcxproj">
+      <Project>{e76502bd-5319-4ae6-859a-6ae378ad20f5}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\RandomEngine\RandomEngine.vcxproj">
       <Project>{cd075829-10a0-49fe-8ff2-401bc5131997}</Project>
     </ProjectReference>

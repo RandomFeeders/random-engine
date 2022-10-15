@@ -20,6 +20,7 @@ class Program : public RandomEngine::Application {
 	public:
 		Program() {
 			PushLayer(new ExampleLayer());
+			PushOverlay(new RandomEngine::GuiLayer());
 		}
 
 		~Program() {

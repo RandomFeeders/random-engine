@@ -6,7 +6,7 @@
 
 namespace RandomEngine {
 
-	class RANDOM_ENGINE_API KeyEvent : public Event {
+	class KeyEvent : public Event {
 
 		protected:
 			int _keyCode;
@@ -20,7 +20,7 @@ namespace RandomEngine {
 			EVENT_CLASS_CATEGORY(EC_Keyboard | EC_Input)
 	};
 
-	class RANDOM_ENGINE_API KeyPressedEvent : public KeyEvent {
+	class KeyPressedEvent : public KeyEvent {
 		
 		protected:
 			int _repeatCount;
@@ -40,7 +40,7 @@ namespace RandomEngine {
 			EVENT_CLASS_TYPE(KeyPressed)
 	};
 
-	class RANDOM_ENGINE_API KeyReleasedEvent : public KeyEvent {
+	class KeyReleasedEvent : public KeyEvent {
 
 		public:
 			KeyReleasedEvent(int keyCode)
@@ -53,6 +53,21 @@ namespace RandomEngine {
 			}
 
 			EVENT_CLASS_TYPE(KeyReleased)
+	};
+
+	class KeyTypedEvent : public KeyEvent {
+
+		public:
+			KeyTypedEvent(int keyCode)
+				: KeyEvent(keyCode) { }
+
+			std::string ToString() const override {
+				std::stringstream ss;
+				ss << GetName() << ": " << _keyCode;
+				return ss.str();
+			}
+
+			EVENT_CLASS_TYPE(KeyTyped)
 	};
 
 }

@@ -1,16 +1,10 @@
 #pragma once
 
-#ifdef RE_PLATFORM_WINDOWS
-	#ifndef RANDOM_ENGINE_API
-		#define RANDOM_ENGINE_API
-	#else
-		#ifdef RE_BUILD_DLL
-			#define RANDOM_ENGINE_API __declspec(dllexport)
-		#else
-			#define RANDOM_ENGINE_API __declspec(dllimport)
-		#endif
-	#endif
-#else
+#if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
+	#define _CRT_SECURE_NO_WARNINGS
+#endif
+
+#ifndef RE_PLATFORM_WINDOWS
 	#error Random Engine only supports Windows!
 #endif
 

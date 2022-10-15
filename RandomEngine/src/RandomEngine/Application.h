@@ -9,9 +9,11 @@
 
 namespace RandomEngine {
 
-	class RANDOM_ENGINE_API Application {
+	class Application {
 		
 		private:
+			static Application* _instance;
+
 			bool _running = false;
 			std::unique_ptr<Window> _window;
 			LayerStack _layerStack;
@@ -27,6 +29,10 @@ namespace RandomEngine {
 
 			void PushLayer(Layer* layer);
 			void PushOverlay(Layer* overlay);
+
+			inline Window& GetWindow() const { return *_window; }
+
+			inline static Application& GetInstance() { return *_instance; }
 	};
 
 	Application* CreateApplication();

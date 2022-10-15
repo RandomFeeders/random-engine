@@ -6,7 +6,12 @@
 
 namespace RandomEngine {
 
+	Application* Application::_instance = nullptr;
+
 	Application::Application() {
+		RE_CORE_ASSERT(!_instance, "Application already exists!");
+		_instance = this;
+
 		_window = std::unique_ptr<Window>(Window::Create());
 		_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 	}
@@ -51,10 +56,12 @@ namespace RandomEngine {
 
 	void Application::PushLayer(Layer* layer) {
 		_layerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay) {
 		_layerStack.PushOverlay(overlay);
+		overlay->OnAttach();
 	}
 
 }

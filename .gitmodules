@@ -4,3 +4,6 @@
 [submodule "RandomEngine/vendor/glfw"]
 	path = RandomEngine/vendor/glfw
 	url = https://github.com/glfw/glfw
+[submodule "RandomEngine/vendor/ImGui"]
+	path = RandomEngine/vendor/ImGui
+	url = https://github.com/ocornut/imgui

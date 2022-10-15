@@ -1,4 +1,6 @@
 #include "REPCH.h"
+	
+#include "glad/glad.h"
 
 #include "WindowsWindow.h"
 #include "RandomEngine/Events/ApplicationEvent.h"
@@ -44,6 +46,8 @@ namespace RandomEngine {
 
 		_window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(_window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		RE_CORE_ASSERT(status, "Failed to initialize GLAD!");
 		glfwSetWindowUserPointer(_window, &_data);
 		SetVSync(true);
 
@@ -92,6 +96,13 @@ namespace RandomEngine {
 						break;
 					}
 				}
+			});
+
+		glfwSetCharCallback(_window, [](GLFWwindow* window, unsigned int keycode)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				KeyTypedEvent event(keycode);
+				data.EventCallback(event);
 			});
 
 		glfwSetMouseButtonCallback(_window, [](GLFWwindow* window, int button, int action, int mods)

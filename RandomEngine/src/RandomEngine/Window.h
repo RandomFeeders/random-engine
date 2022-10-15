@@ -21,7 +21,7 @@ namespace RandomEngine {
 				: Title(title), Width(width), Height(height) { }
 	};
 
-	class RANDOM_ENGINE_API Window {
+	class Window {
 
 		public:
 			using EventCallbackFn = std::function<void(Event&)>;

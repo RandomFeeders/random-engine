@@ -55,7 +55,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>RE_ENABLE_ASSERTS;RE_PLATFORM_WINDOWS;RE_ENV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RE_PLATFORM_WINDOWS;RE_ENV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)RandomEngine\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

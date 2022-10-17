@@ -2,8 +2,6 @@
 
 #include "application.h"
 
-#include "gl/GL.h"
-
 namespace RandomEngine {
 
 	Application* Application::_instance = nullptr;
@@ -36,8 +34,6 @@ namespace RandomEngine {
 	}
 
 	void Application::OnEvent(Event& e) {
-		RE_CORE_TRACE("{0}", e);
-
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 

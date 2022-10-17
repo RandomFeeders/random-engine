@@ -1,6 +1,6 @@
 #include "REPCH.h"
 	
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 #include "WindowsWindow.h"
 #include "RandomEngine/Events/ApplicationEvent.h"

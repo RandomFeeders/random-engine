@@ -8,6 +8,10 @@
 	#error Random Engine only supports Windows!
 #endif
 
+#ifdef RE_ENV_DEBUG
+	#define RE_ENABLE_ASSERTS
+#endif
+
 #ifdef RE_ENABLE_ASSERTS
 	#define RE_ASSERT(x, ...) { if (!x) { RE_ERROR("Assertation failed: {0}", __VA_ARGS__); __debugbreak(); } }
 	#define RE_CORE_ASSERT(x, ...) { if (!x) { RE_CORE_ERROR("Assertation failed: {0}", __VA_ARGS__); __debugbreak(); } }

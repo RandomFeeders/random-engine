@@ -2,6 +2,8 @@
 
 #include "REPCH.h"
 
+#include <glad/glad.h>
+
 #include "Core.h"
 #include "Window.h"
 #include "Events/ApplicationEvent.h"

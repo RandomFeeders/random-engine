@@ -2,9 +2,9 @@
 
 #include "REPCH.h"
 
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "imgui.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <imgui.h>
 
 #include "RandomEngine/Application.h"
 #include "RandomEngine/Layer.h"

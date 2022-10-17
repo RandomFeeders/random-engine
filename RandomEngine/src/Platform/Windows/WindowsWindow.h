@@ -2,10 +2,9 @@
 
 #include "REPCH.h"
 
-#include "RandomEngine/Window.h"
-#include "RandomEngine/Log.h"
+#include <GLFW/glfw3.h>
 
-#include "GLFW/glfw3.h"
+#include "RandomEngine/Window.h"
 
 namespace RandomEngine {
 
@@ -42,6 +41,7 @@ namespace RandomEngine {
 			void SetVSync(bool enabled) override;
 			inline bool IsVSync() const override { return _data.VSync; }
 
+			inline void* GetNativeWindow() const override { return _window; }
 	};
 
 }

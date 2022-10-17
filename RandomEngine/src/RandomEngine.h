@@ -2,10 +2,15 @@
 
 #include "REPCH.h"
 
+#include "RandomEngine/Maths/Maths.h"
+
 #include "RandomEngine/Application.h"
 #include "RandomEngine/Layer.h"
 #include "RandomEngine/Log.h"
 #include "RandomEngine/Window.h"
+
+#include "RandomEngine/KeyCodes.h"
+#include "RandomEngine/Input.h"
 
 #include "RandomEngine/GUI/GuiLayer.h"
 

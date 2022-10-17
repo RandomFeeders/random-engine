@@ -55,7 +55,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;RE_ENABLE_ASSERTS;RE_PLATFORM_WINDOWS;RE_BUILD_DLL;RE_ENV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;RE_PLATFORM_WINDOWS;RE_ENV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -85,7 +85,7 @@
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;RE_PLATFORM_WINDOWS;RE_BUILD_DLL;RE_ENV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;RE_PLATFORM_WINDOWS;RE_ENV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -114,14 +114,16 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\RandomEngine\Events\ApplicationEvent.h" />
     <ClInclude Include="src\RandomEngine\Events\Event.h" />
     <ClInclude Include="src\RandomEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\RandomEngine\Events\MouseEvent.h" />
-    <ClInclude Include="src\RandomEngine\GuiOpenGLLoader.h" />
     <ClInclude Include="src\RandomEngine\GuiOpenGLRenderer.h" />
     <ClInclude Include="src\RandomEngine\GUI\GuiLayer.h" />
+    <ClInclude Include="src\RandomEngine\Input.h" />
+    <ClInclude Include="src\RandomEngine\KeyCodes.h" />
     <ClInclude Include="src\RandomEngine\Layer.h" />
     <ClInclude Include="src\RandomEngine\LayerStack.h" />
     <ClInclude Include="src\RandomEngine\Log.h" />
@@ -129,10 +131,16 @@
     <ClInclude Include="src\RandomEngine\Core.h" />
     <ClInclude Include="src\RandomEngine.h" />
     <ClInclude Include="src\RandomEngine\EntryPoint.h" />
+    <ClInclude Include="src\RandomEngine\Maths\Maths.h" />
+    <ClInclude Include="src\RandomEngine\Maths\Matrices\Matrix4f.h" />
+    <ClInclude Include="src\RandomEngine\Maths\Vectors\Vector2f.h" />
+    <ClInclude Include="src\RandomEngine\Maths\Vectors\Vector3f.h" />
+    <ClInclude Include="src\RandomEngine\Maths\Vectors\Vector4f.h" />
     <ClInclude Include="src\RandomEngine\Window.h" />
     <ClInclude Include="src\REPCH.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\RandomEngine\GuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\RandomEngine\GUI\GuiLayer.cpp" />
@@ -140,6 +148,10 @@
     <ClCompile Include="src\RandomEngine\LayerStack.cpp" />
     <ClCompile Include="src\RandomEngine\Log.cpp" />
     <ClCompile Include="src\RandomEngine\Application.cpp" />
+    <ClCompile Include="src\RandomEngine\Maths\Matrices\Matrix4f.cpp" />
+    <ClCompile Include="src\RandomEngine\Maths\Vectors\Vector2f.cpp" />
+    <ClCompile Include="src\RandomEngine\Maths\Vectors\Vector3f.cpp" />
+    <ClCompile Include="src\RandomEngine\Maths\Vectors\Vector4f.cpp" />
     <ClCompile Include="src\REPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

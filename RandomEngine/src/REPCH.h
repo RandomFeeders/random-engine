@@ -1,11 +1,14 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
+
 #include <iostream>
 #include <memory>
 #include <utility>
 #include <algorithm>
 #include <functional>
 
+#include <math.h>
 #include <string>
 #include <sstream>
 #include <vector>

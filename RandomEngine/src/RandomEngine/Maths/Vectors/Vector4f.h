@@ -2,29 +2,27 @@
 
 #include "REPCH.h"
 
+#include <glm/glm.hpp>
+
 namespace RandomEngine::Maths {
 
-	struct Vector4f {
-		float x, y, z, w;
+	struct Vector4f : public glm::vec4 {
 
-		Vector4f() = default;
-		Vector4f(const float& x, const float& y, const float& z, const float& w);
+		using glm::vec4::vec;
 
-		Vector4f& operator+ (const Vector4f& other);
-		Vector4f& operator- (const Vector4f& other);
-		Vector4f& operator* (const Vector4f& other);
-		Vector4f& operator/ (const Vector4f& other);
-		Vector4f& operator+= (const Vector4f& other);
-		Vector4f& operator-= (const Vector4f& other);
-		Vector4f& operator*= (const Vector4f& other);
-		Vector4f& operator/= (const Vector4f& other);
-		Vector4f& operator<<= (const Vector4f& other);
-		bool operator== (const Vector4f& other);
-		bool operator!= (const Vector4f& other);
+		Vector4f(const glm::vec4& v) : glm::vec4(v) { }
 
-		std::string ToString() const;
+		inline std::string ToString() const {
+			std::stringstream ss;
+			ss << "Vector4f { " << x << ", " << y << ", " << z << ", " << w << " }";
+			return ss.str();
+		}
 
-		friend std::ostream& operator<<(std::ostream& stream, const Vector4f& vector);
+		friend std::ostream& operator<<(std::ostream& stream, const Vector4f& vector) {
+			stream << vector.ToString();
+			return stream;
+		}
+
 	};
 
 }

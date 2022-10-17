@@ -116,17 +116,5 @@
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="src\RandomEngine\Maths\Vectors\Vector2f.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="src\RandomEngine\Maths\Vectors\Vector3f.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="src\RandomEngine\Maths\Vectors\Vector4f.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="src\RandomEngine\Maths\Matrices\Matrix4f.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

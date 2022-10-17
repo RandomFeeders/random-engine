@@ -2,34 +2,33 @@
 
 #include "REPCH.h"
 
-#include "RandomEngine/Maths/Maths.h"
+#include <glm/glm.hpp>
+
+#include "RandomEngine/Maths/Vectors/Vector4f.h"
 
 namespace RandomEngine::Maths {
 
-	struct Matrix4f {
+	struct Matrix4f : public glm::mat4 {
 
-		union {
-			float elements[4 * 4];
-			Vector4f columns[4];
-		};
+		using glm::mat4::mat;
 
-		Matrix4f();
-		Matrix4f(float diagonal);
+		Matrix4f(const glm::mat4& m) : glm::mat4(m) { }
 
-		Matrix4f& operator* (const Matrix4f& other);
-		Matrix4f& operator*= (const Matrix4f& other);
+		inline std::string ToString() const {
+			std::stringstream ss;
+			Vector4f vecA = this->operator[](0);
+			Vector4f vecB = this->operator[](1);
+			Vector4f vecC = this->operator[](2);
+			Vector4f vecD = this->operator[](3);
+			ss << "Matrix4f { " << vecA << ", " << vecB << ", " << vecC << ", " << vecD << " }";
+			return ss.str();
+		}
 
-		// Identity matrix
-		static Matrix4f identity();
-
-		// Projection matrices
-		static Matrix4f orthographic(float top, float right, float bottom, float left, float near, float far);
-		static Matrix4f perspective(float fov, float aspectRatio, float near, float far);
-
-		// Translation matrices
-		static Matrix4f translation(const Vector3f& translation);
-		static Matrix4f rotation(float angle, const Vector3f& axis);
-		static Matrix4f scale(const Vector3f& scale);
+		friend std::ostream& operator<<(std::ostream& stream, const Matrix4f& vector) {
+			stream << vector.ToString();
+			return stream;
+		}
+		
 	};
 
 }

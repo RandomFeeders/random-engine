@@ -24,7 +24,7 @@ namespace RandomEngine {
 		double xPos, yPos;
 		glfwGetCursorPos(window, &xPos, &yPos);
 
-		return Maths::Vector2f(xPos, yPos);
+		return { (float)xPos, (float)yPos };
 	}
 
 }

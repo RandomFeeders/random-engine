@@ -2,29 +2,27 @@
 
 #include "REPCH.h"
 
+#include <glm/glm.hpp>
+
 namespace RandomEngine::Maths {
 
-	struct Vector2f {
-		float x, y;
+	struct Vector2f : public glm::vec2 {
 
-		Vector2f();
-		Vector2f(const float& x, const float& y);
+		using glm::vec2::vec;
 
-		Vector2f& operator+ (const Vector2f& other);
-		Vector2f& operator- (const Vector2f& other);
-		Vector2f& operator* (const Vector2f& other);
-		Vector2f& operator/ (const Vector2f& other);
-		Vector2f& operator+= (const Vector2f& other);
-		Vector2f& operator-= (const Vector2f& other);
-		Vector2f& operator*= (const Vector2f& other);
-		Vector2f& operator/= (const Vector2f& other);
-		Vector2f& operator<<= (const Vector2f& other);
-		bool operator== (const Vector2f& other);
-		bool operator!= (const Vector2f& other);
+		Vector2f(const glm::vec2& v) : glm::vec2(v) { }
 
-		std::string ToString() const;
+		inline std::string ToString() const {
+			std::stringstream ss;
+			ss << "Vector2f { " << x << ", " << y << " }";
+			return ss.str();
+		}
 
-		friend std::ostream& operator<<(std::ostream& stream, const Vector2f& vector);
+		friend std::ostream& operator<<(std::ostream& stream, const Vector2f& vector) {
+			stream << vector.ToString();
+			return stream;
+		}
+
 	};
 
 }

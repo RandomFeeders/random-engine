@@ -58,7 +58,7 @@
       <PreprocessorDefinitions>RE_PLATFORM_WINDOWS;RE_ENV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)RandomEngine\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)RandomEngine\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;$(SolutionDir)RandomEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -83,7 +83,7 @@
       <PreprocessorDefinitions>RE_PLATFORM_WINDOWS;RE_ENV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)RandomEngine\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)RandomEngine\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;$(SolutionDir)RandomEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <StringPooling>true</StringPooling>
     </ClCompile>
     <Link>

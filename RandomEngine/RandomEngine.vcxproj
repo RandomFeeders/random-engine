@@ -58,7 +58,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;RE_PLATFORM_WINDOWS;RE_ENV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;$(SolutionDir)RandomEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>REPCH.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -88,7 +88,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;RE_PLATFORM_WINDOWS;RE_ENV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)\src;$(SolutionDir)RandomEngine\vendor\spdlog\include;$(SolutionDir)RandomEngine\vendor\glfw\include;$(SolutionDir)RandomEngine\vendor\glad\include;$(SolutionDir)RandomEngine\vendor\ImGui;$(SolutionDir)RandomEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>REPCH.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -148,10 +148,6 @@
     <ClCompile Include="src\RandomEngine\LayerStack.cpp" />
     <ClCompile Include="src\RandomEngine\Log.cpp" />
     <ClCompile Include="src\RandomEngine\Application.cpp" />
-    <ClCompile Include="src\RandomEngine\Maths\Matrices\Matrix4f.cpp" />
-    <ClCompile Include="src\RandomEngine\Maths\Vectors\Vector2f.cpp" />
-    <ClCompile Include="src\RandomEngine\Maths\Vectors\Vector3f.cpp" />
-    <ClCompile Include="src\RandomEngine\Maths\Vectors\Vector4f.cpp" />
     <ClCompile Include="src\REPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

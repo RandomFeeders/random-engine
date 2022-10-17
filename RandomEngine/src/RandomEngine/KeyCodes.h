@@ -78,13 +78,13 @@
 #define RE_KEY_NUM7							0x147
 #define RE_KEY_NUM8							0x148
 #define RE_KEY_NUM9							0x149
-#define RE_KEY_DECIMAL						0x14A
-#define RE_KEY_DIVIDE						0x14B
-#define RE_KEY_MULTIPLY						0x14C
-#define RE_KEY_SUBTRACT						0x14D
-#define RE_KEY_ADD							0x14E
-#define RE_KEY_ENTER						0x14F
-#define RE_KEY_EQUAL						0x150
+#define RE_KEY_NUMDECIMAL					0x14A
+#define RE_KEY_NUMDIVIDE					0x14B
+#define RE_KEY_NUMMULTIPLY					0x14C
+#define RE_KEY_NUMSUBTRACT					0x14D
+#define RE_KEY_NUMADD						0x14E
+#define RE_KEY_NUMENTER						0x14F
+#define RE_KEY_NUMEQUAL						0x150
 
 #define RE_KEY_LEFT_SHIFT					0x154
 #define RE_KEY_LEFT_CONTROL					0x155

@@ -1,12 +1,6 @@
 #pragma once
 
-#include "REPCH.h"
-
-#include <GLFW/glfw3.h>
-
-#include "RandomEngine/Core.h"
-#include "RandomEngine/Input.h"
-#include "RandomEngine/Application.h"
+#include "RandomEngine/Core/Input.h"
 
 namespace RandomEngine {
 

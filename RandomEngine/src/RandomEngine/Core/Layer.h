@@ -1,9 +1,6 @@
 #pragma once
 
-#include "REPCH.h"
-
-#include "Core.h"
-#include "Events/Event.h"
+#include "RandomEngine/Events/Event.h"
 
 namespace RandomEngine {
 
@@ -14,11 +11,12 @@ namespace RandomEngine {
 
 		public:
 			Layer(const std::string& name = "Layer");
-			virtual ~Layer();
+			virtual ~Layer() = default;
 
 			virtual void OnAttach();
 			virtual void OnDetach();
 			virtual void OnUpdate();
+			virtual void OnGUIRender();
 			virtual void OnEvent(Event& event);
 
 			inline const std::string& GetName() const { return _name; }

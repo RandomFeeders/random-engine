@@ -1,7 +1,5 @@
 #pragma once
 
-#include "REPCH.h"
-
 #include <glm/glm.hpp>
 
 namespace RandomEngine::Maths {

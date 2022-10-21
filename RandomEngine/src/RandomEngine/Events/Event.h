@@ -1,8 +1,6 @@
 #pragma once
 
-#include "REPCH.h"
-
-#include "RandomEngine/Core.h"
+#include "RandomEngine/Core/Base.h"
 
 namespace RandomEngine {
 

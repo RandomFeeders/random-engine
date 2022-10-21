@@ -1,8 +1,5 @@
 #pragma once
 
-#include "REPCH.h"
-
-#include "Core.h"
 #include "Layer.h"
 
 namespace RandomEngine {
@@ -11,7 +8,7 @@ namespace RandomEngine {
 
 		private:
 			std::vector<Layer*> _layers;
-			std::vector<Layer*>::iterator _layerInsert;
+			unsigned int _layerInsertIndex;
 
 		public:
 			LayerStack();

@@ -2,6 +2,10 @@
 
 #include "WindowsInput.h"
 
+#include <GLFW/glfw3.h>
+
+#include "RandomEngine/Core/Application.h"
+
 namespace RandomEngine {
 
 	Input* Input::_instance = new WindowsInput();

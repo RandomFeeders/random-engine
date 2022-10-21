@@ -1,6 +1,7 @@
 #pragma once
 
-#include "REPCH.h"
+#include "RandomEngine/Core/Base.h"
+#include "RandomEngine/Core/Application.h"
 
 #ifdef RE_PLATFORM_WINDOWS
 

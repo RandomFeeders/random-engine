@@ -1,13 +1,9 @@
 #pragma once
 
-#include "REPCH.h"
-
-#include <glad/glad.h>
-
-#include "Core.h"
 #include "Window.h"
-#include "Events/ApplicationEvent.h"
 #include "LayerStack.h"
+#include "RandomEngine/Events/ApplicationEvent.h"
+#include "RandomEngine/GUI/GuiLayer.h"
 
 namespace RandomEngine {
 
@@ -19,6 +15,7 @@ namespace RandomEngine {
 			bool _running = false;
 			std::unique_ptr<Window> _window;
 			LayerStack _layerStack;
+			GuiLayer* _guiLayer;
 
 			bool OnWindowClose(WindowCloseEvent& e);
 

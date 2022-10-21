@@ -1,12 +1,6 @@
 #pragma once
 
-#if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
-	#define _CRT_SECURE_NO_WARNINGS
-#endif
-
-#ifndef RE_PLATFORM_WINDOWS
-	#error Random Engine only supports Windows!
-#endif
+#include "RandomEngine/Core/PlatformDetection.h"
 
 #ifdef RE_ENV_DEBUG
 	#define RE_ENABLE_ASSERTS

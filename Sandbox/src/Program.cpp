@@ -1,4 +1,5 @@
 #include <RandomEngine.h>
+#include <RandomEngine/Core/EntryPoint.h>
 
 class ExampleLayer : public RandomEngine::Layer {
 
@@ -20,7 +21,6 @@ class Program : public RandomEngine::Application {
 	public:
 		Program() {
 			PushLayer(new ExampleLayer());
-			PushOverlay(new RandomEngine::GuiLayer());
 		}
 
 		~Program() {

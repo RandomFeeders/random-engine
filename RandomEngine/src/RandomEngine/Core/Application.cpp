@@ -1,5 +1,7 @@
 #include "REPCH.h"
 
+#include <glad/glad.h>
+
 #include "application.h"
 
 namespace RandomEngine {
@@ -12,11 +14,12 @@ namespace RandomEngine {
 
 		_window = std::unique_ptr<Window>(Window::Create());
 		_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		_guiLayer = new GuiLayer();
+		PushOverlay(_guiLayer);
 	}
 
-	Application::~Application() {
-
-	}
+	Application::~Application() { }
 
 	void Application::Run() {
 		_running = true;
@@ -28,6 +31,12 @@ namespace RandomEngine {
 			for (Layer* layer : _layerStack) {
 				layer->OnUpdate();
 			}
+
+			_guiLayer->Begin();
+			for (Layer* layer : _layerStack) {
+				layer->OnGUIRender();
+			}
+			_guiLayer->End();
 
 			_window->OnUpdate();
 		}

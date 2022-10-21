@@ -1,5 +1,7 @@
 #pragma once
 
+#include "RandomEngine/Core/PlatformDetection.h"
+
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -12,7 +14,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "RandomEngine/Log.h"
+#include "RandomEngine/Core/Base.h"
+#include "RandomEngine/Core/Log.h"
 
 #ifdef RE_PLATFORM_WINDOWS
 	#include <Windows.h>

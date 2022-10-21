@@ -2,8 +2,7 @@
 
 #include "REPCH.h"
 
-#include "Core.h"
-#include "Events/Event.h"
+#include "RandomEngine/Events/Event.h"
 
 namespace RandomEngine {
 

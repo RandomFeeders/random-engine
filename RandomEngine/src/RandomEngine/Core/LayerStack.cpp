@@ -5,7 +5,7 @@
 namespace RandomEngine {
 
 	LayerStack::LayerStack() {
-		_layerInsert = _layers.begin();
+		_layerInsertIndex = 0;
 	}
 
 	LayerStack::~LayerStack() {
@@ -15,7 +15,7 @@ namespace RandomEngine {
 	}
 
 	void LayerStack::PushLayer(Layer* layer) {
-		_layerInsert = _layers.emplace(_layerInsert, layer);
+		_layers.emplace(begin() + _layerInsertIndex++, layer);
 	}
 
 	void LayerStack::PushOverlay(Layer* overlay) {
@@ -26,7 +26,7 @@ namespace RandomEngine {
 		auto iterator = std::find(_layers.begin(), _layers.end(), layer);
 		if (iterator != _layers.end()) {
 			_layers.erase(iterator);
-			_layerInsert--;
+			_layerInsertIndex--;
 		}
 	}
 

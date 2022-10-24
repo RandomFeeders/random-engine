@@ -4,6 +4,7 @@
 #include "LayerStack.h"
 #include "RandomEngine/Events/ApplicationEvent.h"
 #include "RandomEngine/GUI/GuiLayer.h"
+#include "RandomEngine/Graphics/Shader.h"
 
 namespace RandomEngine {
 
@@ -18,6 +19,7 @@ namespace RandomEngine {
 			GuiLayer* _guiLayer;
 
 			unsigned int _vertexArray, _vertexBuffer, _indexBuffer; 
+			std::unique_ptr<Graphics::Shader> _shader;
 
 			bool OnWindowClose(WindowCloseEvent& e);
 

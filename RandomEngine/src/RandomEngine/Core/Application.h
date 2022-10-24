@@ -17,6 +17,8 @@ namespace RandomEngine {
 			LayerStack _layerStack;
 			GuiLayer* _guiLayer;
 
+			unsigned int _vertexArray, _vertexBuffer, _indexBuffer; 
+
 			bool OnWindowClose(WindowCloseEvent& e);
 
 		public:

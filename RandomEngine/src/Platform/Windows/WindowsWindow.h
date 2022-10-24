@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RandomEngine/Core/Window.h"
+#include "RandomEngine/Graphics/Context.h"
 
 namespace RandomEngine {
 
@@ -17,8 +18,8 @@ namespace RandomEngine {
 			};
 
 			GLFWwindow* _window;
-			WindowData _data;
-			
+			Graphics::Context* _context;
+			WindowData _data;			
 
 			virtual void Init(const WindowProps& props);
 			virtual void SetEvents();

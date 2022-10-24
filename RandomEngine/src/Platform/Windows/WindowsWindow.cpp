@@ -1,9 +1,9 @@
 #include "REPCH.h"
-	
-#include <glad/glad.h>
+
 #include <GLFW/glfw3.h>
 
-#include "WindowsWindow.h"
+#include "Platform/Windows/WindowsWindow.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 #include "RandomEngine/Events/ApplicationEvent.h"
 #include "RandomEngine/Events/KeyEvent.h"
 #include "RandomEngine/Events/MouseEvent.h"
@@ -46,9 +46,9 @@ namespace RandomEngine {
 		}
 
 		_window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(_window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		RE_CORE_ASSERT(status, "Failed to initialize GLAD!");
+		_context = new Graphics::OpenGLContext(_window);
+		_context->Init();
+
 		glfwSetWindowUserPointer(_window, &_data);
 		SetVSync(true);
 
@@ -147,7 +147,7 @@ namespace RandomEngine {
 
 	void WindowsWindow::OnUpdate() {
 		glfwPollEvents();
-		glfwSwapBuffers(_window);
+		_context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled) {

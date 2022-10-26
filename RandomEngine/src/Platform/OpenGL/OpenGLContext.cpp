@@ -14,6 +14,7 @@ namespace RandomEngine::Graphics {
 
 	void OpenGLContext::Init() {
 		glfwMakeContextCurrent(_window);
+
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		RE_CORE_ASSERT(status, "Failed to initialize GLAD!");
 

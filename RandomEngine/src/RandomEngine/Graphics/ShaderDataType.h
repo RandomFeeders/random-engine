@@ -29,7 +29,7 @@ static unsigned int GetShaderDataTypeSize(ShaderDataType type) {
 		case ShaderDataType::Struct:		return 0;
 		default: 
 			RE_CORE_ASSERT(false, "Unknown ShaderDataType value!"); 
-			break;
+			return 0;
 	}
 }
 
@@ -53,6 +53,6 @@ static unsigned int GetShaderDataTypeCount(ShaderDataType type) {
 	case ShaderDataType::Struct:		return 0;
 	default:
 		RE_CORE_ASSERT(false, "Unknown ShaderDataType value!");
-		break;
+		return 0;
 	}
 }

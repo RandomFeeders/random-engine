@@ -44,8 +44,6 @@ namespace RandomEngine::Graphics {
 			std::vector<BufferElement>::iterator end() { return _elements.end(); }
 			std::vector<BufferElement>::const_iterator begin() const { return _elements.begin(); }
 			std::vector<BufferElement>::const_iterator end() const { return _elements.end(); }
-
-			static BufferLayout& Default();
 	};
 
 }

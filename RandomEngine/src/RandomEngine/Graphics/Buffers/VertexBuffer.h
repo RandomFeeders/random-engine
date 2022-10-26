@@ -8,7 +8,7 @@ namespace RandomEngine::Graphics {
 	class VertexBuffer : public Buffer<float> {
 
 		protected:
-			BufferLayout& _layout;
+			BufferLayout _layout;
 
 		public:
 			VertexBuffer(float* data, unsigned int count);

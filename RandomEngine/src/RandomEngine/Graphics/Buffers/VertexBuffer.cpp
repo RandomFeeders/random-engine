@@ -9,7 +9,7 @@
 namespace RandomEngine::Graphics {
 
 	VertexBuffer::VertexBuffer(float* data, unsigned int count)
-		: Buffer(data, count), _layout(BufferLayout::Default()) { }
+		: Buffer(data, count) { }
 
 	void VertexBuffer::SetLayout(const BufferLayout& layout) {
 		_layout = layout;
@@ -25,11 +25,6 @@ namespace RandomEngine::Graphics {
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
 				return nullptr;
 		}
-	}
-
-	BufferLayout& BufferLayout::Default() {
-		BufferLayout layout = { };
-		return layout;
 	}
 
 }

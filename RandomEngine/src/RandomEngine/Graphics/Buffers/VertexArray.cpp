@@ -1,7 +1,7 @@
 #include "REPCH.h"
 #include "VertexArray.h"
 
-#include "RandomEngine/Graphics/Renderer.h"
+#include "RandomEngine/Graphics/RendererAPI.h"
 #include "Platform/OpenGL/Buffers/OpenGLVertexArray.h"
 #include "Platform/Vulkan/Buffers/VulkanVertexArray.h"
 
@@ -16,10 +16,10 @@ namespace RandomEngine::Graphics {
 	}
 
 	VertexArray* VertexArray::Create() {
-		switch (Renderer::GetAPI()) {
-			case RendererAPI::OpenGL:
+		switch (RendererAPI::GetAPI()) {
+			case RendererAPI::API::OpenGL:
 				return new OpenGLVertexArray();
-			case RendererAPI::Vulkan:
+			case RendererAPI::API::Vulkan:
 				return new VulkanVertexArray();
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");

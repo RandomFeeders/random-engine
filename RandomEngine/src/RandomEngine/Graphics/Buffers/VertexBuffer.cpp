@@ -2,7 +2,7 @@
 
 #include "VertexBuffer.h"
 
-#include "RandomEngine/Graphics/Renderer.h"
+#include "RandomEngine/Graphics/RendererAPI.h"
 #include "Platform/OpenGL/Buffers/OpenGLVertexBuffer.h"
 #include "Platform/Vulkan/Buffers/VulkanVertexBuffer.h"
 
@@ -16,10 +16,10 @@ namespace RandomEngine::Graphics {
 	}
 
 	VertexBuffer* VertexBuffer::Create(float* data, unsigned int count) {
-		switch (Renderer::GetAPI()) {
-			case RendererAPI::OpenGL:
+		switch (RendererAPI::GetAPI()) {
+			case RendererAPI::API::OpenGL:
 				return new OpenGLVertexBuffer(data, count);
-			case RendererAPI::Vulkan:
+			case RendererAPI::API::Vulkan:
 				return new VulkanVertexBuffer(data, count);
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");

@@ -1,8 +1,8 @@
 #include "REPCH.h"
 
-#include <glad/glad.h>
-
 #include "application.h"
+#include "RandomEngine/Graphics/Renderer.h"
+#include "RandomEngine/Graphics/RenderCommands.h"
 #include "RandomEngine/Graphics/Buffers/BufferLayout.h"
 #include "RandomEngine/Graphics/Buffers/VertexBuffer.h"
 #include "RandomEngine/Graphics/Buffers/IndexBuffer.h"
@@ -14,6 +14,8 @@ namespace RandomEngine {
 	Application::Application() {
 		RE_CORE_ASSERT(!_instance, "Application already exists!");
 		_instance = this;
+
+		Graphics::Renderer::Init();
 
 		_window = std::unique_ptr<Window>(Window::Create());
 		_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
@@ -98,12 +100,15 @@ namespace RandomEngine {
 		_running = true;
 
 		while (_running) {
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			Graphics::RenderCommands::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+			Graphics::RenderCommands::Clear();
+
+			Graphics::Renderer::BeginScene();
 
 			_shader->Bind();
-			_vertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, _vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Graphics::Renderer::Submit(_vertexArray);
+
+			Graphics::Renderer::EndScene();
 
 			for (Layer* layer : _layerStack) {
 				layer->OnUpdate();

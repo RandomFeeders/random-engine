@@ -1,20 +1,25 @@
 #pragma once
 
+#include "RendererAPI.h"
+#include "RenderCommands.h"
+
 namespace RandomEngine::Graphics {
 
-	enum class RendererAPI {
-		None = 0,
-		OpenGL = 1,
-		Vulkan = 2
-	};
-
 	class Renderer {
+		friend class RenderCommands;
 
 		private:
-			static RendererAPI _rendererAPI;
+			static RendererAPI* _rendererAPI;
 
 		public:
-			static inline RendererAPI GetAPI() { return _rendererAPI; }
+			static void Init();
+
+			static void BeginScene();
+			static void EndScene();
+
+			static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+
+			static inline RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	};
 
 }

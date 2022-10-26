@@ -2,7 +2,7 @@
 
 #include "IndexBuffer.h"
 
-#include "RandomEngine/Graphics/Renderer.h"
+#include "RandomEngine/Graphics/RendererAPI.h"
 #include "Platform/OpenGL/Buffers/OpenGLIndexBuffer.h"
 #include "Platform/Vulkan/Buffers/VulkanIndexBuffer.h"
 
@@ -12,10 +12,10 @@ namespace RandomEngine::Graphics {
 		: Buffer<unsigned int>(data, count) { }
 
 	IndexBuffer* IndexBuffer::Create(unsigned int* data, unsigned int count) {
-		switch (Renderer::GetAPI()) {
-			case RendererAPI::OpenGL:
+		switch (RendererAPI::GetAPI()) {
+			case RendererAPI::API::OpenGL:
 				return new OpenGLIndexBuffer(data, count);
-			case RendererAPI::Vulkan:
+			case RendererAPI::API::Vulkan:
 				return new VulkanIndexBuffer(data, count);
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");

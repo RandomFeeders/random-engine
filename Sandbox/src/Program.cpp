@@ -1,22 +1,11 @@
 #include <RandomEngine.h>
 #include <RandomEngine/Core/EntryPoint.h>
 
-class ExampleLayer : public RandomEngine::Layer {
+#include "ExampleLayer.h"
 
-	public:
-		ExampleLayer()
-			: Layer("Example") { }
+namespace Sandbox {
 
-		void OnUpdate() override {
-
-		}
-
-		void OnEvent(RandomEngine::Event& e) override {
-
-		}
-};
-
-class Program : public RandomEngine::Application {
+	class Program : public RandomEngine::Application {
 
 	public:
 		Program() {
@@ -26,8 +15,10 @@ class Program : public RandomEngine::Application {
 		~Program() {
 
 		}
-};
+	};
+
+}
 
 RandomEngine::Application* RandomEngine::CreateApplication() {
-	return new Program();
+	return new Sandbox::Program();
 }

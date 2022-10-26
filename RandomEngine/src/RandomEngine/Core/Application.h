@@ -1,13 +1,11 @@
 #pragma once
 
 #include <memory>
+
 #include "Window.h"
 #include "LayerStack.h"
 #include "RandomEngine/Events/ApplicationEvent.h"
 #include "RandomEngine/GUI/GuiLayer.h"
-#include "RandomEngine/Graphics/Shader.h"
-#include "RandomEngine/Graphics/Buffers/VertexArray.h"
-#include "RandomEngine/Graphics/Cameras/OrthographicCamera.h"
 
 namespace RandomEngine {
 
@@ -20,11 +18,6 @@ namespace RandomEngine {
 			std::unique_ptr<Window> _window;
 			LayerStack _layerStack;
 			GuiLayer* _guiLayer;
-
-			std::shared_ptr<Graphics::Shader> _shader;
-			std::shared_ptr<Graphics::VertexArray> _vertexArray;
-
-			Graphics::OrthographicCamera _camera;
 
 			bool OnWindowClose(WindowCloseEvent& e);
 

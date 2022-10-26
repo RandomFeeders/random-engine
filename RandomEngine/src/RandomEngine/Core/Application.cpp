@@ -11,8 +11,7 @@ namespace RandomEngine {
 
 	Application* Application::_instance = nullptr;
 
-	Application::Application()
-		: _camera(0.9f, 1.6f, -0.9f, -1.6f) {
+	Application::Application() {
 		RE_CORE_ASSERT(!_instance, "Application already exists!");
 		_instance = this;
 
@@ -23,78 +22,6 @@ namespace RandomEngine {
 
 		_guiLayer = new GuiLayer();
 		PushOverlay(_guiLayer);
-
-		_vertexArray.reset(Graphics::VertexArray::Create());
-
-		float vertices[7 * 7] = {
-			-0.45f, -0.30f, 0.00f, 0.8f, 0.8f, 0.2f, 1.0f,	// A - 0
-			 0.00f, -0.50f, 0.00f, 0.8f, 0.2f, 0.8f, 1.0f,	// B - 1
-			 0.00f,  0.05f, 0.00f, 0.2f, 0.8f, 0.8f, 1.0f,	// C - 2
-			-0.45f,  0.30f, 0.00f, 0.2f, 0.2f, 0.8f, 1.0f,	// D - 3
-			 0.45f, -0.30f, 0.00f, 0.2f, 0.8f, 0.2f, 1.0f,	// E - 4
-			 0.45f,  0.30f, 0.00f, 0.8f, 0.2f, 0.2f, 1.0f,	// F - 5
-			 0.00f,  0.50f, 0.00f, 0.8f, 0.2f, 0.8f, 1.0f	// G - 6
-		};
-
-		std::shared_ptr<Graphics::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(Graphics::VertexBuffer::Create(vertices, 7 * 7));
-
-		Graphics::BufferLayout layout = {
-			{ "_position", ShaderDataType::Vector3f },
-			{ "_color", ShaderDataType::Vector4f }
-		};
-
-		vertexBuffer->SetLayout(layout);
-
-		unsigned int indices[3 * 6] = { 
-			0, 1, 2, 
-			2, 3, 0, 
-			1, 4, 5, 
-			5, 2, 1, 
-			3, 2, 5, 
-			5, 6, 3
-		};
-
-		std::shared_ptr<Graphics::IndexBuffer> indexBuffer;
-		indexBuffer.reset(Graphics::IndexBuffer::Create(indices, 3 * 6));
-
-		_vertexArray->AddVertexBuffer(vertexBuffer);
-		_vertexArray->SetIndexBuffer(indexBuffer);
-		_vertexArray->Bind();
-
-		std::string vertexSrc = R"(
-			#version 330 core
-
-			layout(location = 0) in vec4 _position;
-			layout(location = 1) in vec4 _color;
-
-			uniform mat4 u_ViewProjection;
-
-			out vec4 v_position;
-			out vec4 v_color;
-
-			void main() {
-				v_position = _position;
-				gl_Position = u_ViewProjection * _position;
-				v_color = _color;
-			}
-		)";
-
-		std::string fragmentSrc = R"(
-			#version 330 core
-
-			layout(location = 0) out vec4 color;
-
-			in vec4 v_position;
-			in vec4 v_color;
-
-			void main() {
-				color = vec4(v_position * 0.5 + 0.5);
-				color = v_color;
-			}
-		)";
-
-		_shader.reset(new Graphics::Shader(vertexSrc, fragmentSrc));
 	}
 
 	Application::~Application() { }
@@ -103,13 +30,6 @@ namespace RandomEngine {
 		_running = true;
 
 		while (_running) {
-			Graphics::RenderCommands::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
-			Graphics::RenderCommands::Clear();
-
-			Graphics::Renderer::BeginScene(_camera);
-			Graphics::Renderer::Submit(_shader, _vertexArray);
-			Graphics::Renderer::EndScene();
-
 			for (Layer* layer : _layerStack) {
 				layer->OnUpdate();
 			}

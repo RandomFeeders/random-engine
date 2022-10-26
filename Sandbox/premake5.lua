@@ -15,6 +15,7 @@ project "Sandbox"
 
 	includedirs
 	{
+		"%{wks.location}/Sandbox",
 		"%{wks.location}/RandomEngine/vendor/spdlog/include",
 		"%{wks.location}/RandomEngine/src",
 		"%{wks.location}/RandomEngine/vendor",

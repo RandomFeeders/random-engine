@@ -11,7 +11,8 @@ namespace RandomEngine {
 
 	Application* Application::_instance = nullptr;
 
-	Application::Application() {
+	Application::Application()
+		: _camera(0.9f, 1.6f, -0.9f, -1.6f) {
 		RE_CORE_ASSERT(!_instance, "Application already exists!");
 		_instance = this;
 
@@ -26,13 +27,13 @@ namespace RandomEngine {
 		_vertexArray.reset(Graphics::VertexArray::Create());
 
 		float vertices[7 * 7] = {
-			-0.45f, -0.50f, 0.00f, 0.8f, 0.8, 0.2f, 1.0f,	// A - 0
-			 0.00f, -0.75f, 0.00f, 0.8f, 0.2, 0.8f, 1.0f,	// B - 1
-			 0.00f,  0.00f, 0.00f, 0.2f, 0.8, 0.8f, 1.0f,	// C - 2
-			-0.45f,  0.50f, 0.00f, 0.2f, 0.2, 0.8f, 1.0f,	// D - 3
-			 0.45f, -0.50f, 0.00f, 0.2f, 0.8, 0.2f, 1.0f,	// E - 4
-			 0.45f,  0.50f, 0.00f, 0.8f, 0.2, 0.2f, 1.0f,	// F - 5
-			 0.00f,  0.75f, 0.00f, 0.8f, 0.2, 0.8f, 1.0f	// G - 6
+			-0.45f, -0.30f, 0.00f, 0.8f, 0.8f, 0.2f, 1.0f,	// A - 0
+			 0.00f, -0.50f, 0.00f, 0.8f, 0.2f, 0.8f, 1.0f,	// B - 1
+			 0.00f,  0.05f, 0.00f, 0.2f, 0.8f, 0.8f, 1.0f,	// C - 2
+			-0.45f,  0.30f, 0.00f, 0.2f, 0.2f, 0.8f, 1.0f,	// D - 3
+			 0.45f, -0.30f, 0.00f, 0.2f, 0.8f, 0.2f, 1.0f,	// E - 4
+			 0.45f,  0.30f, 0.00f, 0.8f, 0.2f, 0.2f, 1.0f,	// F - 5
+			 0.00f,  0.50f, 0.00f, 0.8f, 0.2f, 0.8f, 1.0f	// G - 6
 		};
 
 		std::shared_ptr<Graphics::VertexBuffer> vertexBuffer;
@@ -67,12 +68,14 @@ namespace RandomEngine {
 			layout(location = 0) in vec4 _position;
 			layout(location = 1) in vec4 _color;
 
+			uniform mat4 u_ViewProjection;
+
 			out vec4 v_position;
 			out vec4 v_color;
 
 			void main() {
 				v_position = _position;
-				gl_Position = _position;
+				gl_Position = u_ViewProjection * _position;
 				v_color = _color;
 			}
 		)";
@@ -103,11 +106,8 @@ namespace RandomEngine {
 			Graphics::RenderCommands::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 			Graphics::RenderCommands::Clear();
 
-			Graphics::Renderer::BeginScene();
-
-			_shader->Bind();
-			Graphics::Renderer::Submit(_vertexArray);
-
+			Graphics::Renderer::BeginScene(_camera);
+			Graphics::Renderer::Submit(_shader, _vertexArray);
 			Graphics::Renderer::EndScene();
 
 			for (Layer* layer : _layerStack) {

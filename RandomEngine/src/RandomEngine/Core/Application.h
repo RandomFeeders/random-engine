@@ -7,6 +7,7 @@
 #include "RandomEngine/GUI/GuiLayer.h"
 #include "RandomEngine/Graphics/Shader.h"
 #include "RandomEngine/Graphics/Buffers/VertexArray.h"
+#include "RandomEngine/Graphics/Cameras/OrthographicCamera.h"
 
 namespace RandomEngine {
 
@@ -22,6 +23,8 @@ namespace RandomEngine {
 
 			std::shared_ptr<Graphics::Shader> _shader;
 			std::shared_ptr<Graphics::VertexArray> _vertexArray;
+
+			Graphics::OrthographicCamera _camera;
 
 			bool OnWindowClose(WindowCloseEvent& e);
 

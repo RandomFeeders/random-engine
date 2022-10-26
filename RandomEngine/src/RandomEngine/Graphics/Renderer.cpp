@@ -7,6 +7,7 @@
 namespace RandomEngine::Graphics {
 
 	RendererAPI* Renderer::_rendererAPI = nullptr;
+	Renderer::SceneData* Renderer::_sceneData = new Renderer::SceneData;
 
 	void Renderer::Init() {
 		switch (GetAPI()) {
@@ -23,15 +24,17 @@ namespace RandomEngine::Graphics {
 		}
 	}
 
-	void Renderer::BeginScene() {
-
+	void Renderer::BeginScene(OrthographicCamera& camera) {
+		_sceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 
 	void Renderer::EndScene() {
 
 	}
 
-	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray) {
+	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray) {
+		shader->Bind();
+		shader->Define("u_ViewProjection", _sceneData->ViewProjectionMatrix);
 		vertexArray->Bind();
 		RenderCommands::DrawIndexed(vertexArray);
 	}

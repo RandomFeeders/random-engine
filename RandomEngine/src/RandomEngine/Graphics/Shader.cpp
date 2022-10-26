@@ -6,7 +6,8 @@
 
 namespace RandomEngine::Graphics {
 
-	Shader::Shader(const std::string& vertexSrc, const std::string& fragmentSrc) {
+	Shader::Shader(const std::string& vertexSrc, const std::string& fragmentSrc) 
+		: _rendererId(NULL) {
 		unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
 		const char* source = vertexSrc.c_str();
@@ -98,6 +99,30 @@ namespace RandomEngine::Graphics {
 
 	void Shader::Unbind() const {
 		glUseProgram(NULL);
+	}
+
+	void Shader::Define(const std::string& name, int value) {
+		glUniform1i(glGetUniformLocation(_rendererId, name.c_str()), value);
+	}
+
+	void Shader::Define(const std::string& name, float value) {
+		glUniform1f(glGetUniformLocation(_rendererId, name.c_str()), value);
+	}
+
+	void Shader::Define(const std::string& name, const Maths::Vector2f& value) {
+		glUniform2f(glGetUniformLocation(_rendererId, name.c_str()), value.x, value.y);
+	}
+
+	void Shader::Define(const std::string& name, const Maths::Vector3f& value) {
+		glUniform3f(glGetUniformLocation(_rendererId, name.c_str()), value.x, value.y, value.z);
+	}
+
+	void Shader::Define(const std::string& name, const Maths::Vector4f& value) {
+		glUniform4f(glGetUniformLocation(_rendererId, name.c_str()), value.x, value.y, value.z, value.w);
+	}
+
+	void Shader::Define(const std::string& name, const Maths::Matrix4f& value) {
+		glUniformMatrix4fv(glGetUniformLocation(_rendererId, name.c_str()), 1, GL_FALSE, value.ToPointer());
 	}
 
 }

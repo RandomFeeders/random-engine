@@ -2,8 +2,9 @@
 
 #include <iostream>
 #include <sstream>
-#include <glm/glm.hpp>
+#include <glm/ext.hpp>
 
+#include "RandomEngine/Maths/Vectors/Vector3f.h"
 #include "RandomEngine/Maths/Vectors/Vector4f.h"
 
 namespace RandomEngine::Maths {
@@ -13,6 +14,8 @@ namespace RandomEngine::Maths {
 		using glm::mat4::mat;
 
 		Matrix4f(const glm::mat4& m) : glm::mat4(m) { }
+
+		const float* ToPointer() const;
 
 		inline std::string ToString() const {
 			std::stringstream ss;
@@ -28,7 +31,21 @@ namespace RandomEngine::Maths {
 			stream << vector.ToString();
 			return stream;
 		}
-		
+
+		// Identity matrix
+		static Matrix4f Identity();
+
+		// Projection matrices
+		static Matrix4f Orthographic(float top, float right, float bottom, float left, float near_, float far_);
+		static Matrix4f Perspective(float fov, float aspectRatio, float near_, float far_);
+
+		// Translation matrices
+		static Matrix4f Translation(const Vector3f& translation);
+		static Matrix4f Rotation(float angle, const Vector3f& axis);
+		static Matrix4f Scale(const Vector3f& scale);
+
+		// Utils
+		static const Matrix4f& Inverse(const Matrix4f& matrix);		
 	};
 
 }

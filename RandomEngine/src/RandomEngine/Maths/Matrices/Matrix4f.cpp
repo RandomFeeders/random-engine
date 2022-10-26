@@ -7,10 +7,6 @@ namespace RandomEngine::Maths {
 		return Matrix4f(1.0f);
 	}
 
-	const float* Matrix4f::ToPointer() const {
-		return glm::value_ptr(*((glm::mat4*)this));
-	}
-
 	Matrix4f Matrix4f::Orthographic(float top, float right, float bottom, float left, float near_, float far_) {
 
 		// |  2 / (r - l)        0              0          -((r + l) / (r - l))  |

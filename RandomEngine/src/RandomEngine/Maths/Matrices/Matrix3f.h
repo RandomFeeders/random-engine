@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <glm/glm.hpp>
+#include <glm/ext.hpp>
 
 #include "RandomEngine/Maths/Vectors/Vector3f.h"
 
@@ -22,6 +22,8 @@ namespace RandomEngine::Maths {
 			ss << "Matrix3f { " << vecA << ", " << vecB << ", " << vecC << " }";
 			return ss.str();
 		}
+
+		operator float* () const { return glm::value_ptr(*((glm::mat3*)this)); }
 
 		friend std::ostream& operator<<(std::ostream& stream, const Matrix3f& vector) {
 			stream << vector.ToString();

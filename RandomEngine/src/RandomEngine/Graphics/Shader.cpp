@@ -122,7 +122,7 @@ namespace RandomEngine::Graphics {
 	}
 
 	void Shader::Define(const std::string& name, const Maths::Matrix4f& value) {
-		glUniformMatrix4fv(glGetUniformLocation(_rendererId, name.c_str()), 1, GL_FALSE, value.ToPointer());
+		glUniformMatrix4fv(glGetUniformLocation(_rendererId, name.c_str()), 1, GL_FALSE, value);
 	}
 
 }

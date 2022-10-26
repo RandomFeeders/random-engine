@@ -15,8 +15,6 @@ namespace RandomEngine::Maths {
 
 		Matrix4f(const glm::mat4& m) : glm::mat4(m) { }
 
-		const float* ToPointer() const;
-
 		inline std::string ToString() const {
 			std::stringstream ss;
 			Vector4f vecA = this->operator[](0);
@@ -26,6 +24,8 @@ namespace RandomEngine::Maths {
 			ss << "Matrix4f { " << vecA << ", " << vecB << ", " << vecC << ", " << vecD << " }";
 			return ss.str();
 		}
+
+		operator float* () const { return glm::value_ptr(*((glm::mat4*)this)); }
 
 		friend std::ostream& operator<<(std::ostream& stream, const Matrix4f& vector) {
 			stream << vector.ToString();

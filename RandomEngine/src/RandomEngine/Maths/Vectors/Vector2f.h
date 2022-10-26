@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <glm/glm.hpp>
+#include <glm/ext.hpp>
 
 namespace RandomEngine::Maths {
 
@@ -17,6 +17,8 @@ namespace RandomEngine::Maths {
 			ss << "Vector2f { " << x << ", " << y << " }";
 			return ss.str();
 		}
+
+		operator float* () const { return glm::value_ptr(*((glm::vec2*)this)); }
 
 		friend std::ostream& operator<<(std::ostream& stream, const Vector2f& vector) {
 			stream << vector.ToString();

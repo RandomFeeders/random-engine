@@ -4,6 +4,8 @@
 
 #include "application.h"
 #include "RandomEngine/Graphics/Buffers/BufferLayout.h"
+#include "RandomEngine/Graphics/Buffers/VertexBuffer.h"
+#include "RandomEngine/Graphics/Buffers/IndexBuffer.h"
 
 namespace RandomEngine {
 
@@ -19,38 +21,43 @@ namespace RandomEngine {
 		_guiLayer = new GuiLayer();
 		PushOverlay(_guiLayer);
 
-		glGenVertexArrays(1, &_vertexArray);
-		glBindVertexArray(_vertexArray);
+		_vertexArray.reset(Graphics::VertexArray::Create());
 
-		float vertices[3 * 7] = {
-			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
-			0.5f, -0.5f, 0.0f, 0.2f, 0.8f, 0.8f, 1.0f,
-			0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
+		float vertices[7 * 7] = {
+			-0.45f, -0.50f, 0.00f, 0.8f, 0.8, 0.2f, 1.0f,	// A - 0
+			 0.00f, -0.75f, 0.00f, 0.8f, 0.2, 0.8f, 1.0f,	// B - 1
+			 0.00f,  0.00f, 0.00f, 0.2f, 0.8, 0.8f, 1.0f,	// C - 2
+			-0.45f,  0.50f, 0.00f, 0.2f, 0.2, 0.8f, 1.0f,	// D - 3
+			 0.45f, -0.50f, 0.00f, 0.2f, 0.8, 0.2f, 1.0f,	// E - 4
+			 0.45f,  0.50f, 0.00f, 0.8f, 0.2, 0.2f, 1.0f,	// F - 5
+			 0.00f,  0.75f, 0.00f, 0.8f, 0.2, 0.8f, 1.0f	// G - 6
 		};
 
-		_vertexBuffer.reset(Graphics::VertexBuffer::Create(vertices, 3 * 7));
+		std::shared_ptr<Graphics::VertexBuffer> vertexBuffer;
+		vertexBuffer.reset(Graphics::VertexBuffer::Create(vertices, 7 * 7));
 
 		Graphics::BufferLayout layout = {
 			{ "_position", ShaderDataType::Vector3f },
 			{ "_color", ShaderDataType::Vector4f }
 		};
 
-		// _vertexBuffer->SetLayout(layout);
+		vertexBuffer->SetLayout(layout);
 
-		unsigned int index = 0;
-		for (auto& element : layout) {
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, element.ComponentCount, 
-				GL_FLOAT, GL_FALSE, layout.GetStride(), (const void*) element.Offset);
-			index++;
-		}
+		unsigned int indices[3 * 6] = { 
+			0, 1, 2, 
+			2, 3, 0, 
+			1, 4, 5, 
+			5, 2, 1, 
+			3, 2, 5, 
+			5, 6, 3
+		};
 
-		
+		std::shared_ptr<Graphics::IndexBuffer> indexBuffer;
+		indexBuffer.reset(Graphics::IndexBuffer::Create(indices, 3 * 6));
 
-		unsigned int indices[3 * 1] = { 0, 1, 2 };
-
-		_indexBuffer.reset(Graphics::IndexBuffer::Create(indices, 3));
-		_indexBuffer->Bind();
+		_vertexArray->AddVertexBuffer(vertexBuffer);
+		_vertexArray->SetIndexBuffer(indexBuffer);
+		_vertexArray->Bind();
 
 		std::string vertexSrc = R"(
 			#version 330 core
@@ -95,8 +102,8 @@ namespace RandomEngine {
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			_shader->Bind();
-			glBindVertexArray(_vertexArray);
-			glDrawElements(GL_TRIANGLES, _indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			_vertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, _vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : _layerStack) {
 				layer->OnUpdate();

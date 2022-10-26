@@ -1,12 +1,12 @@
 #pragma once
 
+#include <memory>
 #include "Window.h"
 #include "LayerStack.h"
 #include "RandomEngine/Events/ApplicationEvent.h"
 #include "RandomEngine/GUI/GuiLayer.h"
 #include "RandomEngine/Graphics/Shader.h"
-#include "RandomEngine/Graphics/Buffers/VertexBuffer.h"
-#include "RandomEngine/Graphics/Buffers/IndexBuffer.h"
+#include "RandomEngine/Graphics/Buffers/VertexArray.h"
 
 namespace RandomEngine {
 
@@ -20,10 +20,8 @@ namespace RandomEngine {
 			LayerStack _layerStack;
 			GuiLayer* _guiLayer;
 
-			unsigned int _vertexArray;
-			std::unique_ptr<Graphics::IndexBuffer> _indexBuffer;
-			std::unique_ptr<Graphics::VertexBuffer> _vertexBuffer;
-			std::unique_ptr<Graphics::Shader> _shader;
+			std::shared_ptr<Graphics::Shader> _shader;
+			std::shared_ptr<Graphics::VertexArray> _vertexArray;
 
 			bool OnWindowClose(WindowCloseEvent& e);
 

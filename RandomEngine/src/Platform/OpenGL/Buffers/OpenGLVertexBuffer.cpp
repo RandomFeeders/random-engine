@@ -26,4 +26,8 @@ namespace RandomEngine::Graphics {
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 	}
 
+	void OpenGLVertexBuffer::SetLayout(const BufferLayout& layout) {
+		__super::SetLayout(layout);
+	}
+
 }

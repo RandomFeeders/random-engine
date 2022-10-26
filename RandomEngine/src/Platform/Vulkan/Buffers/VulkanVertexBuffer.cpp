@@ -21,4 +21,8 @@ namespace RandomEngine::Graphics {
 
 	}
 
+	void VulkanVertexBuffer::SetLayout(const BufferLayout& layout) {
+		__super::SetLayout(layout);
+	}
+
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RandomEngine/Core/PlatformDetection.h"
+#include "RandomEngine/Core/Log.h"
 
 #ifdef RE_ENV_DEBUG
 	#define RE_ENABLE_ASSERTS

@@ -15,6 +15,8 @@ namespace RandomEngine::Graphics {
 
 			void Bind() const override;
 			void Unbind() const override;
+
+			void SetLayout(const BufferLayout& layout) override;
 	};
 
 }

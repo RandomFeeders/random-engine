@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 
 #include "application.h"
+#include "RandomEngine/Graphics/Buffers/BufferLayout.h"
 
 namespace RandomEngine {
 
@@ -21,17 +22,30 @@ namespace RandomEngine {
 		glGenVertexArrays(1, &_vertexArray);
 		glBindVertexArray(_vertexArray);
 
-		float vertices[3 * 3] = {
-			-0.5f, -0.5f, 0.0f,
-			0.5f, -0.5f, 0.0f,
-			0.0f, 0.5f, 0.0f
+		float vertices[3 * 7] = {
+			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
+			0.5f, -0.5f, 0.0f, 0.2f, 0.8f, 0.8f, 1.0f,
+			0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		_vertexBuffer.reset(Graphics::VertexBuffer::Create(vertices, 3 * 3));
-		_vertexBuffer->Bind();
+		_vertexBuffer.reset(Graphics::VertexBuffer::Create(vertices, 3 * 7));
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+		Graphics::BufferLayout layout = {
+			{ "_position", ShaderDataType::Vector3f },
+			{ "_color", ShaderDataType::Vector4f }
+		};
+
+		// _vertexBuffer->SetLayout(layout);
+
+		unsigned int index = 0;
+		for (auto& element : layout) {
+			glEnableVertexAttribArray(index);
+			glVertexAttribPointer(index, element.ComponentCount, 
+				GL_FLOAT, GL_FALSE, layout.GetStride(), (const void*) element.Offset);
+			index++;
+		}
+
+		
 
 		unsigned int indices[3 * 1] = { 0, 1, 2 };
 
@@ -42,12 +56,15 @@ namespace RandomEngine {
 			#version 330 core
 
 			layout(location = 0) in vec4 _position;
+			layout(location = 1) in vec4 _color;
 
 			out vec4 v_position;
+			out vec4 v_color;
 
 			void main() {
 				v_position = _position;
 				gl_Position = _position;
+				v_color = _color;
 			}
 		)";
 
@@ -57,9 +74,11 @@ namespace RandomEngine {
 			layout(location = 0) out vec4 color;
 
 			in vec4 v_position;
+			in vec4 v_color;
 
 			void main() {
 				color = vec4(v_position * 0.5 + 0.5);
+				color = v_color;
 			}
 		)";
 

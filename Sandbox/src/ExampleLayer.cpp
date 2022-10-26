@@ -52,7 +52,7 @@ namespace Sandbox {
 		_shader.reset(new Shader(vertexSrc, fragmentSrc));
 	}
 
-	void ExampleLayer::OnUpdate() {
+	void ExampleLayer::OnUpdate(RandomEngine::Timestep timestep) {
 		using namespace RandomEngine::Graphics;
 		using namespace RandomEngine::Maths;
 
@@ -60,22 +60,22 @@ namespace Sandbox {
 		Vector3f camRot = _camera.GetRotation();
 
 		if (RandomEngine::Input::IsKeyPressed(RE_KEY_A))
-			camPos.x -= _cameraSpeed;
+			camPos.x -= _cameraSpeed * timestep;
 
 		if (RandomEngine::Input::IsKeyPressed(RE_KEY_D))
-			camPos.x += _cameraSpeed;
+			camPos.x += _cameraSpeed * timestep;
 
 		if (RandomEngine::Input::IsKeyPressed(RE_KEY_S))
-			camPos.y -= _cameraSpeed;
+			camPos.y -= _cameraSpeed * timestep;
 
 		if (RandomEngine::Input::IsKeyPressed(RE_KEY_W))
-			camPos.y += _cameraSpeed;
+			camPos.y += _cameraSpeed * timestep;
 
 		if (RandomEngine::Input::IsKeyPressed(RE_KEY_Q))
-			camRot.z += _cameraSpeed * 3;
+			camRot.z += _cameraSpeed * 5 * timestep;
 
 		if (RandomEngine::Input::IsKeyPressed(RE_KEY_E))
-			camRot.z -= _cameraSpeed * 3;
+			camRot.z -= _cameraSpeed * 5 * timestep;
 
 		_camera.SetPosition(camPos);
 		_camera.SetRotation(camRot);

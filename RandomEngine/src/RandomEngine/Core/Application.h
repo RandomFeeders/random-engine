@@ -2,8 +2,9 @@
 
 #include <memory>
 
-#include "Window.h"
-#include "LayerStack.h"
+#include "RandomEngine/Core/Window.h"
+#include "RandomEngine/Core/LayerStack.h"
+#include "RandomEngine/Core/Timestep.h"
 #include "RandomEngine/Events/ApplicationEvent.h"
 #include "RandomEngine/GUI/GuiLayer.h"
 
@@ -18,6 +19,7 @@ namespace RandomEngine {
 			std::unique_ptr<Window> _window;
 			LayerStack _layerStack;
 			GuiLayer* _guiLayer;
+			float _lastFrameTime;
 
 			bool OnWindowClose(WindowCloseEvent& e);
 

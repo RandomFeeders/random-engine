@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RandomEngine/Events/Event.h"
+#include "RandomEngine/Core/Timestep.h"
 
 namespace RandomEngine {
 
@@ -15,7 +16,7 @@ namespace RandomEngine {
 
 			virtual void OnAttach();
 			virtual void OnDetach();
-			virtual void OnUpdate();
+			virtual void OnUpdate(Timestep timestep);
 			virtual void OnGUIRender();
 			virtual void OnEvent(Event& event);
 

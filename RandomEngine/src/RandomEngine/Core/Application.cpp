@@ -1,6 +1,8 @@
 #include "REPCH.h"
-
 #include "application.h"
+
+#include <GLFW/glfw3.h>
+
 #include "RandomEngine/Graphics/Renderer.h"
 #include "RandomEngine/Graphics/RenderCommands.h"
 #include "RandomEngine/Graphics/Buffers/BufferLayout.h"
@@ -30,8 +32,12 @@ namespace RandomEngine {
 		_running = true;
 
 		while (_running) {
+			float time = (float)glfwGetTime();
+			Timestep timestep = time - _lastFrameTime;
+			_lastFrameTime = time;
+
 			for (Layer* layer : _layerStack) {
-				layer->OnUpdate();
+				layer->OnUpdate(timestep);
 			}
 
 			_guiLayer->Begin();

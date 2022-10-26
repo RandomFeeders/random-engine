@@ -9,6 +9,8 @@
 #include "RandomEngine/Core/Log.h"
 #include "RandomEngine/Core/Window.h"
 
+#include "RandomEngine/Core/Timestep.h"
+
 #include "RandomEngine/Core/Input.h"
 #include "RandomEngine/Core/KeyCodes.h"
 

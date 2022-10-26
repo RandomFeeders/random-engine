@@ -1,5 +1,4 @@
 #include "REPCH.h"
-
 #include "Layer.h"
 
 namespace RandomEngine {
@@ -11,7 +10,7 @@ namespace RandomEngine {
 
 	void Layer::OnDetach() { }
 
-	void Layer::OnUpdate() { }
+	void Layer::OnUpdate(Timestep timestep) { }
 
 	void Layer::OnGUIRender() { }
 

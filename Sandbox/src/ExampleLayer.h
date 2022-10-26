@@ -12,12 +12,12 @@ namespace Sandbox {
 
 			RandomEngine::Graphics::OrthographicCamera _camera;
 			RandomEngine::Maths::Vector3f _cameraPosition;
-			float _cameraSpeed = 0.1f;
+			float _cameraSpeed = 3.5f;
 
 		public:
 			ExampleLayer();
 
-			void OnUpdate() override;
+			void OnUpdate(RandomEngine::Timestep timestep) override;
 	};
 
 }

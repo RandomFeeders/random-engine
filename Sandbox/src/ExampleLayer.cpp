@@ -5,7 +5,11 @@
 namespace Sandbox {
 
 	ExampleLayer::ExampleLayer() 
-		: Layer("Example"), _camera(0.9f, 1.6f, -0.9f, -1.6f) { 
+		: Layer("Example"), 
+		  _camera(0.9f, 1.6f, -0.9f, -1.6f),
+	      _cubePosition(0.0f),
+		  _cubeRotation(0.0f),
+	      _cubeScale(1.0f) {
 		using namespace RandomEngine::Graphics;
 
 		_vertexArray.reset(VertexArray::Create());
@@ -80,11 +84,41 @@ namespace Sandbox {
 		_camera.SetPosition(camPos);
 		_camera.SetRotation(camRot);
 
+		if (RandomEngine::Input::IsKeyPressed(RE_KEY_LEFT))
+			_cubePosition.x -= _cubeSpeed * timestep;
+
+		if (RandomEngine::Input::IsKeyPressed(RE_KEY_RIGHT))
+			_cubePosition.x += _cubeSpeed * timestep;
+
+		if (RandomEngine::Input::IsKeyPressed(RE_KEY_DOWN))
+			_cubePosition.y -= _cubeSpeed * timestep;
+
+		if (RandomEngine::Input::IsKeyPressed(RE_KEY_UP))
+			_cubePosition.y += _cubeSpeed * timestep;
+
 		RenderCommands::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		RenderCommands::Clear();
 
 		Renderer::BeginScene(_camera);
-		Renderer::Submit(_shader, _vertexArray);
+
+		_cubeScale = { 0.1f, 0.1f, 0.1f };
+
+		for (int y = 0; y < 5; y++) {
+			for (int x = 0; x < 5; x++) {
+				Vector3f pos = { x * 0.11f - 0.22f, y * 0.11f - 0.22f, 0.0f };
+
+				Transform transform(pos, _cubeRotation, _cubeScale);
+
+				Renderer::Submit(_shader, _vertexArray, transform);
+			}
+		}
+
+		_cubeScale = { 0.2f, 0.2f, 0.2f };
+
+		Transform transform(_cubePosition, _cubeRotation, _cubeScale);
+
+		Renderer::Submit(_shader, _vertexArray, transform);
+
 		Renderer::EndScene();
 	}
 

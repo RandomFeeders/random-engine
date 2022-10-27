@@ -27,7 +27,9 @@
 #include "RandomEngine/Graphics/Renderer/Renderer.h"
 #include "RandomEngine/Graphics/Shader.h"
 #include "RandomEngine/Graphics/ShaderDataType.h"
-#include "RandomEngine/Graphics/Renderer.h"
+
+#include "RandomEngine/Graphics/Objects/Transform.h"
+#include "RandomEngine/Graphics/Objects/GameObject.h"
 // -------------------------------------
 
 // -------------- Events ---------------

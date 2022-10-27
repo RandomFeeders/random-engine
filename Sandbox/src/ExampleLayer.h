@@ -14,6 +14,11 @@ namespace Sandbox {
 			RandomEngine::Maths::Vector3f _cameraPosition;
 			float _cameraSpeed = 3.5f;
 
+			RandomEngine::Maths::Vector3f _cubePosition;
+			RandomEngine::Maths::Vector3f _cubeRotation;
+			RandomEngine::Maths::Vector3f _cubeScale;
+			float _cubeSpeed = 2.0f;
+
 		public:
 			ExampleLayer();
 

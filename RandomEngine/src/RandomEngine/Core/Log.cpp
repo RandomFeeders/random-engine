@@ -1,5 +1,4 @@
 #include "REPCH.h"
-
 #include "Log.h"
 
 namespace RandomEngine {

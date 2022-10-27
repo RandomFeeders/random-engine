@@ -1,5 +1,4 @@
 #include "REPCH.h"
-
 #include "LayerStack.h"
 
 namespace RandomEngine {

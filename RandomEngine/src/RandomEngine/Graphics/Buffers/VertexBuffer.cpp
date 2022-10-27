@@ -1,5 +1,4 @@
 #include "REPCH.h"
-
 #include "VertexBuffer.h"
 
 #include "RandomEngine/Graphics/Renderer/RendererAPI.h"

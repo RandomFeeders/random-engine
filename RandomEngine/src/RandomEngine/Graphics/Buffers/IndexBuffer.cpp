@@ -1,5 +1,4 @@
 #include "REPCH.h"
-
 #include "IndexBuffer.h"
 
 #include "RandomEngine/Graphics/Renderer/RendererAPI.h"

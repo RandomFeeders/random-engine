@@ -1,5 +1,4 @@
 #include "REPCH.h"
-
 #include "BufferLayout.h"
 
 namespace RandomEngine::Graphics {

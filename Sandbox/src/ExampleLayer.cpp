@@ -1,5 +1,7 @@
 #include "ExampleLayer.h"
 
+#include <memory>
+#include <Platform/OpenGL/OpenGLShader.h>
 #include "FileUtils.h"
 
 namespace Sandbox {
@@ -9,7 +11,8 @@ namespace Sandbox {
 		  _camera(0.9f, 1.6f, -0.9f, -1.6f),
 	      _cubePosition(0.0f),
 		  _cubeRotation(0.0f),
-	      _cubeScale(1.0f) {
+	      _cubeScale(1.0f),
+		  _cubeColor(1.0f, 1.0f, 1.0f, 0.0f) {
 		using namespace RandomEngine::Graphics;
 
 		_vertexArray.reset(VertexArray::Create());
@@ -52,8 +55,14 @@ namespace Sandbox {
 
 		const std::string& vertexSrc = FileUtils::ReadFile("src/Shaders/basic.vert");
 		const std::string& fragmentSrc = FileUtils::ReadFile("src/Shaders/basic.frag");
+		
+		_shader.reset(Shader::Create(vertexSrc, fragmentSrc));
+	}
 
-		_shader.reset(new Shader(vertexSrc, fragmentSrc));
+	void ExampleLayer::OnGUIRender() {
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit4("Color", _cubeColor);
+		ImGui::End();
 	}
 
 	void ExampleLayer::OnUpdate(RandomEngine::Timestep timestep) {
@@ -117,6 +126,7 @@ namespace Sandbox {
 
 		Transform transform(_cubePosition, _cubeRotation, _cubeScale);
 
+		std::dynamic_pointer_cast<OpenGLShader>(_shader)->Define("u_Color", _cubeColor);
 		Renderer::Submit(_shader, _vertexArray, transform);
 
 		Renderer::EndScene();

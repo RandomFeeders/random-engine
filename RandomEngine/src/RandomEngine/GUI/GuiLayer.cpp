@@ -51,8 +51,8 @@ namespace RandomEngine {
 	}
 
 	void GuiLayer::OnGUIRender() {
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
+		// static bool show = true;
+		// ImGui::ShowDemoWindow(&show);
 	}
 
 	void GuiLayer::Begin() {

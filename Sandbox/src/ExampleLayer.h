@@ -14,6 +14,7 @@ namespace Sandbox {
 			RandomEngine::Maths::Vector3f _cameraPosition;
 			float _cameraSpeed = 3.5f;
 
+			RandomEngine::Maths::Vector4f _cubeColor;
 			RandomEngine::Maths::Vector3f _cubePosition;
 			RandomEngine::Maths::Vector3f _cubeRotation;
 			RandomEngine::Maths::Vector3f _cubeScale;
@@ -23,6 +24,7 @@ namespace Sandbox {
 			ExampleLayer();
 
 			void OnUpdate(RandomEngine::Timestep timestep) override;
+			void OnGUIRender() override;
 	};
 
 }

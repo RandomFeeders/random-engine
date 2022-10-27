@@ -3,6 +3,7 @@
 
 #include "Platform/OpenGL/OpenGLRenderer.h"
 #include "Platform/Vulkan/VulkanRenderer.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 
 namespace RandomEngine::Graphics {
 
@@ -38,8 +39,9 @@ namespace RandomEngine::Graphics {
 		const Maths::Matrix4f& transform
 	) {
 		shader->Bind();
-		shader->Define("u_ViewProjection", _sceneData->ViewProjectionMatrix);
-		shader->Define("u_Transform", transform);
+
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->Define("u_ViewProjection", _sceneData->ViewProjectionMatrix);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->Define("u_Transform", transform);
 
 		vertexArray->Bind();
 		RenderCommands::DrawIndexed(vertexArray);

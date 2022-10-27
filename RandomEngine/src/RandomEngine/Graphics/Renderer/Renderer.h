@@ -25,7 +25,11 @@ namespace RandomEngine::Graphics {
 			static void BeginScene(OrthographicCamera& camera);
 			static void EndScene();
 
-			static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray);
+			static void Submit(
+				const std::shared_ptr<Shader>& shader, 
+				const std::shared_ptr<VertexArray>& vertexArray,
+				const Maths::Matrix4f& transform = Maths::Matrix4f::Identity()
+			);
 
 			static inline RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	};

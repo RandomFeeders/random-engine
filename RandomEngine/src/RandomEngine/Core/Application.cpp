@@ -3,8 +3,8 @@
 
 #include <GLFW/glfw3.h>
 
-#include "RandomEngine/Graphics/Renderer.h"
-#include "RandomEngine/Graphics/RenderCommands.h"
+#include "RandomEngine/Graphics/Renderer/Renderer.h"
+#include "RandomEngine/Graphics/Renderer/RenderCommands.h"
 #include "RandomEngine/Graphics/Buffers/BufferLayout.h"
 #include "RandomEngine/Graphics/Buffers/VertexBuffer.h"
 #include "RandomEngine/Graphics/Buffers/IndexBuffer.h"

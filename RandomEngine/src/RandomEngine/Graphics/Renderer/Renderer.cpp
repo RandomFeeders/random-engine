@@ -32,9 +32,15 @@ namespace RandomEngine::Graphics {
 
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray) {
+	void Renderer::Submit(
+		const std::shared_ptr<Shader>& shader, 
+		const std::shared_ptr<VertexArray>& vertexArray,
+		const Maths::Matrix4f& transform
+	) {
 		shader->Bind();
 		shader->Define("u_ViewProjection", _sceneData->ViewProjectionMatrix);
+		shader->Define("u_Transform", transform);
+
 		vertexArray->Bind();
 		RenderCommands::DrawIndexed(vertexArray);
 	}

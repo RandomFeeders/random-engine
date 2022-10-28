@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Core/Window.h"
 #include "RandomEngine/Graphics/Context.h"
 
@@ -9,7 +10,7 @@ namespace RandomEngine {
 
 		private:
 			struct WindowData {
-				std::string Title;
+				String Title;
 				unsigned int Width;
 				unsigned int Height;
 				bool VSync;

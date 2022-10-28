@@ -1,12 +1,11 @@
 #include "REPCH.h"
-
 #include "OpenGLVertexBuffer.h"
 
 #include <glad/glad.h>
 
 namespace RandomEngine::Graphics {
 	
-	OpenGLVertexBuffer::OpenGLVertexBuffer(float* data, unsigned int count) 
+	OpenGLVertexBuffer::OpenGLVertexBuffer(float* data, unsigned int count)
 		: VertexBuffer(data, count) {
 		glCreateBuffers(1, &_rendererId);
 		glBindBuffer(GL_ARRAY_BUFFER, _rendererId);

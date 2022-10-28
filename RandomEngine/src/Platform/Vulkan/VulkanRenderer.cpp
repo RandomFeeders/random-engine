@@ -11,7 +11,7 @@ namespace RandomEngine::Graphics {
 
 	}
 
-	void VulkanRenderer::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) {
+	void VulkanRenderer::DrawIndexed(const VertexArrayRef& vertexArray) {
 
 	}
 

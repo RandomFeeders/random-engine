@@ -1,9 +1,14 @@
 #pragma once
 
-#include "Buffer.h"
-#include "BufferLayout.h"
+#include "RandomEngine/Core/Types.h"
+#include "RandomEngine/Graphics/Buffers/Buffer.h"
+#include "RandomEngine/Graphics/Buffers/BufferLayout.h"
 
 namespace RandomEngine::Graphics {
+
+	class VertexBuffer;
+
+	using VertexBufferRef = Ref<VertexBuffer>;
 
 	class VertexBuffer : public Buffer<float> {
 
@@ -20,7 +25,7 @@ namespace RandomEngine::Graphics {
 			virtual void SetLayout(const BufferLayout& layout);
 			inline const BufferLayout& GetLayout() const { return _layout; }
 
-			static VertexBuffer* Create(float* data, unsigned int count);
+			static VertexBufferRef Create(float* data, unsigned int count);
 	};
 
 }

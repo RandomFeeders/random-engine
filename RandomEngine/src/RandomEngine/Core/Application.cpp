@@ -19,7 +19,7 @@ namespace RandomEngine {
 
 		Graphics::Renderer::Init();
 
-		_window = std::unique_ptr<Window>(Window::Create());
+		_window = Scope<Window>(Window::Create());
 		_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
 		_guiLayer = new GuiLayer();

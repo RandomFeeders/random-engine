@@ -1,8 +1,13 @@
 #pragma once
 
-#include "Buffer.h"
+#include "RandomEngine/Core/Types.h"
+#include "RandomEngine/Graphics/Buffers/Buffer.h"
 
 namespace RandomEngine::Graphics {
+
+	class IndexBuffer;
+
+	using IndexBufferRef = Ref<IndexBuffer>;
 
 	class IndexBuffer : public Buffer<unsigned int> {
 
@@ -13,7 +18,7 @@ namespace RandomEngine::Graphics {
 			void Bind() const override = 0;
 			void Unbind() const override = 0;
 
-			static IndexBuffer* Create(unsigned int* data, unsigned int count);
+			static IndexBufferRef Create(unsigned int* data, unsigned int count);
 	};
 
 }

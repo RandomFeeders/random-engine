@@ -1,5 +1,4 @@
 #include "REPCH.h"
-
 #include "WindowsInput.h"
 
 #include <GLFW/glfw3.h>

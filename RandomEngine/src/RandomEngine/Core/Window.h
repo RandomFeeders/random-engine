@@ -1,7 +1,6 @@
 #pragma once
 
-#include "REPCH.h"
-
+#include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Events/Event.h"
 
 namespace RandomEngine {
@@ -9,12 +8,12 @@ namespace RandomEngine {
 	struct WindowProps {
 
 		public:
-			std::string Title;
+			String Title;
 			unsigned int Width;
 			unsigned int Height;
 
 			WindowProps(
-				const std::string& title = "Random Engine",
+				const String& title = "Random Engine",
 				unsigned int width = 1280,
 				unsigned int height = 720) 
 				: Title(title), Width(width), Height(height) { }

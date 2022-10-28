@@ -5,7 +5,7 @@ namespace RandomEngine::Graphics {
 
 	BufferLayout::BufferLayout() : _stride(0) { }
 
-	BufferLayout::BufferLayout(const std::initializer_list<BufferElement>& elements)
+	BufferLayout::BufferLayout(const InitList<BufferElement>& elements)
 		: _elements(elements), _stride(0) { 
 		Init();
 	}

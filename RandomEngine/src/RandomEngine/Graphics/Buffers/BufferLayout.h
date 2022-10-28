@@ -1,14 +1,12 @@
 #pragma once
 
-#include <string>
-#include <vector>
-
+#include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Graphics/ShaderDataType.h"
 
 namespace RandomEngine::Graphics {
 
 	struct BufferElement {
-		std::string Name;
+		String Name;
 		ShaderDataType Type;
 		unsigned int Offset;
 		unsigned int Size;
@@ -19,7 +17,7 @@ namespace RandomEngine::Graphics {
 			: Name("_element"), Type(ShaderDataType::None), Size(0),
 			  Offset(0), ComponentCount(0), Normalized(false) { }
 
-		BufferElement(const std::string& name, ShaderDataType type, bool normalized = false)
+		BufferElement(const String& name, ShaderDataType type, bool normalized = false)
 			: Name(name), Type(type), Size(GetShaderDataTypeSize(type)),
 			Offset(0), ComponentCount(GetShaderDataTypeCount(type)),
 			Normalized(normalized) { }
@@ -28,22 +26,22 @@ namespace RandomEngine::Graphics {
 	class BufferLayout {
 
 		private:
-			std::vector<BufferElement> _elements;
+			List<BufferElement> _elements;
 			unsigned int _stride;
 
 			void Init();
 
 		public:
 			BufferLayout();
-			BufferLayout(const std::initializer_list<BufferElement>& elements);
+			BufferLayout(const InitList<BufferElement>& elements);
 
-			inline const std::vector<BufferElement>& GetElements() const { return _elements; }
+			inline const List<BufferElement>& GetElements() const { return _elements; }
 			inline const unsigned int GetStride() const { return _stride; }
 
-			std::vector<BufferElement>::iterator begin() { return _elements.begin(); }
-			std::vector<BufferElement>::iterator end() { return _elements.end(); }
-			std::vector<BufferElement>::const_iterator begin() const { return _elements.begin(); }
-			std::vector<BufferElement>::const_iterator end() const { return _elements.end(); }
+			Iterator<BufferElement> begin() { return _elements.begin(); }
+			Iterator<BufferElement> end() { return _elements.end(); }
+			ConstIterator<BufferElement> begin() const { return _elements.begin(); }
+			ConstIterator<BufferElement> end() const { return _elements.end(); }
 	};
 
 }

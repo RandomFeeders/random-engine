@@ -4,6 +4,8 @@
 #include <sstream>
 #include <glm/ext.hpp>
 
+#include "RandomEngine/Core/Types.h"
+
 namespace RandomEngine::Maths {
 
 	struct Vector4f : public glm::vec4 {
@@ -12,7 +14,7 @@ namespace RandomEngine::Maths {
 
 		Vector4f(const glm::vec4& v) : glm::vec4(v) { }
 
-		inline std::string ToString() const {
+		inline String ToString() const {
 			std::stringstream ss;
 			ss << "Vector4f { " << x << ", " << y << ", " << z << ", " << w << " }";
 			return ss.str();

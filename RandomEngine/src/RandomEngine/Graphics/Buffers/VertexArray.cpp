@@ -7,20 +7,20 @@
 
 namespace RandomEngine::Graphics {
 
-	void VertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer> buffer) {
+	void VertexArray::AddVertexBuffer(const VertexBufferRef buffer) {
 		_vertexBuffers.push_back(buffer);
 	}
 
-	void VertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer> buffer) {
+	void VertexArray::SetIndexBuffer(const IndexBufferRef buffer) {
 		_indexBuffer = buffer;
 	}
 
-	VertexArray* VertexArray::Create() {
+	VertexArrayRef VertexArray::Create() {
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				return new OpenGLVertexArray();
+				return VertexArrayRef(new OpenGLVertexArray());
 			case RendererAPI::API::Vulkan:
-				return new VulkanVertexArray();
+				return VertexArrayRef(new VulkanVertexArray());
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
 				return nullptr;

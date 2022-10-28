@@ -14,12 +14,12 @@ namespace RandomEngine::Graphics {
 		_layout = layout;
 	}
 
-	VertexBuffer* VertexBuffer::Create(float* data, unsigned int count) {
+	VertexBufferRef VertexBuffer::Create(float* data, unsigned int count) {
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				return new OpenGLVertexBuffer(data, count);
+				return VertexBufferRef(new OpenGLVertexBuffer(data, count));
 			case RendererAPI::API::Vulkan:
-				return new VulkanVertexBuffer(data, count);
+				return VertexBufferRef(new VulkanVertexBuffer(data, count));
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
 				return nullptr;

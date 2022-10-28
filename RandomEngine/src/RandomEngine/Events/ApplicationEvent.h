@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RandomEngine/Core/Types.h"
 #include "Event.h"
 
 namespace RandomEngine {
@@ -16,7 +17,7 @@ namespace RandomEngine {
 			inline unsigned int GetWidth() const { return _width; }
 			inline unsigned int GetHeight() const { return _height; }
 
-			std::string ToString() const override {
+			String ToString() const override {
 				std::stringstream ss;
 				ss << GetName() << ": " << _width << ", " << _height;
 				return ss.str();

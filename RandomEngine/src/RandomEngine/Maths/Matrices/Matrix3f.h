@@ -4,6 +4,7 @@
 #include <sstream>
 #include <glm/ext.hpp>
 
+#include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Maths/Vectors/Vector3f.h"
 
 namespace RandomEngine::Maths {
@@ -14,7 +15,7 @@ namespace RandomEngine::Maths {
 
 		Matrix3f(const glm::mat3& m) : glm::mat3(m) { }
 
-		inline std::string ToString() const {
+		inline String ToString() const {
 			std::stringstream ss;
 			Vector3f vecA = this->operator[](0);
 			Vector3f vecB = this->operator[](1);

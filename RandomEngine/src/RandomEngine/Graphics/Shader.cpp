@@ -7,12 +7,12 @@
 
 namespace RandomEngine::Graphics {
 
-	Shader* Shader::Create(const std::string& vertexSrc, const std::string& fragmentSrc) {
+	ShaderRef Shader::Create(const String& vertexSrc, const String& fragmentSrc) {
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				return new OpenGLShader(vertexSrc, fragmentSrc);
+				return ShaderRef(new OpenGLShader(vertexSrc, fragmentSrc));
 			case RendererAPI::API::Vulkan:
-				return new VulkanShader(vertexSrc, fragmentSrc);
+				return ShaderRef(new VulkanShader(vertexSrc, fragmentSrc));
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
 				return nullptr;

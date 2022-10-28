@@ -1,7 +1,6 @@
 #pragma once
 
-#include <memory>
-
+#include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Core/Window.h"
 #include "RandomEngine/Core/LayerStack.h"
 #include "RandomEngine/Core/Timestep.h"
@@ -16,7 +15,7 @@ namespace RandomEngine {
 			static Application* _instance;
 
 			bool _running = false;
-			std::unique_ptr<Window> _window;
+			Scope<Window> _window;
 			LayerStack _layerStack;
 			GuiLayer* _guiLayer;
 			float _lastFrameTime;

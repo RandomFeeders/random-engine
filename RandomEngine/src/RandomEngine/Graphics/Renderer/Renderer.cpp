@@ -7,16 +7,16 @@
 
 namespace RandomEngine::Graphics {
 
-	RendererAPI* Renderer::_rendererAPI = nullptr;
-	Renderer::SceneData* Renderer::_sceneData = new Renderer::SceneData;
+	Scope<RendererAPI> Renderer::_rendererAPI;
+	Scope<Renderer::SceneData> Renderer::_sceneData = Scope<Renderer::SceneData>(new Renderer::SceneData);
 
 	void Renderer::Init() {
 		switch (GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				_rendererAPI = new OpenGLRenderer;
+				_rendererAPI = Scope<RendererAPI>(new OpenGLRenderer);
 				break;
 			case RendererAPI::API::Vulkan:
-				_rendererAPI = new VulkanRenderer;
+				_rendererAPI = Scope<RendererAPI>(new VulkanRenderer);
 				break;
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
@@ -34,8 +34,8 @@ namespace RandomEngine::Graphics {
 	}
 
 	void Renderer::Submit(
-		const std::shared_ptr<Shader>& shader, 
-		const std::shared_ptr<VertexArray>& vertexArray,
+		const ShaderRef& shader,
+		const VertexArrayRef& vertexArray,
 		const Maths::Matrix4f& transform
 	) {
 		shader->Bind();

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RandomEngine/Core/Types.h"
 #include "Event.h"
 
 namespace RandomEngine {
@@ -29,7 +30,7 @@ namespace RandomEngine {
 
 			inline int GetRepeatCount() const { return _repeatCount; }
 
-			std::string ToString() const override {
+			String ToString() const override {
 				std::stringstream ss;
 				ss << GetName() << ": " << _keyCode << " (" << _repeatCount << " repeats)";
 				return ss.str();
@@ -44,7 +45,7 @@ namespace RandomEngine {
 			KeyReleasedEvent(int keyCode)
 				: KeyEvent(keyCode) { }
 
-			std::string ToString() const override {
+			String ToString() const override {
 				std::stringstream ss;
 				ss << GetName() << ": " << _keyCode;
 				return ss.str();
@@ -59,7 +60,7 @@ namespace RandomEngine {
 			KeyTypedEvent(int keyCode)
 				: KeyEvent(keyCode) { }
 
-			std::string ToString() const override {
+			String ToString() const override {
 				std::stringstream ss;
 				ss << GetName() << ": " << _keyCode;
 				return ss.str();

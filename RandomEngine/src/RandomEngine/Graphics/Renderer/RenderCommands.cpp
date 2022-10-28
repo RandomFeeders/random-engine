@@ -13,7 +13,7 @@ namespace RandomEngine::Graphics {
 		Renderer::_rendererAPI->SetClearColor(color);
 	}
 
-	void RenderCommands::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) {
+	void RenderCommands::DrawIndexed(const VertexArrayRef& vertexArray) {
 		Renderer::_rendererAPI->DrawIndexed(vertexArray);
 	}
 

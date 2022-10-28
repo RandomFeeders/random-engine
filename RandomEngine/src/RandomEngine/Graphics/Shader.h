@@ -1,8 +1,12 @@
 #pragma once
 
-#include <string>
+#include "RandomEngine/Core/Types.h"
 
 namespace RandomEngine::Graphics {
+
+	class Shader;
+
+	using ShaderRef = Ref<Shader>;
 
 	class Shader {
 
@@ -13,7 +17,6 @@ namespace RandomEngine::Graphics {
 			virtual void Bind() const = 0;
 			virtual void Unbind() const = 0;
 
-			static Shader* Create(const std::string& vertexSrc, const std::string& fragmentSrc);
+			static ShaderRef Create(const String& vertexSrc, const String& fragmentSrc);
 	};
-
 }

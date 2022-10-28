@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RandomEngine/Core/Base.h"
+#include "RandomEngine/Core/Types.h"
 
 namespace RandomEngine {
 
@@ -39,7 +40,7 @@ namespace RandomEngine {
 		public:
 			virtual EventType GetEventType() const = 0;			
 			virtual int GetCategoryFlags() const = 0;
-			virtual std::string ToString() const { return GetName(); }
+			virtual String ToString() const { return GetName(); }
 
 			inline bool IsInCategory(EventCategory category) {
 				return HAS_FLAG(GetCategoryFlags(), category);

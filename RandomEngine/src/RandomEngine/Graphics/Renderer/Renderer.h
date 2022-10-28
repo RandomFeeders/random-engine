@@ -1,10 +1,10 @@
 #pragma once
 
-#include "RendererAPI.h"
-#include "RenderCommands.h"
 #include "RandomEngine/Maths/Maths.h"
-#include "RandomEngine/Graphics/Shader.h"
+#include "RandomEngine/Graphics/Renderer/RendererAPI.h"
+#include "RandomEngine/Graphics/Renderer/RenderCommands.h"
 #include "RandomEngine/Graphics/Cameras/OrthographicCamera.h"
+#include "RandomEngine/Graphics/Shader.h"
 
 namespace RandomEngine::Graphics {
 
@@ -16,8 +16,8 @@ namespace RandomEngine::Graphics {
 				Maths::Matrix4f ViewProjectionMatrix;
 			};
 
-			static RendererAPI* _rendererAPI;
-			static SceneData* _sceneData;
+			static Scope<RendererAPI> _rendererAPI;
+			static Scope<SceneData> _sceneData;
 
 		public:
 			static void Init();
@@ -26,8 +26,8 @@ namespace RandomEngine::Graphics {
 			static void EndScene();
 
 			static void Submit(
-				const std::shared_ptr<Shader>& shader, 
-				const std::shared_ptr<VertexArray>& vertexArray,
+				const ShaderRef& shader, 
+				const VertexArrayRef& vertexArray,
 				const Maths::Matrix4f& transform = Maths::Matrix4f::Identity()
 			);
 

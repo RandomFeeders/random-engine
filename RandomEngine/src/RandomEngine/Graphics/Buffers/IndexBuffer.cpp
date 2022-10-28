@@ -8,14 +8,14 @@
 namespace RandomEngine::Graphics {
 
 	IndexBuffer::IndexBuffer(unsigned int* data, unsigned int count)
-		: Buffer<unsigned int>(data, count) { }
+		: Buffer(data, count) { }
 
-	IndexBuffer* IndexBuffer::Create(unsigned int* data, unsigned int count) {
+	IndexBufferRef IndexBuffer::Create(unsigned int* data, unsigned int count) {
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				return new OpenGLIndexBuffer(data, count);
+				return IndexBufferRef(new OpenGLIndexBuffer(data, count));
 			case RendererAPI::API::Vulkan:
-				return new VulkanIndexBuffer(data, count);
+				return IndexBufferRef(new VulkanIndexBuffer(data, count));
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
 				return nullptr;

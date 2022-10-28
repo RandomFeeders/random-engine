@@ -13,7 +13,7 @@ namespace RandomEngine::Graphics {
 		glClearColor(color.r, color.g, color.b, color.a);
 	}
 
-	void OpenGLRenderer::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) {
+	void OpenGLRenderer::DrawIndexed(const VertexArrayRef& vertexArray) {
 		glDrawElements(
 			GL_TRIANGLES,
 			vertexArray->GetIndexBuffer()->GetCount(),

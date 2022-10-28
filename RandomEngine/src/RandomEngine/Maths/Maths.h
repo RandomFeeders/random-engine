@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Vectors/Vector2f.h"
-#include "Vectors/Vector3f.h"
-#include "Vectors/Vector4f.h"
-#include "Matrices/Matrix3f.h"
-#include "Matrices/Matrix4f.h"
+#include "RandomEngine/Maths/Vectors/Vector2f.h"
+#include "RandomEngine/Maths/Vectors/Vector3f.h"
+#include "RandomEngine/Maths/Vectors/Vector4f.h"
+#include "RandomEngine/Maths/Matrices/Matrix3f.h"
+#include "RandomEngine/Maths/Matrices/Matrix4f.h"

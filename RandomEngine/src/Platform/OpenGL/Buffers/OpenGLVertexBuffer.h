@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Graphics/Buffers/VertexBuffer.h"
 
 namespace RandomEngine::Graphics {

@@ -13,9 +13,10 @@ namespace Sandbox {
 		  _cubeRotation(0.0f),
 	      _cubeScale(1.0f),
 		  _cubeColor(1.0f, 1.0f, 1.0f, 0.0f) {
+		using namespace RandomEngine;
 		using namespace RandomEngine::Graphics;
 
-		_vertexArray.reset(VertexArray::Create());
+		_vertexArray = VertexArray::Create();
 
 		float vertices[7 * 7] = {
 			-0.45f, -0.30f, 0.00f, 0.8f, 0.8f, 0.2f, 1.0f,	// A - 0
@@ -27,8 +28,7 @@ namespace Sandbox {
 			 0.00f,  0.50f, 0.00f, 0.8f, 0.2f, 0.8f, 1.0f	// G - 6
 		};
 
-		std::shared_ptr<VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(VertexBuffer::Create(vertices, 7 * 7));
+		VertexBufferRef vertexBuffer = VertexBuffer::Create(vertices, 7 * 7);
 
 		BufferLayout layout = {
 			{ "_position", ShaderDataType::Vector3f },
@@ -46,17 +46,16 @@ namespace Sandbox {
 			5, 6, 3
 		};
 
-		std::shared_ptr<IndexBuffer> indexBuffer;
-		indexBuffer.reset(IndexBuffer::Create(indices, 3 * 6));
+		IndexBufferRef indexBuffer = IndexBuffer::Create(indices, 3 * 6);
 
 		_vertexArray->AddVertexBuffer(vertexBuffer);
 		_vertexArray->SetIndexBuffer(indexBuffer);
 		_vertexArray->Bind();
 
-		const std::string& vertexSrc = FileUtils::ReadFile("src/Shaders/basic.vert");
-		const std::string& fragmentSrc = FileUtils::ReadFile("src/Shaders/basic.frag");
+		const RandomEngine::String& vertexSrc = FileUtils::ReadFile("src/Shaders/basic.vert");
+		const RandomEngine::String& fragmentSrc = FileUtils::ReadFile("src/Shaders/basic.frag");
 		
-		_shader.reset(Shader::Create(vertexSrc, fragmentSrc));
+		_shader = Shader::Create(vertexSrc, fragmentSrc);
 	}
 
 	void ExampleLayer::OnGUIRender() {

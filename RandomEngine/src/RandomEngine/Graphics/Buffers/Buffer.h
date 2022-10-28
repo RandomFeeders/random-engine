@@ -1,5 +1,7 @@
 #pragma once
 
+#include "RandomEngine/Core/Types.h"
+
 namespace RandomEngine::Graphics {
 
 	template<typename T>

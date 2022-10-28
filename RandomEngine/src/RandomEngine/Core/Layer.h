@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Events/Event.h"
 #include "RandomEngine/Core/Timestep.h"
 
@@ -8,10 +9,10 @@ namespace RandomEngine {
 	class Layer {
 
 		protected:
-			std::string _name;
+			String _name;
 
 		public:
-			Layer(const std::string& name = "Layer");
+			Layer(const String& name = "Layer");
 			virtual ~Layer() = default;
 
 			virtual void OnAttach();
@@ -20,7 +21,7 @@ namespace RandomEngine {
 			virtual void OnGUIRender();
 			virtual void OnEvent(Event& event);
 
-			inline const std::string& GetName() const { return _name; }
+			inline const String& GetName() const { return _name; }
 	};
 
 }

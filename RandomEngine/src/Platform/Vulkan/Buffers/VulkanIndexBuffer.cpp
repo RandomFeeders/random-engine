@@ -1,5 +1,4 @@
 #include "REPCH.h"
-
 #include "VulkanIndexBuffer.h"
 
 namespace RandomEngine::Graphics {

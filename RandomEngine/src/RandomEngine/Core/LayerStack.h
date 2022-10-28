@@ -7,7 +7,7 @@ namespace RandomEngine {
 	class LayerStack {
 
 		private:
-			std::vector<Layer*> _layers;
+			List<Layer*> _layers;
 			unsigned int _layerInsertIndex;
 
 		public:
@@ -19,8 +19,8 @@ namespace RandomEngine {
 			void PopLayer(Layer* layer);
 			void PopOverlay(Layer* overlay);
 
-			inline std::vector<Layer*>::iterator begin() { return _layers.begin(); }
-			inline std::vector<Layer*>::iterator end() { return _layers.end(); }
+			inline List<Layer*>::iterator begin() { return _layers.begin(); }
+			inline List<Layer*>::iterator end() { return _layers.end(); }
 	};
 
 }

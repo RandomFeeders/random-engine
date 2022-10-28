@@ -3,7 +3,7 @@
 
 namespace RandomEngine {
 
-	Layer::Layer(const std::string& name)
+	Layer::Layer(const String& name)
 		: _name(name) { }
 
 	void Layer::OnAttach() { }

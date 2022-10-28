@@ -19,11 +19,11 @@ namespace RandomEngine::Graphics {
 
 	}
 
-	void VulkanVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer> buffer) { 
+	void VulkanVertexArray::AddVertexBuffer(const VertexBufferRef buffer) {
 		__super::AddVertexBuffer(buffer);
 	}
 
-	void VulkanVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer> buffer) { 
+	void VulkanVertexArray::SetIndexBuffer(const IndexBufferRef buffer) {
 		__super::SetIndexBuffer(buffer);
 	}
 

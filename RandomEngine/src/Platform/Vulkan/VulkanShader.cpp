@@ -3,7 +3,7 @@
 
 namespace RandomEngine::Graphics {
 
-	VulkanShader::VulkanShader(const std::string& vertexSrc, const std::string& fragmentSrc) { }
+	VulkanShader::VulkanShader(const String& vertexSrc, const String& fragmentSrc) { }
 
 	void VulkanShader::Bind() const { }
 

@@ -23,7 +23,7 @@ namespace RandomEngine::Graphics {
 		glBindVertexArray(NULL);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer> buffer) {
+	void OpenGLVertexArray::AddVertexBuffer(const VertexBufferRef buffer) {
 		RE_CORE_ASSERT(buffer->GetLayout().GetElements().size(), "Vertex buffers must have a layout!");
 		
 		glBindVertexArray(_rendererId);
@@ -47,7 +47,7 @@ namespace RandomEngine::Graphics {
 		__super::AddVertexBuffer(buffer);
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer> buffer) {
+	void OpenGLVertexArray::SetIndexBuffer(const IndexBufferRef buffer) {
 		glBindVertexArray(_rendererId);
 		buffer->Bind();
 

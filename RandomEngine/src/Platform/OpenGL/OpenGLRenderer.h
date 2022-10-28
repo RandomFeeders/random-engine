@@ -10,7 +10,7 @@ namespace RandomEngine::Graphics {
 			void Clear() override;
 			void SetClearColor(const Maths::Vector4f& color) override;
 
-			void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) override;
+			void DrawIndexed(const VertexArrayRef& vertexArray) override;
 	};
 
 }

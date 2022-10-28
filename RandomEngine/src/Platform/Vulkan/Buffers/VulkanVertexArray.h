@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Graphics/Buffers/VertexArray.h"
 
 namespace RandomEngine::Graphics {
@@ -13,8 +14,8 @@ namespace RandomEngine::Graphics {
 			void Bind() const override;
 			void Unbind() const override;
 
-			void AddVertexBuffer(const std::shared_ptr<VertexBuffer> buffer) override;
-			void SetIndexBuffer(const std::shared_ptr<IndexBuffer> buffer) override;
+			void AddVertexBuffer(const VertexBufferRef buffer) override;
+			void SetIndexBuffer(const IndexBufferRef buffer) override;
 	};
 
 }

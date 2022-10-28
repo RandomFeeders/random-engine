@@ -1,5 +1,4 @@
 #include "REPCH.h"
-
 #include "OpenGLIndexBuffer.h"
 
 #include <glad/glad.h>

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RandomEngine/Core/Types.h"
 #include "Event.h"
 
 namespace RandomEngine {
@@ -16,7 +17,7 @@ namespace RandomEngine {
 			inline float GetX() const { return _mouseX; }
 			inline float GetY() const { return _mouseY; }
 
-			std::string ToString() const override {
+			String ToString() const override {
 				std::stringstream ss;
 				ss << GetName() << ": " << _mouseX << ", " << _mouseY;
 				return ss.str();
@@ -38,7 +39,7 @@ namespace RandomEngine {
 			inline float GetXOffset() const { return _xOffset; }
 			inline float GetYOffset() const { return _yOffset; }
 
-			std::string ToString() const override {
+			String ToString() const override {
 				std::stringstream ss;
 				ss << GetName() << ": " << _xOffset << ", " << _yOffset;
 				return ss.str();
@@ -69,7 +70,7 @@ namespace RandomEngine {
 			MouseButtonPressedEvent(int button)
 				: MouseButtonEvent(button) { }
 
-			std::string ToString() const override {
+			String ToString() const override {
 				std::stringstream ss;
 				ss << GetName() << ": " << _button;
 				return ss.str();
@@ -84,7 +85,7 @@ namespace RandomEngine {
 			MouseButtonReleasedEvent(int button)
 				: MouseButtonEvent(button) { }
 
-			std::string ToString() const override {
+			String ToString() const override {
 				std::stringstream ss;
 				ss << GetName() << ": " << _button;
 				return ss.str();

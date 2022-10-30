@@ -7,6 +7,7 @@ namespace RandomEngine::Graphics {
 	class OpenGLRenderer : public RendererAPI {
 
 		public:
+			void Init() override;
 			void Clear() override;
 			void SetClearColor(const Maths::Vector4f& color) override;
 

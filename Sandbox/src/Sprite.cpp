@@ -36,7 +36,7 @@ namespace Sandbox {
 		vertexBuffer->Unbind();
 		indexBuffer->Unbind();
 
-		_texture = Texture2D::Create("assets/textures/naughty_face.jpg");
+		_texture = Texture2D::Create("assets/textures/mikasa.png");
 	}
 
 	void Sprite::SetPosition(RandomEngine::Maths::Vector3f position) {

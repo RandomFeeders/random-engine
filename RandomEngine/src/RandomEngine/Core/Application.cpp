@@ -17,10 +17,10 @@ namespace RandomEngine {
 		RE_CORE_ASSERT(!_instance, "Application already exists!");
 		_instance = this;
 
-		Graphics::Renderer::Init();
-
 		_window = Scope<Window>(Window::Create());
 		_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		Graphics::Renderer::Init();
 
 		_guiLayer = new GuiLayer();
 		PushOverlay(_guiLayer);

@@ -3,6 +3,10 @@
 
 namespace RandomEngine::Graphics {
 
+	void VulkanRenderer::Init() {
+
+	}
+
 	void VulkanRenderer::Clear() {
 
 	}

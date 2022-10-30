@@ -19,6 +19,7 @@ namespace RandomEngine::Graphics {
 			static API _rendererAPI;
 
 		public:
+			virtual void Init() = 0;
 			virtual void Clear() = 0;
 			virtual void SetClearColor(const Maths::Vector4f& color) = 0;
 

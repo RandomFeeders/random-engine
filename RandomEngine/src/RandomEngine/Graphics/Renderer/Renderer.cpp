@@ -14,9 +14,11 @@ namespace RandomEngine::Graphics {
 		switch (GetAPI()) {
 			case RendererAPI::API::OpenGL:
 				_rendererAPI = Scope<RendererAPI>(new OpenGLRenderer);
+				_rendererAPI->Init();
 				break;
 			case RendererAPI::API::Vulkan:
 				_rendererAPI = Scope<RendererAPI>(new VulkanRenderer);
+				_rendererAPI->Init();
 				break;
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");

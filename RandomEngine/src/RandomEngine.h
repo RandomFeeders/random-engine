@@ -31,6 +31,7 @@
 
 #include "RandomEngine/Graphics/Objects/Transform.h"
 #include "RandomEngine/Graphics/Objects/GameObject.h"
+#include "RandomEngine/Graphics/Textures/Texture2D.h"
 // -------------------------------------
 
 // -------------- Events ---------------

@@ -35,6 +35,8 @@ namespace Sandbox {
 		_vertexArray->Unbind();
 		vertexBuffer->Unbind();
 		indexBuffer->Unbind();
+
+		_texture = Texture2D::Create("assets/textures/naughty_face.jpg");
 	}
 
 	void Sprite::SetPosition(RandomEngine::Maths::Vector3f position) {
@@ -67,6 +69,10 @@ namespace Sandbox {
 
 	float* Sprite::GetColorPointer() {
 		return _color;
+	}
+
+	RandomEngine::Ref<RandomEngine::Graphics::Texture2D> Sprite::GetTexture() {
+		return _texture;
 	}
 
 }

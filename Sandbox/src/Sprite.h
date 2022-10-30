@@ -10,6 +10,7 @@ namespace Sandbox {
 			RandomEngine::Graphics::VertexArrayRef _vertexArray;
 			RandomEngine::Graphics::Transform _transform;
 			RandomEngine::Maths::Vector4f _color;
+			RandomEngine::Ref<RandomEngine::Graphics::Texture2D> _texture;
 
 			static float _vertices[];
 			static unsigned int _indices[];
@@ -26,6 +27,7 @@ namespace Sandbox {
 			RandomEngine::Graphics::Transform GetTransform();
 			RandomEngine::Graphics::VertexArrayRef GetVertexArray();
 			RandomEngine::Maths::Vector4f GetColor();
+			RandomEngine::Ref<RandomEngine::Graphics::Texture2D> GetTexture();
 
 			float* GetColorPointer();
 

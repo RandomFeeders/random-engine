@@ -30,8 +30,12 @@ namespace Sandbox {
 		_sprite = new Sprite("Test Sprite");
 		_sprite->SetPosition({ 0.0f, 0.0f, 0.0f });
 		_sprite->SetRotation({ 0.0f, 0.0f, 0.0f });
-		_sprite->SetScale({ 0.4f, 0.4f, 0.4f });
+		_sprite->SetScale({ 1.0f, 1.0f, 1.0f });
 		_sprite->SetColor({ 1.0f, 1.0f, 1.0f, 0.0f });
+
+		_basicShader->Bind();
+		std::dynamic_pointer_cast<OpenGLShader>(_basicShader)->Define("u_Texture", 0);
+		_basicShader->Unbind();
 	}
 
 	void ExampleLayer::OnGUIRender() {
@@ -51,6 +55,7 @@ namespace Sandbox {
 
 		Renderer::BeginScene(_camera);
 
+		_sprite->GetTexture()->Bind();
 		Renderer::Submit(_basicShader, _sprite->GetVertexArray(), _sprite->GetTransform());
 
 		// std::dynamic_pointer_cast<OpenGLShader>(_rainbowShader)->Define("u_Color", _cube->GetColor());

@@ -7,65 +7,59 @@
 namespace Sandbox {
 
 	ExampleLayer::ExampleLayer() 
-		: Layer("Example"), 
-		  _camera(0.9f, 1.6f, -0.9f, -1.6f),
-	      _cubePosition(0.0f),
-		  _cubeRotation(0.0f),
-	      _cubeScale(1.0f),
-		  _cubeColor(1.0f, 1.0f, 1.0f, 0.0f) {
+		: Layer("Example"), _camera(0.9f, 1.6f, -0.9f, -1.6f) {
 		using namespace RandomEngine;
 		using namespace RandomEngine::Graphics;
 
-		_vertexArray = VertexArray::Create();
+		const RandomEngine::String& rVertexSrc = FileUtils::ReadFile("assets/shaders/rainbow.vert");
+		const RandomEngine::String& rFragmentSrc = FileUtils::ReadFile("assets/shaders/rainbow.frag");		
+		_rainbowShader = Shader::Create(rVertexSrc, rFragmentSrc);
+		_rainbowShader->Unbind();
 
-		float vertices[7 * 7] = {
-			-0.45f, -0.30f, 0.00f, 0.8f, 0.8f, 0.2f, 1.0f,	// A - 0
-			 0.00f, -0.50f, 0.00f, 0.8f, 0.2f, 0.8f, 1.0f,	// B - 1
-			 0.00f,  0.05f, 0.00f, 0.2f, 0.8f, 0.8f, 1.0f,	// C - 2
-			-0.45f,  0.30f, 0.00f, 0.2f, 0.2f, 0.8f, 1.0f,	// D - 3
-			 0.45f, -0.30f, 0.00f, 0.2f, 0.8f, 0.2f, 1.0f,	// E - 4
-			 0.45f,  0.30f, 0.00f, 0.8f, 0.2f, 0.2f, 1.0f,	// F - 5
-			 0.00f,  0.50f, 0.00f, 0.8f, 0.2f, 0.8f, 1.0f	// G - 6
-		};
+		const RandomEngine::String& bVertexSrc = FileUtils::ReadFile("assets/shaders/basic.vert");
+		const RandomEngine::String& bFragmentSrc = FileUtils::ReadFile("assets/shaders/basic.frag");
+		_basicShader = Shader::Create(bVertexSrc, bFragmentSrc);
+		_basicShader->Unbind();
 
-		VertexBufferRef vertexBuffer = VertexBuffer::Create(vertices, 7 * 7);
+		_cube = new Cube("Test Cube");
+		_cube->SetPosition({ 0.0f, 0.0f, 0.0f });
+		_cube->SetRotation({ 0.0f, 0.0f, 0.0f });
+		_cube->SetScale({ 0.4f, 0.4f, 0.4f });
+		_cube->SetColor({ 1.0f, 1.0f, 1.0f, 0.0f });
 
-		BufferLayout layout = {
-			{ "_position", ShaderDataType::Vector3f },
-			{ "_color", ShaderDataType::Vector4f }
-		};
-
-		vertexBuffer->SetLayout(layout);
-
-		unsigned int indices[3 * 6] = {
-			0, 1, 2,
-			2, 3, 0,
-			1, 4, 5,
-			5, 2, 1,
-			3, 2, 5,
-			5, 6, 3
-		};
-
-		IndexBufferRef indexBuffer = IndexBuffer::Create(indices, 3 * 6);
-
-		_vertexArray->AddVertexBuffer(vertexBuffer);
-		_vertexArray->SetIndexBuffer(indexBuffer);
-		_vertexArray->Bind();
-
-		const RandomEngine::String& vertexSrc = FileUtils::ReadFile("src/Shaders/basic.vert");
-		const RandomEngine::String& fragmentSrc = FileUtils::ReadFile("src/Shaders/basic.frag");
-		
-		_shader = Shader::Create(vertexSrc, fragmentSrc);
+		_sprite = new Sprite("Test Sprite");
+		_sprite->SetPosition({ 0.0f, 0.0f, 0.0f });
+		_sprite->SetRotation({ 0.0f, 0.0f, 0.0f });
+		_sprite->SetScale({ 0.4f, 0.4f, 0.4f });
+		_sprite->SetColor({ 1.0f, 1.0f, 1.0f, 0.0f });
 	}
 
 	void ExampleLayer::OnGUIRender() {
 		ImGui::Begin("Settings");
-		ImGui::ColorEdit4("Color", _cubeColor);
+		ImGui::ColorEdit4("Color", _cube->GetColorPointer());
 		ImGui::End();
 	}
 
 	void ExampleLayer::OnUpdate(RandomEngine::Timestep timestep) {
 		using namespace RandomEngine::Graphics;
+
+		MoveCamera(timestep);
+		MoveObject(_sprite, timestep);		
+
+		RenderCommands::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+		RenderCommands::Clear();
+
+		Renderer::BeginScene(_camera);
+
+		Renderer::Submit(_basicShader, _sprite->GetVertexArray(), _sprite->GetTransform());
+
+		// std::dynamic_pointer_cast<OpenGLShader>(_rainbowShader)->Define("u_Color", _cube->GetColor());
+		// Renderer::Submit(_rainbowShader, _cube->GetVertexArray(), _cube->GetTransform());
+
+		Renderer::EndScene();
+	}
+
+	void ExampleLayer::MoveCamera(RandomEngine::Timestep timestep) {
 		using namespace RandomEngine::Maths;
 
 		Vector3f camPos = _camera.GetPosition();
@@ -91,44 +85,25 @@ namespace Sandbox {
 
 		_camera.SetPosition(camPos);
 		_camera.SetRotation(camRot);
+	}
+
+	template<typename T>
+	void ExampleLayer::MoveObject(T* obj, RandomEngine::Timestep timestep) {
+		auto position = obj->GetTransform().Position;
 
 		if (RandomEngine::Input::IsKeyPressed(RE_KEY_LEFT))
-			_cubePosition.x -= _cubeSpeed * timestep;
+			position.x -= _objSpeed * timestep;
 
 		if (RandomEngine::Input::IsKeyPressed(RE_KEY_RIGHT))
-			_cubePosition.x += _cubeSpeed * timestep;
+			position.x += _objSpeed * timestep;
 
 		if (RandomEngine::Input::IsKeyPressed(RE_KEY_DOWN))
-			_cubePosition.y -= _cubeSpeed * timestep;
+			position.y -= _objSpeed * timestep;
 
 		if (RandomEngine::Input::IsKeyPressed(RE_KEY_UP))
-			_cubePosition.y += _cubeSpeed * timestep;
+			position.y += _objSpeed * timestep;
 
-		RenderCommands::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
-		RenderCommands::Clear();
-
-		Renderer::BeginScene(_camera);
-
-		_cubeScale = { 0.1f, 0.1f, 0.1f };
-
-		for (int y = 0; y < 5; y++) {
-			for (int x = 0; x < 5; x++) {
-				Vector3f pos = { x * 0.11f - 0.22f, y * 0.11f - 0.22f, 0.0f };
-
-				Transform transform(pos, _cubeRotation, _cubeScale);
-
-				Renderer::Submit(_shader, _vertexArray, transform);
-			}
-		}
-
-		_cubeScale = { 0.2f, 0.2f, 0.2f };
-
-		Transform transform(_cubePosition, _cubeRotation, _cubeScale);
-
-		std::dynamic_pointer_cast<OpenGLShader>(_shader)->Define("u_Color", _cubeColor);
-		Renderer::Submit(_shader, _vertexArray, transform);
-
-		Renderer::EndScene();
+		obj->SetPosition(position);
 	}
 
 }

@@ -1,3 +1,4 @@
+#type vertex
 #version 330 core
 
 layout(location = 0) in vec4 _position;
@@ -16,4 +17,17 @@ void main() {
 	float w = u_Color.w + _color.w * (1 - u_Color.w);
 	vec3 rgb = u_Color.xyz * u_Color.w + _color.xyz * _color.w * (1 - u_Color.w);
 	v_color = vec4(rgb, w);
+}
+
+#type fragment
+#version 330 core
+
+layout(location = 0) out vec4 color;
+
+in vec4 v_position;
+in vec4 v_color;
+
+void main() {
+	color = vec4(v_position * 0.5 + 0.5);
+	color = v_color;
 }

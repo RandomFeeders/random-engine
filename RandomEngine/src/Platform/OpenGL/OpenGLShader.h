@@ -7,12 +7,18 @@
 namespace RandomEngine::Graphics {
 
 	class OpenGLShader : public Shader {
+		friend class Shader;
 
 		private:
 			unsigned int _rendererId;
 
+			void Compile(Shader::Dictionary sources);
+
+			static MapperFunc GetMapper();
+
 		public:
 			OpenGLShader(const String& vertexSrc, const String& fragmentSrc);
+			OpenGLShader(Shader::Dictionary shaderDict);
 			virtual ~OpenGLShader();
 
 			void Bind() const override;

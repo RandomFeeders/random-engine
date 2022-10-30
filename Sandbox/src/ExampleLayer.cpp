@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <Platform/OpenGL/OpenGLShader.h>
-#include "FileUtils.h"
 
 namespace Sandbox {
 
@@ -10,15 +9,11 @@ namespace Sandbox {
 		: Layer("Example"), _camera(0.9f, 1.6f, -0.9f, -1.6f) {
 		using namespace RandomEngine;
 		using namespace RandomEngine::Graphics;
-
-		const RandomEngine::String& rVertexSrc = FileUtils::ReadFile("assets/shaders/rainbow.vert");
-		const RandomEngine::String& rFragmentSrc = FileUtils::ReadFile("assets/shaders/rainbow.frag");		
-		_rainbowShader = Shader::Create(rVertexSrc, rFragmentSrc);
+	
+		_rainbowShader = Shader::Create("assets/shaders/rainbow.glsl");
 		_rainbowShader->Unbind();
 
-		const RandomEngine::String& bVertexSrc = FileUtils::ReadFile("assets/shaders/basic.vert");
-		const RandomEngine::String& bFragmentSrc = FileUtils::ReadFile("assets/shaders/basic.frag");
-		_basicShader = Shader::Create(bVertexSrc, bFragmentSrc);
+		_basicShader = Shader::Create("assets/shaders/basic.glsl");
 		_basicShader->Unbind();
 
 		_cube = new Cube("Test Cube");

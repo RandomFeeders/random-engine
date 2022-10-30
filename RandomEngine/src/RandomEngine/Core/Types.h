@@ -26,6 +26,9 @@ namespace RandomEngine {
 
 	using String = std::string;
 
+	template<typename TKey, typename TValue>
+	using Dictionary = std::unordered_map<TKey, TValue>;
+
 	template<typename T>
 	using Func = std::function<T>;
 

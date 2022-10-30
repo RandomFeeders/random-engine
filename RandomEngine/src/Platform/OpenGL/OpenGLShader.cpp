@@ -5,65 +5,78 @@
 
 namespace RandomEngine::Graphics {
 
+	static GLenum Mapper(const String& type) {
+		if (type == "vertex")
+			return GL_VERTEX_SHADER;
+		else if (type == "fragment" || type == "pixel")
+			return GL_FRAGMENT_SHADER;
+
+		RE_CORE_ASSERT(false, "Invalid shader type specified!");
+		return GL_NONE;
+	}
+
+	Shader::MapperFunc OpenGLShader::GetMapper() { return Mapper; }
+
+	OpenGLShader::OpenGLShader(Shader::Dictionary shaderDict)
+		: _rendererId(NULL) {
+		Compile(shaderDict);
+	}
+
 	OpenGLShader::OpenGLShader(const String& vertexSrc, const String& fragmentSrc)
 		: _rendererId(NULL) {
-		unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+		Shader::Dictionary dict;
+		dict[GL_VERTEX_SHADER] = vertexSrc;
+		dict[GL_FRAGMENT_SHADER] = fragmentSrc;
+		Compile(dict);
+	}
 
-		const char* source = vertexSrc.c_str();
-		glShaderSource(vertexShader, 1, &source, 0);
+	OpenGLShader::~OpenGLShader() {
+		glDeleteProgram(_rendererId);
+	}
 
-		glCompileShader(vertexShader);
+	void OpenGLShader::Compile(Shader::Dictionary sources) {
+		List<unsigned int> shaderList;
+		
+		for (auto& item : sources) {
+			GLenum type = item.first;
+			const String& source = item.second;
 
-		int status = 0;
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &status);
-		if (status == GL_FALSE) {
-			int maxLength = 0;
-			glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
+			unsigned int shader = glCreateShader(type);
 
-			List<char> infoLog(maxLength);
-			glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
+			const char* c_source = source.c_str();
+			glShaderSource(shader, 1, &c_source, 0);
 
-			glDeleteShader(vertexShader);
+			glCompileShader(shader);
 
-			RE_CORE_ERROR("{0}", infoLog.data());
-			RE_CORE_ASSERT(false, "Vertex shader compilation failure!");
+			int status = 0;
+			glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+			if (status == GL_FALSE) {
+				int maxLength = 0;
+				glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
 
-			return;
-		}
+				List<char> infoLog(maxLength);
+				glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
 
-		unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+				glDeleteShader(shader);
 
-		source = fragmentSrc.c_str();
-		glShaderSource(fragmentShader, 1, &source, 0);
+				RE_CORE_ERROR("{0}", infoLog.data());
+				RE_CORE_ASSERT(false, "Shader compilation failure!");
 
-		glCompileShader(fragmentShader);
+				return;
+			}
 
-		status = 0;
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &status);
-		if (status == GL_FALSE) {
-			int maxLength = 0;
-			glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
-
-			List<char> infoLog(maxLength);
-			glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
-
-			glDeleteShader(vertexShader);
-			glDeleteShader(fragmentShader);
-
-			RE_CORE_ERROR("{0}", infoLog.data());
-			RE_CORE_ASSERT(false, "Fragment shader compilation failure!");
-
-			return;
+			shaderList.push_back(shader);
 		}
 
 		_rendererId = glCreateProgram();
 
-		glAttachShader(_rendererId, vertexShader);
-		glAttachShader(_rendererId, fragmentShader);
+		for (auto shader : shaderList) {
+			glAttachShader(_rendererId, shader);
+		}
 
 		glLinkProgram(_rendererId);
 
-		status = 0;
+		int status = 0;
 		glGetProgramiv(_rendererId, GL_LINK_STATUS, &status);
 		if (status == GL_FALSE) {
 			int maxLength = 0;
@@ -73,23 +86,23 @@ namespace RandomEngine::Graphics {
 			glGetProgramInfoLog(_rendererId, maxLength, &maxLength, &infoLog[0]);
 
 			glDeleteProgram(_rendererId);
-			glDeleteShader(vertexShader);
-			glDeleteShader(fragmentShader);
+			
+			for (auto shader : shaderList) {
+				glDeleteShader(shader);
+			}
 
 			RE_CORE_ERROR("{0}", infoLog.data());
 			RE_CORE_ASSERT(false, "Shader linker failure!");
 
+			_rendererId = NULL;
+
 			return;
 		}
 
-		glDetachShader(_rendererId, vertexShader);
-		glDetachShader(_rendererId, fragmentShader);
-		glDeleteShader(vertexShader);
-		glDeleteShader(fragmentShader);
-	}
-
-	OpenGLShader::~OpenGLShader() {
-		glDeleteProgram(_rendererId);
+		for (auto shader : shaderList) {
+			glDetachShader(_rendererId, shader);
+			glDeleteShader(shader);
+		}
 	}
 
 	void OpenGLShader::Bind() const {

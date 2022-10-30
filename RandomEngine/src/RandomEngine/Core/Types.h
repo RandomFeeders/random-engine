@@ -26,4 +26,7 @@ namespace RandomEngine {
 
 	using String = std::string;
 
+	template<typename T>
+	using Func = std::function<T>;
+
 }

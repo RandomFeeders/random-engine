@@ -52,7 +52,7 @@ namespace RandomEngine {
 	class EventDispatcher {
 		
 		template<typename T>
-		using EventFn = std::function<bool(T&)>;
+		using EventFn = Func<bool(T&)>;
 
 		private:
 			Event& _event;

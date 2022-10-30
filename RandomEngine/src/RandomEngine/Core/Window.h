@@ -22,7 +22,7 @@ namespace RandomEngine {
 	class Window {
 
 		public:
-			using EventCallbackFn = std::function<void(Event&)>;
+			using EventCallbackFn = Func<void(Event&)>;
 
 			virtual ~Window() { }
 

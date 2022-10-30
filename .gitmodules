@@ -10,3 +10,6 @@
 [submodule "RandomEngine/vendor/glm"]
 	path = RandomEngine/vendor/glm
 	url = https://github.com/RandomFeeders/glm
+[submodule "RandomEngine/vendor/stb"]
+	path = RandomEngine/vendor/stb
+	url = https://github.com/RandomFeeders/stb

@@ -21,7 +21,7 @@ project "RandomEngine"
 		"_CRT_SECURE_NO_WARNINGS",
 		"GLFW_INCLUDE_NONE"
 	}
-
+	
 	includedirs
 	{
 		"src",
@@ -30,6 +30,7 @@ project "RandomEngine"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb}",
 		"%{IncludeDir.VulkanSDK}"
 	}
 

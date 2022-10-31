@@ -9,10 +9,10 @@ namespace RandomEngine::IO {
 	File::File(const String& path) : _path(path), _size(0) { Open(); }
 
 	bool File::Open() {
-		std::ifstream in(_path, std::ios::in, std::ios::binary);
+		std::ifstream in(_path, std::ios::in | std::ios::binary);
 
 		if (!in) {
-			RE_CORE_ASSERT("Could not open file '{0}'", _path);
+			RE_CORE_ASSERT(false, "Could not open file '{0}'", _path);
 			return false;
 		}
 

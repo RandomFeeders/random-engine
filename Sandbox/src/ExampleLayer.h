@@ -9,8 +9,7 @@ namespace Sandbox {
 	class ExampleLayer : public RandomEngine::Layer {
 
 		private:
-			RandomEngine::Graphics::ShaderRef _rainbowShader;
-			RandomEngine::Graphics::ShaderRef _basicShader;
+			RandomEngine::Graphics::ShaderLibrary _shaderLibrary;
 
 			RandomEngine::Graphics::OrthographicCamera _camera;
 			RandomEngine::Maths::Vector3f _cameraPosition;

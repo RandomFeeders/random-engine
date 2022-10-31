@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glad/glad.h>
-#include "RandomEngine/Graphics/ShaderDataType.h"
+#include "RandomEngine/Graphics/Shader/ShaderDataType.h"
 
 static GLenum ShaderDataTypeToOpenGLDataType(ShaderDataType type) {
 	switch (type)

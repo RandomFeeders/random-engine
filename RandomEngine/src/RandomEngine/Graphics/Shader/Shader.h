@@ -15,6 +15,8 @@ namespace RandomEngine::Graphics {
 			using Dictionary = Dictionary<unsigned int, String>;
 
 		private:
+			String _name;
+
 			static Dictionary PreProcessFile(const String& source, MapperFunc mapper);
 
 		public:
@@ -24,7 +26,9 @@ namespace RandomEngine::Graphics {
 			virtual void Bind() const = 0;
 			virtual void Unbind() const = 0;
 
-			static ShaderRef Create(const String& vertexSrc, const String& fragmentSrc);
-			static ShaderRef Create(const String& filePath);
+			virtual const String& GetName() const { return _name; };
+
+			static ShaderRef Create(const String& name, const String& vertexSrc, const String& fragmentSrc);
+			static ShaderRef Create(const String& filePath, const String& name = String());
 	};
 }

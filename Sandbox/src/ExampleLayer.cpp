@@ -10,11 +10,11 @@ namespace Sandbox {
 		using namespace RandomEngine;
 		using namespace RandomEngine::Graphics;
 	
-		_rainbowShader = Shader::Create("assets/shaders/rainbow.glsl");
-		_rainbowShader->Unbind();
+		auto rainbowShader = _shaderLibrary.Load("RainbowShader", "assets/shaders/rainbow.glsl");
+		rainbowShader->Unbind();
 
-		_basicShader = Shader::Create("assets/shaders/basic.glsl");
-		_basicShader->Unbind();
+		auto basicShader = _shaderLibrary.Load("BasicShader", "assets/shaders/basic.glsl");
+		basicShader->Unbind();
 
 		_cube = new Cube("Test Cube");
 		_cube->SetPosition({ 0.0f, 0.0f, 0.0f });
@@ -28,9 +28,9 @@ namespace Sandbox {
 		_sprite->SetScale({ 1.0f, 1.0f, 1.0f });
 		_sprite->SetColor({ 1.0f, 1.0f, 1.0f, 0.0f });
 
-		_basicShader->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(_basicShader)->Define("u_Texture", 0);
-		_basicShader->Unbind();
+		basicShader->Bind();
+		std::dynamic_pointer_cast<OpenGLShader>(basicShader)->Define("u_Texture", 0);
+		basicShader->Unbind();
 	}
 
 	void ExampleLayer::OnGUIRender() {
@@ -51,7 +51,8 @@ namespace Sandbox {
 		Renderer::BeginScene(_camera);
 
 		_sprite->GetTexture()->Bind();
-		Renderer::Submit(_basicShader, _sprite->GetVertexArray(), _sprite->GetTransform());
+		auto basicShader = _shaderLibrary.Get("BasicShader");
+		Renderer::Submit(basicShader, _sprite->GetVertexArray(), _sprite->GetTransform());
 
 		// std::dynamic_pointer_cast<OpenGLShader>(_rainbowShader)->Define("u_Color", _cube->GetColor());
 		// Renderer::Submit(_rainbowShader, _cube->GetVertexArray(), _cube->GetTransform());

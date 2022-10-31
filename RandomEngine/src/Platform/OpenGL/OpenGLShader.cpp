@@ -35,8 +35,10 @@ namespace RandomEngine::Graphics {
 	}
 
 	void OpenGLShader::Compile(Shader::Dictionary sources) {
-		List<unsigned int> shaderList;
+		RE_CORE_ASSERT(sources.size() <= 2, "Only two shaders per file is supported!");
+		Array<unsigned int, 2> shaderList { };
 		
+		int index = 0;
 		for (auto& item : sources) {
 			GLenum type = item.first;
 			const String& source = item.second;
@@ -65,7 +67,7 @@ namespace RandomEngine::Graphics {
 				return;
 			}
 
-			shaderList.push_back(shader);
+			shaderList[index++] = shader;
 		}
 
 		_rendererId = glCreateProgram();

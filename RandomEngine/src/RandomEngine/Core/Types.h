@@ -12,6 +12,9 @@ namespace RandomEngine {
 	template<typename T>
 	using Ref = std::shared_ptr<T>;
 
+	template<typename T, size_t s>
+	using Array = std::array<T, s>;
+
 	template<typename T>
 	using List = std::vector<T>;
 

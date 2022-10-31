@@ -4,7 +4,7 @@
 #include "RandomEngine/Graphics/Renderer/RendererAPI.h"
 #include "RandomEngine/Graphics/Renderer/RenderCommands.h"
 #include "RandomEngine/Graphics/Cameras/OrthographicCamera.h"
-#include "RandomEngine/Graphics/Shader.h"
+#include "RandomEngine/Graphics/Shader/Shader.h"
 
 namespace RandomEngine::Graphics {
 

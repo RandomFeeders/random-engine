@@ -26,8 +26,9 @@
 #include "RandomEngine/Graphics/Cameras/OrthographicCamera.h"
 
 #include "RandomEngine/Graphics/Renderer/Renderer.h"
-#include "RandomEngine/Graphics/Shader.h"
-#include "RandomEngine/Graphics/ShaderDataType.h"
+#include "RandomEngine/Graphics/Shader/Shader.h"
+#include "RandomEngine/Graphics/Shader/ShaderLibrary.h"
+#include "RandomEngine/Graphics/Shader/ShaderDataType.h"
 
 #include "RandomEngine/Graphics/Objects/Transform.h"
 #include "RandomEngine/Graphics/Objects/GameObject.h"

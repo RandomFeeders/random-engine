@@ -35,33 +35,56 @@ namespace RandomEngine::Graphics {
 		return shaderSources;
 	}
 
-	ShaderRef Shader::Create(const String& vertexSrc, const String& fragmentSrc) {
+	ShaderRef Shader::Create(const String& name, const String& vertexSrc, const String& fragmentSrc) {
+		Shader* shader;
+
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				return ShaderRef(new OpenGLShader(vertexSrc, fragmentSrc));
+				shader = new OpenGLShader(vertexSrc, fragmentSrc);
+				break;
 			case RendererAPI::API::Vulkan:
-				return ShaderRef(new VulkanShader(vertexSrc, fragmentSrc));
+				shader = new VulkanShader(vertexSrc, fragmentSrc);
+				break;
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
 				return nullptr;
 		}
+
+		shader->_name = name;
+		return ShaderRef(shader);
 	}
 
-	ShaderRef Shader::Create(const String& filePath) {
+	ShaderRef Shader::Create(const String& filePath, const String& name) {
 		IO::File file(filePath);
 		Shader::Dictionary dict;
+		Shader* shader;
 
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
 				dict = PreProcessFile(file.Read(), OpenGLShader::GetMapper());
-				return ShaderRef(new OpenGLShader(dict));
+				shader = new OpenGLShader(dict);
+				break;
 			case RendererAPI::API::Vulkan:
 				dict = PreProcessFile(file.Read(), VulkanShader::GetMapper());
-				return ShaderRef(new VulkanShader(dict));
+				shader = new VulkanShader(dict);
+				break;
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
 				return nullptr;
 		}
+
+		if (name == "") {
+			auto lastSlash = filePath.find_last_of("/\\");
+			lastSlash = lastSlash == String::npos ? 0 : lastSlash + 1;
+			auto lastDot = filePath.rfind('.');
+			auto count = lastDot == String::npos ? filePath.size() - lastSlash : lastDot - lastSlash;
+
+			shader->_name = filePath.substr(lastSlash, count);
+		} else {
+			shader->_name = name;
+		}
+
+		return ShaderRef(shader);
 	}
 
 }

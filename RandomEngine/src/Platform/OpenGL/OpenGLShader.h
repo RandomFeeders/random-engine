@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RandomEngine/Core/Types.h"
-#include "RandomEngine/Graphics/Shader.h"
+#include "RandomEngine/Graphics/Shader/Shader.h"
 #include "RandomEngine/Maths/Maths.h"
 
 namespace RandomEngine::Graphics {

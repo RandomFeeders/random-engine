@@ -6,7 +6,7 @@
 namespace Sandbox {
 
 	ExampleLayer::ExampleLayer() 
-		: Layer("Example"), _camera(0.9f, 1.6f, -0.9f, -1.6f) {
+		: Layer("Example"), _camera(16 / 9, true) {
 		using namespace RandomEngine;
 		using namespace RandomEngine::Graphics;
 	
@@ -39,16 +39,21 @@ namespace Sandbox {
 		ImGui::End();
 	}
 
+	void ExampleLayer::OnEvent(RandomEngine::Event& e) {
+		_camera.OnEvent(e);
+	}
+
 	void ExampleLayer::OnUpdate(RandomEngine::Timestep timestep) {
 		using namespace RandomEngine::Graphics;
 
-		MoveCamera(timestep);
+		_camera.OnUpdate(timestep);
+
 		MoveObject(_sprite, timestep);		
 
 		RenderCommands::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		RenderCommands::Clear();
 
-		Renderer::BeginScene(_camera);
+		Renderer::BeginScene(_camera.GetCamera());
 
 		_sprite->GetTexture()->Bind();
 		auto basicShader = _shaderLibrary.Get("BasicShader");
@@ -58,34 +63,6 @@ namespace Sandbox {
 		// Renderer::Submit(_rainbowShader, _cube->GetVertexArray(), _cube->GetTransform());
 
 		Renderer::EndScene();
-	}
-
-	void ExampleLayer::MoveCamera(RandomEngine::Timestep timestep) {
-		using namespace RandomEngine::Maths;
-
-		Vector3f camPos = _camera.GetPosition();
-		Vector3f camRot = _camera.GetRotation();
-
-		if (RandomEngine::Input::IsKeyPressed(RE_KEY_A))
-			camPos.x -= _cameraSpeed * timestep;
-
-		if (RandomEngine::Input::IsKeyPressed(RE_KEY_D))
-			camPos.x += _cameraSpeed * timestep;
-
-		if (RandomEngine::Input::IsKeyPressed(RE_KEY_S))
-			camPos.y -= _cameraSpeed * timestep;
-
-		if (RandomEngine::Input::IsKeyPressed(RE_KEY_W))
-			camPos.y += _cameraSpeed * timestep;
-
-		if (RandomEngine::Input::IsKeyPressed(RE_KEY_Q))
-			camRot.z += _cameraSpeed * 5 * timestep;
-
-		if (RandomEngine::Input::IsKeyPressed(RE_KEY_E))
-			camRot.z -= _cameraSpeed * 5 * timestep;
-
-		_camera.SetPosition(camPos);
-		_camera.SetRotation(camRot);
 	}
 
 	template<typename T>

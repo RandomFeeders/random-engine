@@ -24,6 +24,7 @@
 #include "RandomEngine/Graphics/Buffers/BufferLayout.h"
 
 #include "RandomEngine/Graphics/Cameras/OrthographicCamera.h"
+#include "RandomEngine/Graphics/Cameras/OrthographicCameraController.h"
 
 #include "RandomEngine/Graphics/Renderer/Renderer.h"
 #include "RandomEngine/Graphics/Shader/Shader.h"

@@ -27,7 +27,7 @@ namespace RandomEngine::Graphics {
 		}
 	}
 
-	void Renderer::BeginScene(OrthographicCamera& camera) {
+	void Renderer::BeginScene(const OrthographicCamera& camera) {
 		_sceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 

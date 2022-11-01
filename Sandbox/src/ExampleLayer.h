@@ -11,14 +11,10 @@ namespace Sandbox {
 		private:
 			RandomEngine::Graphics::ShaderLibrary _shaderLibrary;
 
-			RandomEngine::Graphics::OrthographicCamera _camera;
-			RandomEngine::Maths::Vector3f _cameraPosition;
+			RandomEngine::Graphics::OrthographicCameraController _camera;
 			Cube* _cube;
 			Sprite* _sprite;
-			float _cameraSpeed = 3.5f;
 			float _objSpeed = 2.0f;
-
-			void MoveCamera(RandomEngine::Timestep timestep);
 
 			template<typename T>
 			void MoveObject(T* obj, RandomEngine::Timestep timestep);
@@ -27,6 +23,7 @@ namespace Sandbox {
 			ExampleLayer();
 
 			void OnUpdate(RandomEngine::Timestep timestep) override;
+			void OnEvent(RandomEngine::Event& e) override;
 			void OnGUIRender() override;
 	};
 

@@ -6,7 +6,7 @@
 namespace Sandbox {
 
 	ExampleLayer::ExampleLayer() 
-		: Layer("Example"), _camera(16 / 9, true) {
+		: Layer("Example"), _camera(16.0f / 9.0f, true) {
 		using namespace RandomEngine;
 		using namespace RandomEngine::Graphics;
 	

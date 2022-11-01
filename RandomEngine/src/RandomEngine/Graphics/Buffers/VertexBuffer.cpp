@@ -17,9 +17,9 @@ namespace RandomEngine::Graphics {
 	VertexBufferRef VertexBuffer::Create(float* data, unsigned int count) {
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				return VertexBufferRef(new OpenGLVertexBuffer(data, count));
+				return CreateRef<OpenGLVertexBuffer>(data, count);
 			case RendererAPI::API::Vulkan:
-				return VertexBufferRef(new VulkanVertexBuffer(data, count));
+				return CreateRef<VulkanVertexBuffer>(data, count);
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
 				return nullptr;

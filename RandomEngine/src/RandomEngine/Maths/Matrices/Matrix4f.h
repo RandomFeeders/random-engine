@@ -46,7 +46,7 @@ namespace RandomEngine::Maths {
 		static Matrix4f Scale(const Vector3f& scale);
 
 		// Utils
-		static const Matrix4f& Inverse(const Matrix4f& matrix);		
+		static const Matrix4f Inverse(const Matrix4f& matrix);		
 	};
 
 }

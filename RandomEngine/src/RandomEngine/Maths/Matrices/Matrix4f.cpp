@@ -98,7 +98,7 @@ namespace RandomEngine::Maths {
 		return result;
 	}
 
-	const Matrix4f& Matrix4f::Inverse(const Matrix4f& matrix) {
+	const Matrix4f Matrix4f::Inverse(const Matrix4f& matrix) {
 		return glm::inverse(matrix);
 	}
 

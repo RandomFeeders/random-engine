@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Maths/Maths.h"
 
 namespace RandomEngine {
@@ -7,7 +8,7 @@ namespace RandomEngine {
 	class Input {
 
 		private:
-			static Input* _instance;
+			static Scope<Input> _instance;
 
 		protected:
 			virtual bool IsKeyPressedImpl(int keycode) = 0;

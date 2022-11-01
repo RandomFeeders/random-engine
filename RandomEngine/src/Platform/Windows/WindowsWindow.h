@@ -11,16 +11,16 @@ namespace RandomEngine {
 		private:
 			struct WindowData {
 				String Title;
-				unsigned int Width;
-				unsigned int Height;
-				bool VSync;
-				bool Minimized;
+				unsigned int Width = 0;
+				unsigned int Height = 0;
+				bool VSync = false;
+				bool Minimized = false;
 
 				EventCallbackFn EventCallback;
 			};
 
 			GLFWwindow* _window;
-			Graphics::Context* _context;
+			Scope<Graphics::Context> _context;
 			WindowData _data;			
 
 			virtual void Init(const WindowProps& props);

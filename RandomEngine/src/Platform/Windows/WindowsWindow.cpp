@@ -47,7 +47,7 @@ namespace RandomEngine {
 		}
 
 		_window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
-		_context = new Graphics::OpenGLContext(_window);
+		_context = CreateScope<Graphics::OpenGLContext>(_window);
 		_context->Init();
 
 		glfwSetWindowUserPointer(_window, &_data);

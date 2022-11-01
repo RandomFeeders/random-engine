@@ -23,27 +23,23 @@ namespace RandomEngine::Graphics {
 			RE_CORE_ASSERT(mapper(type), "Invalid shader type specified!");
 
 			size_t nextLinePos = source.find_first_not_of("\r\n", eol);
-			pos = source.find(typeToken, nextLinePos);
+			pos = source.find(typeToken, nextLinePos);			
 
-			shaderSources[mapper(type)] =
-				source.substr(
-					nextLinePos,
-					pos - (nextLinePos == String::npos ? source.size() - 1 : nextLinePos)
-				);
+			shaderSources[mapper(type)] = (pos == String::npos) ? source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
 		}
 
 		return shaderSources;
 	}
 
 	ShaderRef Shader::Create(const String& name, const String& vertexSrc, const String& fragmentSrc) {
-		Shader* shader;
+		ShaderRef shader;
 
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				shader = new OpenGLShader(vertexSrc, fragmentSrc);
+				shader = CreateRef<OpenGLShader>(vertexSrc, fragmentSrc);
 				break;
 			case RendererAPI::API::Vulkan:
-				shader = new VulkanShader(vertexSrc, fragmentSrc);
+				shader = CreateRef<VulkanShader>(vertexSrc, fragmentSrc);
 				break;
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
@@ -51,22 +47,22 @@ namespace RandomEngine::Graphics {
 		}
 
 		shader->_name = name;
-		return ShaderRef(shader);
+		return shader;
 	}
 
 	ShaderRef Shader::Create(const String& filePath, const String& name) {
 		IO::File file(filePath);
 		Shader::Dictionary dict;
-		Shader* shader;
+		ShaderRef shader;
 
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
 				dict = PreProcessFile(file.Read(), OpenGLShader::GetMapper());
-				shader = new OpenGLShader(dict);
+				shader = CreateRef<OpenGLShader>(dict);
 				break;
 			case RendererAPI::API::Vulkan:
 				dict = PreProcessFile(file.Read(), VulkanShader::GetMapper());
-				shader = new VulkanShader(dict);
+				shader = CreateRef<VulkanShader>(dict);
 				break;
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
@@ -84,7 +80,7 @@ namespace RandomEngine::Graphics {
 			shader->_name = name;
 		}
 
-		return ShaderRef(shader);
+		return shader;
 	}
 
 }

@@ -18,9 +18,9 @@ namespace RandomEngine::Graphics {
 	VertexArrayRef VertexArray::Create() {
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				return VertexArrayRef(new OpenGLVertexArray());
+				return CreateRef<OpenGLVertexArray>();
 			case RendererAPI::API::Vulkan:
-				return VertexArrayRef(new VulkanVertexArray());
+				return CreateRef<VulkanVertexArray>();
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
 				return nullptr;

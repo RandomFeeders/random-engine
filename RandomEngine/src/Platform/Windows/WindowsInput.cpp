@@ -7,7 +7,7 @@
 
 namespace RandomEngine {
 
-	Input* Input::_instance = new WindowsInput();
+	Scope<Input> Input::_instance = CreateScope<WindowsInput>();
 
 	bool WindowsInput::IsKeyPressedImpl(int keycode) {
 		auto window = static_cast<GLFWwindow*>(Application::GetInstance().GetWindow().GetNativeWindow());

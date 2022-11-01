@@ -8,16 +8,16 @@
 namespace RandomEngine::Graphics {
 
 	Scope<RendererAPI> Renderer::_rendererAPI;
-	Scope<Renderer::SceneData> Renderer::_sceneData = Scope<Renderer::SceneData>(new Renderer::SceneData);
+	Scope<Renderer::SceneData> Renderer::_sceneData = CreateScope<Renderer::SceneData>();
 
 	void Renderer::Init() {
 		switch (GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				_rendererAPI = Scope<RendererAPI>(new OpenGLRenderer);
+				_rendererAPI = CreateScope<OpenGLRenderer>();
 				_rendererAPI->Init();
 				break;
 			case RendererAPI::API::Vulkan:
-				_rendererAPI = Scope<RendererAPI>(new VulkanRenderer);
+				_rendererAPI = CreateScope<VulkanRenderer>();
 				_rendererAPI->Init();
 				break;
 			default:

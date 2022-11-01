@@ -10,6 +10,7 @@ namespace RandomEngine::Graphics {
 			void Init() override;
 			void Clear() override;
 			void SetClearColor(const Maths::Vector4f& color) override;
+			void SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height) override;
 
 			void DrawIndexed(const VertexArrayRef& vertexArray) override;
 	};

@@ -36,8 +36,10 @@ namespace RandomEngine {
 			Timestep timestep = time - _lastFrameTime;
 			_lastFrameTime = time;
 
-			for (Layer* layer : _layerStack) {
-				layer->OnUpdate(timestep);
+			if (!_window->IsMinimized() || _runOnBackground) {
+				for (Layer* layer : _layerStack) {
+					layer->OnUpdate(timestep);
+				}
 			}
 
 			_guiLayer->Begin();
@@ -52,6 +54,7 @@ namespace RandomEngine {
 
 	void Application::OnEvent(Event& e) {
 		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResized));
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 
 		for (auto iterator = _layerStack.end(); iterator != _layerStack.begin(); ) {
@@ -60,6 +63,14 @@ namespace RandomEngine {
 				break;
 			}
 		}
+	}
+
+	bool Application::OnWindowResized(WindowResizeEvent& e) {
+		if (e.IsMinimized()) return false;
+
+		Graphics::Renderer::OnWindowResized(e.GetWidth(), e.GetHeight());
+
+		return false;
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e) {

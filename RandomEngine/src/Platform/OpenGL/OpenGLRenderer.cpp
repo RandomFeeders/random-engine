@@ -18,6 +18,10 @@ namespace RandomEngine::Graphics {
 		glClearColor(color.r, color.g, color.b, color.a);
 	}
 
+	void OpenGLRenderer::SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height) {
+		glViewport(x, y, width, height);
+	}
+
 	void OpenGLRenderer::DrawIndexed(const VertexArrayRef& vertexArray) {
 		glDrawElements(
 			GL_TRIANGLES,

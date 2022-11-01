@@ -15,11 +15,14 @@ namespace RandomEngine {
 			static Application* _instance;
 
 			bool _running = false;
+			bool _minimized = false;
+			bool _runOnBackground = false;
 			Scope<Window> _window;
 			LayerStack _layerStack;
 			GuiLayer* _guiLayer;
 			float _lastFrameTime;
 
+			bool OnWindowResized(WindowResizeEvent& e);
 			bool OnWindowClose(WindowCloseEvent& e);
 
 		public:

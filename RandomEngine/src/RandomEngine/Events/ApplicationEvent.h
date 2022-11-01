@@ -9,13 +9,15 @@ namespace RandomEngine {
 
 		protected:
 			unsigned int _width, _height;
+			bool _minimized;
 
 		public:
 			WindowResizeEvent(unsigned int width, unsigned int height)
-				: _width(width), _height(height) { }
+				: _width(width), _height(height), _minimized(width == 0 || height == 0) { }
 
 			inline unsigned int GetWidth() const { return _width; }
 			inline unsigned int GetHeight() const { return _height; }
+			inline bool IsMinimized() const { return _minimized; }
 
 			String ToString() const override {
 				std::stringstream ss;

@@ -32,6 +32,7 @@ namespace RandomEngine {
 		_data.Title = props.Title;
 		_data.Width = props.Width;
 		_data.Height = props.Height;
+		_data.Minimized = false;
 
 		RE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
@@ -61,6 +62,12 @@ namespace RandomEngine {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				data.Width = width;
 				data.Height = height;
+
+				if (width == 0 || height == 0) {
+					data.Minimized = true;
+				} else {
+					data.Minimized = false;
+				}
 
 				WindowResizeEvent event(width, height);
 				data.EventCallback(event);

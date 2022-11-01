@@ -27,6 +27,10 @@ namespace RandomEngine::Graphics {
 		}
 	}
 
+	void Renderer::OnWindowResized(unsigned int width, unsigned int height) {
+		_rendererAPI->SetViewport(0, 0, width, height);
+	}
+
 	void Renderer::BeginScene(const OrthographicCamera& camera) {
 		_sceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
@@ -46,7 +50,7 @@ namespace RandomEngine::Graphics {
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->Define("u_Transform", transform);
 
 		vertexArray->Bind();
-		RenderCommands::DrawIndexed(vertexArray);
+		_rendererAPI->DrawIndexed(vertexArray);
 	}
 
 }

@@ -14,6 +14,7 @@ namespace RandomEngine {
 				unsigned int Width;
 				unsigned int Height;
 				bool VSync;
+				bool Minimized;
 
 				EventCallbackFn EventCallback;
 			};
@@ -38,6 +39,7 @@ namespace RandomEngine {
 			inline void SetEventCallback(const EventCallbackFn& callback) override { _data.EventCallback = callback; }
 			void SetVSync(bool enabled) override;
 			inline bool IsVSync() const override { return _data.VSync; }
+			inline bool IsMinimized() const override { return _data.Minimized; }
 
 			inline void* GetNativeWindow() const override { return _window; }
 	};

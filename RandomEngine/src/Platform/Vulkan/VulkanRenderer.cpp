@@ -15,6 +15,10 @@ namespace RandomEngine::Graphics {
 
 	}
 
+	void VulkanRenderer::SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height) {
+
+	}
+
 	void VulkanRenderer::DrawIndexed(const VertexArrayRef& vertexArray) {
 
 	}

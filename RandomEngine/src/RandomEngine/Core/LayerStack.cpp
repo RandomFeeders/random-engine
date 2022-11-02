@@ -16,23 +16,27 @@ namespace RandomEngine {
 
 	void LayerStack::PushLayer(Layer* layer) {
 		_layers.emplace(begin() + _layerInsertIndex++, layer);
+		layer->OnAttach();
 	}
 
 	void LayerStack::PushOverlay(Layer* overlay) {
 		_layers.emplace_back(overlay);
+		overlay->OnAttach();
 	}
 
 	void LayerStack::PopLayer(Layer* layer) {
-		auto iterator = std::find(_layers.begin(), _layers.end(), layer);
-		if (iterator != _layers.end()) {
+		auto iterator = std::find(_layers.begin(), _layers.begin() + _layerInsertIndex, layer);
+		if (iterator != _layers.begin() + _layerInsertIndex) {
+			layer->OnDetach();
 			_layers.erase(iterator);
 			_layerInsertIndex--;
 		}
 	}
 
 	void LayerStack::PopOverlay(Layer* overlay) {
-		auto iterator = std::find(_layers.begin(), _layers.end(), overlay);
+		auto iterator = std::find(_layers.begin() + _layerInsertIndex, _layers.end(), overlay);
 		if (iterator != _layers.end()) {
+			overlay->OnDetach();
 			_layers.erase(iterator);
 		}
 	}

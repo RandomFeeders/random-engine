@@ -80,12 +80,10 @@ namespace RandomEngine {
 
 	void Application::PushLayer(Layer* layer) {
 		_layerStack.PushLayer(layer);
-		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay) {
 		_layerStack.PushOverlay(overlay);
-		overlay->OnAttach();
 	}
 
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RandomEngine/Core/Types.h"
+#include "RandomEngine/Maths/Maths.h"
 
 namespace RandomEngine::Graphics {
 
@@ -27,6 +28,14 @@ namespace RandomEngine::Graphics {
 			virtual void Unbind() const = 0;
 
 			virtual const String& GetName() const { return _name; };
+
+			virtual void Define(const String& name, int value) = 0;
+			virtual void Define(const String& name, float value) = 0;
+			virtual void Define(const String& name, const Maths::Vector2f& value) = 0;
+			virtual void Define(const String& name, const Maths::Vector3f& value) = 0;
+			virtual void Define(const String& name, const Maths::Vector4f& value) = 0;
+			virtual void Define(const String& name, const Maths::Matrix3f& value) = 0;
+			virtual void Define(const String& name, const Maths::Matrix4f& value) = 0;
 
 			static ShaderRef Create(const String& name, const String& vertexSrc, const String& fragmentSrc);
 			static ShaderRef Create(const String& filePath, const String& name = String());

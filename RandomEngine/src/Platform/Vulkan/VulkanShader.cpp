@@ -15,4 +15,18 @@ namespace RandomEngine::Graphics {
 
 	void VulkanShader::Unbind() const { }
 
+	void VulkanShader::Define(const String& name, int value) { }
+
+	void VulkanShader::Define(const String& name, float value) { }
+
+	void VulkanShader::Define(const String& name, const Maths::Vector2f& value) { }
+
+	void VulkanShader::Define(const String& name, const Maths::Vector3f& value) { }
+
+	void VulkanShader::Define(const String& name, const Maths::Vector4f& value) { }
+
+	void VulkanShader::Define(const String& name, const Maths::Matrix3f& value) { }
+
+	void VulkanShader::Define(const String& name, const Maths::Matrix4f& value) { }
+
 }

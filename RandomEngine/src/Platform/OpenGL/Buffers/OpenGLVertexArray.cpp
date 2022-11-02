@@ -5,7 +5,7 @@
 
 namespace RandomEngine::Graphics {
 
-	OpenGLVertexArray::OpenGLVertexArray() {
+	OpenGLVertexArray::OpenGLVertexArray() : _vertexBufferIndex(0) {
 		glCreateVertexArrays(1, &_rendererId);
 		glBindVertexArray(_rendererId);
 	}
@@ -30,18 +30,17 @@ namespace RandomEngine::Graphics {
 		buffer->Bind();
 		
 		const auto& layout = buffer->GetLayout();
-		unsigned int index = 0;
 		for (const auto& element : layout) {
-			glEnableVertexAttribArray(index);
+			glEnableVertexAttribArray(_vertexBufferIndex);
 			glVertexAttribPointer(
-				index,
+				_vertexBufferIndex,
 				element.ComponentCount,
 				ShaderDataTypeToOpenGLDataType(element.Type),
 				element.Normalized ? GL_TRUE : GL_FALSE,
 				layout.GetStride(),
-				(const void*) element.Offset
+				(const void*)(intptr_t) element.Offset
 			);
-			index++;
+			_vertexBufferIndex++;
 		}
 
 		__super::AddVertexBuffer(buffer);

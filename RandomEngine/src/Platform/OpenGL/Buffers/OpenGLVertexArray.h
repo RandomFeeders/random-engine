@@ -9,6 +9,7 @@ namespace RandomEngine::Graphics {
 	{
 		private:
 			unsigned int _rendererId;
+			unsigned int _vertexBufferIndex;
 
 		public:
 			OpenGLVertexArray();

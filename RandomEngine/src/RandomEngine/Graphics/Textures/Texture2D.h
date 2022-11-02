@@ -13,9 +13,11 @@ namespace RandomEngine::Graphics {
 
 		public:
 			Texture2D(const String& path);
+			Texture2D(unsigned int width, unsigned int height);
 			virtual ~Texture2D() = default;
 
 			static Texture2DRef Create(const String& path);
+			static Texture2DRef Create(unsigned int width, unsigned int height);
 	};
 
 }

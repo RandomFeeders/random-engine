@@ -50,9 +50,6 @@ namespace RandomEngine {
 	};
 
 	class EventDispatcher {
-		
-		template<typename T>
-		using EventFn = Func<bool(T&)>;
 
 		private:
 			Event& _event;
@@ -61,10 +58,10 @@ namespace RandomEngine {
 			EventDispatcher(Event& event)
 				: _event(event) { }
 
-			template<typename T>
-			bool Dispatch(EventFn<T> func) {
+			template<typename T, typename F>
+			bool Dispatch(const F& func) {
 				if (_event.GetEventType() == T::GetStaticType()) {
-					_event._handled = func(*(T*)&_event);
+					_event._handled = func(static_cast<T&>(_event));
 					return true;
 				}
 				return false;

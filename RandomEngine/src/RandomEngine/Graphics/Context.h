@@ -1,5 +1,7 @@
 #pragma once
 
+struct GLFWwindow;
+
 namespace RandomEngine::Graphics {
 
 	class Context {
@@ -7,6 +9,8 @@ namespace RandomEngine::Graphics {
 		public:
 			virtual void Init() = 0;
 			virtual void SwapBuffers() = 0;
+
+			static Context* Create(GLFWwindow* window);
 	};
 
 }

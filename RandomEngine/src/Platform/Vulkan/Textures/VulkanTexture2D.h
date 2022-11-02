@@ -9,9 +9,11 @@ namespace RandomEngine::Graphics {
 
 		public:
 			VulkanTexture2D(const String& path);
+			VulkanTexture2D(unsigned int width, unsigned int height);
 			~VulkanTexture2D();
 
 			void Bind(unsigned int slot = 0) const override;
+			void SetData(void* data, unsigned int size) override;
 	};
 
 }

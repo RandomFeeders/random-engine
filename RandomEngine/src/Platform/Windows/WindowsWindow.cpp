@@ -3,14 +3,14 @@
 #include <GLFW/glfw3.h>
 
 #include "Platform/Windows/WindowsWindow.h"
-#include "Platform/OpenGL/OpenGLContext.h"
+#include "RandomEngine/Graphics/Context.h"
 #include "RandomEngine/Events/ApplicationEvent.h"
 #include "RandomEngine/Events/KeyEvent.h"
 #include "RandomEngine/Events/MouseEvent.h"
 
 namespace RandomEngine {
 
-	static bool _glfwInitialized = false;
+	static unsigned int _glfwWindowCount = 0;
 
 	static void GLFWErrorCallback(int code, const char* desc) {
 		RE_CORE_ERROR("GLFW Error ({0}): {1}", code, desc);
@@ -36,18 +36,21 @@ namespace RandomEngine {
 
 		RE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-		if (!_glfwInitialized) {
+		if (_glfwWindowCount == 0) {
+			RE_CORE_INFO("Initializing GLFW");
+
 			int success = glfwInit();
 
 			RE_CORE_ASSERT(success, "Cound not initialize GLFW!");
 
 			glfwSetErrorCallback(GLFWErrorCallback);
-
-			_glfwInitialized = true;
 		}
 
 		_window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
-		_context = CreateScope<Graphics::OpenGLContext>(_window);
+		_glfwWindowCount++;
+
+		
+		_context.reset(Graphics::Context::Create(_window));
 		_context->Init();
 
 		glfwSetWindowUserPointer(_window, &_data);
@@ -149,7 +152,12 @@ namespace RandomEngine {
 	}
 
 	void WindowsWindow::Shutdown() {
-		glfwDestroyWindow(_window);
+		if (_window != nullptr) glfwDestroyWindow(_window);
+
+		if (--_glfwWindowCount == 0) {
+			RE_CORE_INFO("No more windows is present, terminating GLFW");
+			glfwTerminate();
+		}
 	}
 
 	void WindowsWindow::OnUpdate() {

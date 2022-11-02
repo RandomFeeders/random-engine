@@ -6,16 +6,17 @@ struct GLFWwindow;
 
 namespace RandomEngine::Graphics {
 
-	class OpenGLContext : public Context {
+	class VulkanContext : public Context {
 
 		private:
 			GLFWwindow* _window;
 
 		public:
-			OpenGLContext(GLFWwindow* window);
+			VulkanContext(GLFWwindow* window);
 
 			void Init() override;
 			void SwapBuffers() override;
+
 	};
 
 }

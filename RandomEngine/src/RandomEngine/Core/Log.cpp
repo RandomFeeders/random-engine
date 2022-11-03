@@ -3,8 +3,8 @@
 
 namespace RandomEngine {
 
-	std::shared_ptr<spdlog::logger> Log::_coreLogger;
-	std::shared_ptr<spdlog::logger> Log::_clientLogger;
+	Ref<spdlog::logger> Log::_coreLogger;
+	Ref<spdlog::logger> Log::_clientLogger;
 
 	void Log::Init() {
 		spdlog::set_pattern("%^[%d/%m/%C %H:%M:%S] %n: %v%$");

@@ -1,22 +1,23 @@
 #pragma once
 
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
-#include "spdlog/fmt/ostr.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/fmt/ostr.h>
+#include "RandomEngine/Core/Types.h"
 
 namespace RandomEngine {
 
 	class Log
 	{
 		private:
-			static std::shared_ptr<spdlog::logger> _coreLogger;
-			static std::shared_ptr<spdlog::logger> _clientLogger;
+			static Ref<spdlog::logger> _coreLogger;
+			static Ref<spdlog::logger> _clientLogger;
 
 		public:
 			static void Init();
 
-			inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return _coreLogger; }
-			inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return _clientLogger; }
+			inline static Ref<spdlog::logger>& GetCoreLogger() { return _coreLogger; }
+			inline static Ref<spdlog::logger>& GetClientLogger() { return _clientLogger; }
 	};
 
 }

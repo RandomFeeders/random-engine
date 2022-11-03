@@ -17,7 +17,7 @@ namespace RandomEngine {
 		RE_CORE_ASSERT(!_instance, "Application already exists!");
 		_instance = this;
 
-		_window = Scope<Window>(Window::Create());
+		_window = Window::Create();
 		_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
 		Graphics::Renderer::Init();

@@ -16,8 +16,8 @@ namespace RandomEngine {
 		RE_CORE_ERROR("GLFW Error ({0}): {1}", code, desc);
 	}
 
-	Window* Window::Create(const WindowProps& props) {
-		return new WindowsWindow(props);
+	Scope<Window> Window::Create(const WindowProps& props) {
+		return CreateScope<WindowsWindow>(props);
 	}
 
 	WindowsWindow::WindowsWindow(const WindowProps& props) {
@@ -49,8 +49,7 @@ namespace RandomEngine {
 		_window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
 		_glfwWindowCount++;
 
-		
-		_context.reset(Graphics::Context::Create(_window));
+		_context = Graphics::Context::Create(_window);
 		_context->Init();
 
 		glfwSetWindowUserPointer(_window, &_data);

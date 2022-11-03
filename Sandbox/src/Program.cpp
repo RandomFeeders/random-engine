@@ -2,6 +2,7 @@
 #include <RandomEngine/Core/EntryPoint.h>
 
 #include "ExampleLayer.h"
+#include "Simple2DLayer.h"
 
 namespace Sandbox {
 
@@ -9,7 +10,7 @@ namespace Sandbox {
 
 	public:
 		Program() {
-			PushLayer(new ExampleLayer());
+			PushLayer(new Simple2DLayer());
 		}
 
 		~Program() {

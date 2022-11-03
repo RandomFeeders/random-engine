@@ -7,12 +7,12 @@
 
 namespace RandomEngine::Graphics {
 
-	Context* Context::Create(GLFWwindow* window) {
+	Scope<Context> Context::Create(void* window) {
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				return new OpenGLContext(window);
+				return CreateScope<OpenGLContext>(static_cast<GLFWwindow*>(window));
 			case RendererAPI::API::Vulkan:
-				return new VulkanContext(window);
+				return CreateScope<VulkanContext>(static_cast<GLFWwindow*>(window));
 			default:
 				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
 				return nullptr;

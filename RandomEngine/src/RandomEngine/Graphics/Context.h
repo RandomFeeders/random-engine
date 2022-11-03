@@ -1,5 +1,7 @@
 #pragma once
 
+#include "RandomEngine/Core/Types.h"
+
 struct GLFWwindow;
 
 namespace RandomEngine::Graphics {
@@ -10,7 +12,7 @@ namespace RandomEngine::Graphics {
 			virtual void Init() = 0;
 			virtual void SwapBuffers() = 0;
 
-			static Context* Create(GLFWwindow* window);
+			static Scope<Context> Create(void* window);
 	};
 
 }

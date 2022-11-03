@@ -10,7 +10,7 @@ namespace RandomEngine {
 
 	void Layer::OnDetach() { }
 
-	void Layer::OnUpdate(Timestep timestep) { }
+	void Layer::OnUpdate(UpdateArgs args) { }
 
 	void Layer::OnGUIRender() { }
 

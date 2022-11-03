@@ -40,7 +40,7 @@ namespace RandomEngine {
 
 			if (!_window->IsMinimized() || _runOnBackground) {
 				for (Layer* layer : _layerStack) {
-					layer->OnUpdate(timestep);
+					layer->OnUpdate({ timestep });
 				}
 			}
 

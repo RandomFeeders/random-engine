@@ -22,7 +22,7 @@ namespace Sandbox {
 		public:
 			ExampleLayer();
 
-			void OnUpdate(RandomEngine::Timestep timestep) override;
+			void OnUpdate(RandomEngine::UpdateArgs args) override;
 			void OnEvent(RandomEngine::Event& e) override;
 			void OnGUIRender() override;
 	};

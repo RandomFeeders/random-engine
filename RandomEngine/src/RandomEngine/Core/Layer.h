@@ -6,6 +6,10 @@
 
 namespace RandomEngine {
 
+	struct UpdateArgs {
+		Timestep DeltaTime;
+	};
+
 	class Layer {
 
 		protected:
@@ -17,7 +21,7 @@ namespace RandomEngine {
 
 			virtual void OnAttach();
 			virtual void OnDetach();
-			virtual void OnUpdate(Timestep timestep);
+			virtual void OnUpdate(UpdateArgs args);
 			virtual void OnGUIRender();
 			virtual void OnEvent(Event& event);
 

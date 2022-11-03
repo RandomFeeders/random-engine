@@ -43,12 +43,12 @@ namespace Sandbox {
 		_camera.OnEvent(e);
 	}
 
-	void ExampleLayer::OnUpdate(RandomEngine::Timestep timestep) {
+	void ExampleLayer::OnUpdate(RandomEngine::UpdateArgs args) {
 		using namespace RandomEngine::Graphics;
 
-		_camera.OnUpdate(timestep);
+		_camera.OnUpdate(args.DeltaTime);
 
-		MoveObject(_sprite, timestep);		
+		MoveObject(_sprite, args.DeltaTime);
 
 		RenderCommands::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		RenderCommands::Clear();

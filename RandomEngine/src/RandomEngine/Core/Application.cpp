@@ -26,7 +26,9 @@ namespace RandomEngine {
 		PushOverlay(_guiLayer);
 	}
 
-	Application::~Application() { }
+	Application::~Application() { 
+		Graphics::Renderer::Shutdown();
+	}
 
 	void Application::Run() {
 		_running = true;

@@ -7,6 +7,10 @@ namespace RandomEngine::Graphics {
 
 	}
 
+	void VulkanRenderer::Shutdown() {
+
+	}
+
 	void VulkanRenderer::Clear() {
 
 	}

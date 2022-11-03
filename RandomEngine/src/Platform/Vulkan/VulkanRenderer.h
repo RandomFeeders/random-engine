@@ -9,6 +9,8 @@ namespace RandomEngine::Graphics {
 
 	public:
 		void Init() override;
+		void Shutdown() override;
+
 		void Clear() override;
 		void SetClearColor(const Maths::Vector4f& color) override;
 		void SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height) override;

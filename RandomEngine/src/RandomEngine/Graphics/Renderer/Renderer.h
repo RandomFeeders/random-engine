@@ -21,6 +21,7 @@ namespace RandomEngine::Graphics {
 
 		public:
 			static void Init();
+			static void Shutdown();
 			static void OnWindowResized(unsigned int width, unsigned int height);
 
 			static void BeginScene(const OrthographicCamera& camera);

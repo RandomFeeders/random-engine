@@ -27,6 +27,11 @@ namespace RandomEngine::Graphics {
 		}
 	}
 
+	void Renderer::Shutdown() {
+		_rendererAPI->Shutdown();
+		_rendererAPI.reset(nullptr);
+	}
+
 	void Renderer::OnWindowResized(unsigned int width, unsigned int height) {
 		_rendererAPI->SetViewport(0, 0, width, height);
 	}

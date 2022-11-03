@@ -72,6 +72,6 @@ namespace RandomEngine {
 		return os << e.ToString();
 	}
 
-	#define BIND_EVENT_FN(func) std::bind(&func, this, std::placeholders::_1)
+	#define RE_BIND_EVENT_FN(func) std::bind(&func, this, std::placeholders::_1)
 
 }

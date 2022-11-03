@@ -41,10 +41,10 @@ namespace RandomEngine::Graphics {
 	void OrthographicCameraController::OnEvent(Event& e) {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(
-			BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled)
+			RE_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled)
 		);
 		dispatcher.Dispatch<WindowResizeEvent>(
-			BIND_EVENT_FN(OrthographicCameraController::OnWindowResized)
+			RE_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized)
 		);
 	}
 

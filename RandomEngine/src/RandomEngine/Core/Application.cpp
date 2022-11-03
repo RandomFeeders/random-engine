@@ -18,7 +18,7 @@ namespace RandomEngine {
 		_instance = this;
 
 		_window = Window::Create();
-		_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+		_window->SetEventCallback(RE_BIND_EVENT_FN(Application::OnEvent));
 
 		Graphics::Renderer::Init();
 
@@ -56,8 +56,8 @@ namespace RandomEngine {
 
 	void Application::OnEvent(Event& e) {
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResized));
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(RE_BIND_EVENT_FN(Application::OnWindowResized));
+		dispatcher.Dispatch<WindowCloseEvent>(RE_BIND_EVENT_FN(Application::OnWindowClose));
 
 		for (auto iterator = _layerStack.end(); iterator != _layerStack.begin(); ) {
 			(*--iterator)->OnEvent(e);

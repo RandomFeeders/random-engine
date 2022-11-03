@@ -18,8 +18,15 @@ namespace RandomEngine::IO {
 
 		in.seekg(0, std::ios::end);
 		_size = in.tellg();
-		in.seekg(0, std::ios::beg);
+
+		if (_size == -1) {
+			RE_CORE_ASSERT(false, "Could not read file '{0}'", _path);
+			return false;
+		}
+
 		_content.resize(_size);
+
+		in.seekg(0, std::ios::beg);
 		in.read(&_content[0], _size);
 		in.close();
 

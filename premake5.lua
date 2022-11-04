@@ -14,7 +14,11 @@ workspace "Random Engine"
 
 	solution_items
 	{
-		".editorconfig"
+		".editorconfig",
+		".gitignore",
+		".gitmodules",
+		"README.md",
+		"LICENSE.md"
 	}
 
 	flags

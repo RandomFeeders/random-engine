@@ -1,8 +1,11 @@
 #pragma once
 
+#include "RandomEngine/Core/Base.h"
+#include "RandomEngine/Core/Types.h"
+#include "RandomEngine/Profiling/TimerOutput.h"
+
 #include <chrono>
 #include <format>
-#include "RandomEngine/Core/Types.h"
 
 namespace RandomEngine::Profiling {
 
@@ -23,17 +26,18 @@ namespace RandomEngine::Profiling {
 				}
 			};
 
-			using Callback = Func<void(Result)>;
+			using Callback = Func<void(Result)>;		
 
 		private:
 			const char* _name;
 			Callback _callback;
 			std::chrono::time_point<std::chrono::steady_clock> _startTimepoint;
-			bool _stopped, _started, _trace;
+			bool _stopped, _started;
+			TimerOutput _output;
 
 		public:
-			Timer(const char* name, bool autoStart = true, bool trace = false);
-			Timer(const char* name, Callback callback, bool autoStart = true, bool trace = false);
+			Timer(const char* name, bool autoStart = true, TimerOutput output = TimerOutput::None);
+			Timer(const char* name, Callback callback, bool autoStart = true, TimerOutput output = TimerOutput::Callback);
 			~Timer();
 
 			void Start();

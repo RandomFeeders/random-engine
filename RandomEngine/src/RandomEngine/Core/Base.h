@@ -16,4 +16,4 @@
 #endif
 
 #define BIT(n) (1 << n)
-#define HAS_FLAG(e, f) (e & f)
+#define HAS_FLAG(e, f) ((e & f) == f)

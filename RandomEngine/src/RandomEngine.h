@@ -1,5 +1,6 @@
 #pragma once
 
+// ---------------- Core ---------------
 #include "RandomEngine/Core/Base.h"
 #include "RandomEngine/Core/Types.h"
 
@@ -16,6 +17,7 @@
 #include "RandomEngine/Core/KeyCodes.h"
 
 #include "RandomEngine/GUI/GuiLayer.h"
+// -------------------------------------
 
 // ------------- Graphics --------------
 #include "RandomEngine/Graphics/Buffers/VertexArray.h"
@@ -27,6 +29,7 @@
 #include "RandomEngine/Graphics/Cameras/OrthographicCameraController.h"
 
 #include "RandomEngine/Graphics/Renderer/Renderer.h"
+#include "RandomEngine/Graphics/Renderer/Renderer2D.h"
 #include "RandomEngine/Graphics/Shader/Shader.h"
 #include "RandomEngine/Graphics/Shader/ShaderLibrary.h"
 #include "RandomEngine/Graphics/Shader/ShaderDataType.h"
@@ -45,4 +48,6 @@
 
 // ------------- Profiling -------------
 #include "RandomEngine/Profiling/Timer.h"
+#include "RandomEngine/Profiling/TimerOutput.h"
+#include "RandomEngine/Profiling/Instrumentor.h"
 // -------------------------------------

@@ -1,18 +1,23 @@
 #include "REPCH.h"
 #include "Timer.h"
 
+#include <algorithm>
+#include <thread>
+
+#include "RandomEngine/Profiling/Instrumentor.h"
+
 namespace RandomEngine::Profiling {
 
-	Timer::Timer(const char* name, bool autoStart, bool trace)
-		: _name(name), _started(false), _stopped(false), _callback([](Result result) {}), _trace(trace) {
+	Timer::Timer(const char* name, bool autoStart, TimerOutput output)
+		: _name(name), _started(false), _stopped(false), _callback([](Result result) {}), _output(output) {
 		if (autoStart) {
 			_startTimepoint = std::chrono::high_resolution_clock::now();
 			_started = true;
 		}
 	}
 
-	Timer::Timer(const char* name, Callback callback, bool autoStart, bool trace)
-		: _name(name), _started(false), _stopped(false), _callback(callback), _trace(trace) {
+	Timer::Timer(const char* name, Callback callback, bool autoStart, TimerOutput output)
+		: _name(name), _started(false), _stopped(false), _callback(callback), _output(output) {
 		if (autoStart) {
 			_startTimepoint = std::chrono::high_resolution_clock::now();
 			_started = true;
@@ -45,9 +50,12 @@ namespace RandomEngine::Profiling {
 
 		float duration = (end - start) * 0.001f;
 
-		if (_trace) RE_CORE_TRACE("{0} duration: {1}ms", _name, duration);
-
-		_callback({ _name, duration });
+		if (HAS_FLAG(_output, TimerOutput::Trace)) RE_CORE_TRACE("{0} duration: {1}ms", _name, duration);
+		if (HAS_FLAG(_output, TimerOutput::Callback)) _callback({ _name, duration });
+		if (HAS_FLAG(_output, TimerOutput::Instrumentor)) {
+			unsigned int threadId = std::hash<std::thread::id>{}(std::this_thread::get_id());
+			Instrumentor::Get().WriteProfile({ _name, start, end, threadId });
+		}
 	}
 
 }

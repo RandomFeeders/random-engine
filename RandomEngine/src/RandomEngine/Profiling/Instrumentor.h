@@ -2,17 +2,21 @@
 
 #include "RandomEngine/Core/Types.h"
 
-#include <chrono>
 #include <algorithm>
+#include <chrono>
 #include <fstream>
+#include <iomanip>
 #include <thread>
 
 namespace RandomEngine::Profiling {
 
+	using FloatingPointMicroseconds = std::chrono::duration<double, std::micro>;
+
 	struct ProfileResult {
 		String Name;
-		long long Start, End;
-		unsigned int ThreadId;
+		FloatingPointMicroseconds Start; 
+		std::chrono::microseconds ElapsedTime;
+		std::thread::id ThreadId;
 	};
 
 	struct InstrumentationSession {
@@ -22,9 +26,11 @@ namespace RandomEngine::Profiling {
 	class Instrumentor {
 
 		private:
+			std::mutex _mutex;
 			InstrumentationSession* _currentSession;
 			std::ofstream _outputStream;
-			int _profileCount;
+
+			void InternalEndSession();
 
 		public:
 			Instrumentor();

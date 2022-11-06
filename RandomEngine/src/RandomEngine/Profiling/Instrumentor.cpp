@@ -3,7 +3,7 @@
 
 namespace RandomEngine::Profiling {
 
-	Instrumentor::Instrumentor() : _currentSession(nullptr), _profileCount(0) { }
+	Instrumentor::Instrumentor() : _currentSession(nullptr) { }
 
 	Instrumentor& Instrumentor::Get() {
 		static Instrumentor instance;
@@ -14,40 +14,69 @@ namespace RandomEngine::Profiling {
 		const std::string& name,
 		const std::string& filePath
 	) {
+		std::lock_guard lock(_mutex);
+
+		if (_currentSession) {
+			if (Log::HasInit()) {
+				RE_CORE_ERROR(
+					"Instrumentor::BeginSession('{0}') when session '{1}' already open.", 
+					name, 
+					_currentSession->Name
+				);
+			}
+
+			InternalEndSession();
+		}
+
 		_outputStream.open(filePath);
-		WriteHeader();
-		_currentSession = new InstrumentationSession{ name };
+		if (_outputStream.is_open()) {
+			_currentSession = new InstrumentationSession{ name };
+			WriteHeader();
+		} else if (Log::HasInit()) {
+			RE_CORE_ERROR("Instrumentor could not open results file '{0}'.", filePath);
+		}		
 	}
 
 	void Instrumentor::EndSession() {
-		WriteFooter();
-		_outputStream.close();
-		delete _currentSession;
-		_currentSession = nullptr;
-		_profileCount = 0;
+		std::lock_guard lock(_mutex);
+		InternalEndSession();		
+	}
+
+	void Instrumentor::InternalEndSession() {
+		if (_currentSession) {
+			WriteFooter();
+			_outputStream.close();
+			delete _currentSession;
+			_currentSession = nullptr;
+		}
 	}
 
 	void Instrumentor::WriteProfile(const ProfileResult& result) {
-		if (_profileCount++ > 0) _outputStream << ", ";
+		std::stringstream json;
 
 		std::string name = result.Name;
 		std::replace(name.begin(), name.end(), '"', '\'');
 
-		_outputStream << "{ ";
-		_outputStream << "\"cat\": \"function\", ";
-		_outputStream << "\"dur\": " << (result.End - result.Start) << ", ";
-		_outputStream << "\"name\": \"" << name << "\", ";
-		_outputStream << "\"ph\": \"X\", ";
-		_outputStream << "\"pid\": 0,";
-		_outputStream << "\"tid\": " << result.ThreadId << ", ";
-		_outputStream << "\"ts\": " << result.Start;
-		_outputStream << " }";
+		json << std::setprecision(3) << std::fixed;
+		json << ", { ";
+		json << "\"cat\": \"function\", ";
+		json << "\"dur\": " << (result.ElapsedTime.count()) << ", ";
+		json << "\"name\": \"" << name << "\", ";
+		json << "\"ph\": \"X\", ";
+		json << "\"pid\": 0,";
+		json << "\"tid\": " << result.ThreadId << ", ";
+		json << "\"ts\": " << result.Start.count();
+		json << " }";
 
-		_outputStream.flush();
+		std::lock_guard lock(_mutex);
+		if (_currentSession) {
+			_outputStream << json.str();
+			_outputStream.flush();
+		}
 	}
 
 	void Instrumentor::WriteHeader() {
-		_outputStream << "{ \"otherData\": { }, \"traceEvents\": [ ";
+		_outputStream << "{ \"otherData\": { }, \"traceEvents\": [ { }";
 		_outputStream.flush();
 	}
 

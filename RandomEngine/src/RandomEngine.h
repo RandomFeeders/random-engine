@@ -3,6 +3,7 @@
 // ---------------- Core ---------------
 #include "RandomEngine/Core/Base.h"
 #include "RandomEngine/Core/Types.h"
+#include "RandomEngine/Profiling/Profiling.h"
 
 #include "RandomEngine/Maths/Maths.h"
 

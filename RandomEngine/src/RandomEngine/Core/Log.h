@@ -1,6 +1,7 @@
 #pragma once
 
 #include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/fmt/ostr.h>
 #include "RandomEngine/Core/Types.h"
@@ -10,12 +11,14 @@ namespace RandomEngine {
 	class Log
 	{
 		private:
+			static bool _hasInit;
 			static Ref<spdlog::logger> _coreLogger;
 			static Ref<spdlog::logger> _clientLogger;
 
 		public:
 			static void Init();
 
+			inline static bool HasInit() { return _hasInit; }
 			inline static Ref<spdlog::logger>& GetCoreLogger() { return _coreLogger; }
 			inline static Ref<spdlog::logger>& GetClientLogger() { return _clientLogger; }
 	};

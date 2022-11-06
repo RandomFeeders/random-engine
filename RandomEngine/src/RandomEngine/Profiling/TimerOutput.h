@@ -8,7 +8,8 @@ namespace RandomEngine::Profiling {
 		None = 0,
 		Trace = BIT(0),
 		Instrumentor = BIT(1),
-		Callback = BIT(2)
+		Callback = BIT(2),
+		All = Trace | Instrumentor | Callback
 	};
 
 	inline TimerOutput operator|(TimerOutput a, TimerOutput b) {

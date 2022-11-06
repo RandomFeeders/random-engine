@@ -7,6 +7,9 @@ namespace Sandbox {
 
 	void Simple2DLayer::OnAttach() { 
 		using namespace RandomEngine;
+
+		RE_PROFILE_BEGIN_SESSION("Test", "test.json");
+
 		_cameraController = CreateScope<Graphics::OrthographicCameraController>(16.0f / 9.0f);
 		_shader = Graphics::Shader::Create("assets/shaders/rainbow.glsl", "RainbowShader");
 		_shader->Unbind();
@@ -21,15 +24,20 @@ namespace Sandbox {
 	void Simple2DLayer::OnDetach() {
 		_cameraController.reset(nullptr);
 		_cube.reset(nullptr);
+
+		RE_PROFILE_END_SESSION();
 	}
 
 	void Simple2DLayer::OnUpdate(RandomEngine::UpdateArgs args) {
 		using namespace RandomEngine;
 
+		RE_PROFILE_SCOPE_CALLBACK("Simple2DLayer::OnUpdate", [&](Profiling::Timer::Result result) { _results.push_back(result); }, Profiling::TimerOutput::All);
+		
+		/*
 		Profiling::Timer timer(
 			"Simple2DLayer::OnUpdate", 
 			[&](Profiling::Timer::Result result) { _results.push_back(result); }
-		);
+		);*/
 
 		_cameraController->OnUpdate(args.DeltaTime);
 

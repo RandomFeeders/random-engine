@@ -45,9 +45,3 @@
 #include "RandomEngine/Events/KeyEvent.h"
 #include "RandomEngine/Events/MouseEvent.h"
 // -------------------------------------
-
-// ------------- Profiling -------------
-#include "RandomEngine/Profiling/Timer.h"
-#include "RandomEngine/Profiling/TimerOutput.h"
-#include "RandomEngine/Profiling/Instrumentor.h"
-// -------------------------------------

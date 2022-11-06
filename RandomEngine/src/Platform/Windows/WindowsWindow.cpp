@@ -7,6 +7,7 @@
 #include "RandomEngine/Events/ApplicationEvent.h"
 #include "RandomEngine/Events/KeyEvent.h"
 #include "RandomEngine/Events/MouseEvent.h"
+#include "RandomEngine/Graphics/Renderer/RendererAPI.h"
 
 namespace RandomEngine {
 
@@ -14,10 +15,6 @@ namespace RandomEngine {
 
 	static void GLFWErrorCallback(int code, const char* desc) {
 		RE_CORE_ERROR("GLFW Error ({0}): {1}", code, desc);
-	}
-
-	Scope<Window> Window::Create(const WindowProps& props) {
-		return CreateScope<WindowsWindow>(props);
 	}
 
 	WindowsWindow::WindowsWindow(const WindowProps& props) {
@@ -45,6 +42,19 @@ namespace RandomEngine {
 
 			glfwSetErrorCallback(GLFWErrorCallback);
 		}
+
+		#ifdef RE_ENV_DEBUG
+		switch (Graphics::RendererAPI::GetAPI()) {
+			case Graphics::RendererAPI::API::OpenGL:
+				glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+				break;
+			case Graphics::RendererAPI::API::Vulkan:
+				break;
+			default:
+				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
+				break;
+		}
+		#endif
 
 		_window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
 		_glfwWindowCount++;
@@ -89,19 +99,19 @@ namespace RandomEngine {
 				switch (action) {
 					case GLFW_PRESS:
 					{
-						KeyPressedEvent event(key, 0);
+						KeyPressedEvent event(static_cast<KeyCode>(key), 0);
 						data.EventCallback(event);
 						break;
 					}
 					case GLFW_RELEASE:
 					{
-						KeyReleasedEvent event(key);
+						KeyReleasedEvent event(static_cast<KeyCode>(key));
 						data.EventCallback(event);
 						break;
 					}
 					case GLFW_REPEAT:
 					{
-						KeyPressedEvent event(key, 1);
+						KeyPressedEvent event(static_cast<KeyCode>(key), 1);
 						data.EventCallback(event);
 						break;
 					}
@@ -111,7 +121,7 @@ namespace RandomEngine {
 		glfwSetCharCallback(_window, [](GLFWwindow* window, unsigned int keycode)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				KeyTypedEvent event(keycode);
+				KeyTypedEvent event(static_cast<KeyCode>(keycode));
 				data.EventCallback(event);
 			});
 
@@ -122,13 +132,13 @@ namespace RandomEngine {
 				switch (action) {
 					case GLFW_PRESS:
 					{
-						MouseButtonPressedEvent event(button);
+						MouseButtonPressedEvent event(static_cast<MouseCode>(button));
 						data.EventCallback(event);
 						break;
 					}
 					case GLFW_RELEASE:
 					{
-						MouseButtonReleasedEvent event(button);
+						MouseButtonReleasedEvent event(static_cast<MouseCode>(button));
 						data.EventCallback(event);
 						break;
 					}

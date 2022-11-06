@@ -1,7 +1,8 @@
 #pragma once
 
 #include "RandomEngine/Core/Types.h"
-#include "Event.h"
+#include "RandomEngine/Core/KeyCodes.h"
+#include "RandomEngine/Events/Event.h"
 
 namespace RandomEngine {
 
@@ -52,13 +53,13 @@ namespace RandomEngine {
 	class MouseButtonEvent : public Event {
 
 		protected:
-			int _button;
+			MouseCode _button;
 
-			MouseButtonEvent(int button)
+			MouseButtonEvent(MouseCode button)
 				: _button(button) { }
 
 		public:
-			inline int GetMouseButton() const { return _button; }
+			inline MouseCode GetMouseButton() const { return _button; }
 
 			EVENT_CLASS_CATEGORY(EC_Mouse | EC_Input)
 	};
@@ -67,7 +68,7 @@ namespace RandomEngine {
 	class MouseButtonPressedEvent : public MouseButtonEvent {
 
 		public:
-			MouseButtonPressedEvent(int button)
+			MouseButtonPressedEvent(MouseCode button)
 				: MouseButtonEvent(button) { }
 
 			String ToString() const override {
@@ -82,7 +83,7 @@ namespace RandomEngine {
 	class MouseButtonReleasedEvent : public MouseButtonEvent {
 
 		public:
-			MouseButtonReleasedEvent(int button)
+			MouseButtonReleasedEvent(MouseCode button)
 				: MouseButtonEvent(button) { }
 
 			String ToString() const override {

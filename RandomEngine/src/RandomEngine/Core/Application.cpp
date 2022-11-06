@@ -59,8 +59,8 @@ namespace RandomEngine {
 		dispatcher.Dispatch<WindowResizeEvent>(RE_BIND_EVENT_FN(Application::OnWindowResized));
 		dispatcher.Dispatch<WindowCloseEvent>(RE_BIND_EVENT_FN(Application::OnWindowClose));
 
-		for (auto iterator = _layerStack.end(); iterator != _layerStack.begin(); ) {
-			(*--iterator)->OnEvent(e);
+		for (auto iterator = _layerStack.rbegin(); iterator != _layerStack.rend(); iterator++) {
+			(*iterator)->OnEvent(e);
 			if (e.IsHandled()) {
 				break;
 			}

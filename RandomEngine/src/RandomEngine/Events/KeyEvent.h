@@ -1,20 +1,21 @@
 #pragma once
 
 #include "RandomEngine/Core/Types.h"
-#include "Event.h"
+#include "RandomEngine/Core/KeyCodes.h"
+#include "RandomEngine/Events/Event.h"
 
 namespace RandomEngine {
 
 	class KeyEvent : public Event {
 
 		protected:
-			int _keyCode;
+			KeyCode _keyCode;
 
-			KeyEvent(int keyCode)
+			KeyEvent(KeyCode keyCode)
 				: _keyCode(keyCode) { }
 
 		public:
-			inline int GetKeyCode() const { return _keyCode; }
+			inline KeyCode GetKeyCode() const { return _keyCode; }
 
 			EVENT_CLASS_CATEGORY(EC_Keyboard | EC_Input)
 	};
@@ -25,7 +26,7 @@ namespace RandomEngine {
 			int _repeatCount;
 
 		public:
-			KeyPressedEvent(int keyCode, int repeatCount)
+			KeyPressedEvent(KeyCode keyCode, int repeatCount)
 				: KeyEvent(keyCode), _repeatCount(repeatCount) { }
 
 			inline int GetRepeatCount() const { return _repeatCount; }
@@ -42,7 +43,7 @@ namespace RandomEngine {
 	class KeyReleasedEvent : public KeyEvent {
 
 		public:
-			KeyReleasedEvent(int keyCode)
+			KeyReleasedEvent(KeyCode keyCode)
 				: KeyEvent(keyCode) { }
 
 			String ToString() const override {
@@ -57,7 +58,7 @@ namespace RandomEngine {
 	class KeyTypedEvent : public KeyEvent {
 
 		public:
-			KeyTypedEvent(int keyCode)
+			KeyTypedEvent(KeyCode keyCode)
 				: KeyEvent(keyCode) { }
 
 			String ToString() const override {

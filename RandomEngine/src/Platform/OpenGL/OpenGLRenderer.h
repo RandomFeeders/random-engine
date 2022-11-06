@@ -15,6 +15,16 @@ namespace RandomEngine::Graphics {
 			void SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height) override;
 
 			void DrawIndexed(const VertexArrayRef& vertexArray) override;
+
+			static void OpenGLMessageCallback(
+				unsigned int source,
+				unsigned int type,
+				unsigned int id,
+				unsigned int severity,
+				int length,
+				const char* message,
+				const void* userParam
+			);
 	};
 
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RandomEngine/Core/Types.h"
-#include "Event.h"
+#include "RandomEngine/Events/Event.h"
 
 namespace RandomEngine {
 

@@ -7,12 +7,15 @@
 #include "RandomEngine/Events/ApplicationEvent.h"
 #include "RandomEngine/GUI/GuiLayer.h"
 
+int main(int argc, char** argv);
+
 namespace RandomEngine {
 
 	class Application {
 		
 		private:
 			static Application* _instance;
+			friend int ::main(int argc, char** argv);
 
 			bool _running = false;
 			bool _minimized = false;
@@ -25,11 +28,12 @@ namespace RandomEngine {
 			bool OnWindowResized(WindowResizeEvent& e);
 			bool OnWindowClose(WindowCloseEvent& e);
 
+			void Run();
+
 		public:
 			Application();
 			virtual ~Application();
 
-			void Run();
 			void OnEvent(Event& e);
 
 			void PushLayer(Layer* layer);

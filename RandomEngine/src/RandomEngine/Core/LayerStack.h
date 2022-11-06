@@ -19,8 +19,15 @@ namespace RandomEngine {
 			void PopLayer(Layer* layer);
 			void PopOverlay(Layer* overlay);
 
-			inline List<Layer*>::iterator begin() { return _layers.begin(); }
-			inline List<Layer*>::iterator end() { return _layers.end(); }
+			inline Iterator<Layer*> begin() { return _layers.begin(); }
+			inline Iterator<Layer*> end() { return _layers.end(); }
+			inline ReverseIterator<Layer*> rbegin() { return _layers.rbegin(); }
+			inline ReverseIterator<Layer*> rend() { return _layers.rend(); }
+
+			inline ConstIterator<Layer*> begin() const { return _layers.begin(); }
+			inline ConstIterator<Layer*> end() const { return _layers.end(); }
+			inline ConstReverseIterator<Layer*> rbegin() const { return _layers.rbegin(); }
+			inline ConstReverseIterator<Layer*> rend() const { return _layers.rend(); }
 	};
 
 }

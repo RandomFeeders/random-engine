@@ -37,6 +37,12 @@ namespace RandomEngine {
 	template<typename T>
 	using ConstIterator = std::vector<T>::const_iterator;
 
+	template<typename T>
+	using ReverseIterator = std::vector<T>::reverse_iterator;
+
+	template<typename T>
+	using ConstReverseIterator = std::vector<T>::const_reverse_iterator;
+
 	using String = std::string;
 
 	template<typename TKey, typename TValue>

@@ -26,7 +26,7 @@ namespace RandomEngine::Graphics {
 			virtual void SetClearColor(const Maths::Vector4f& color) = 0;
 			virtual void SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height) = 0;
 
-			virtual void DrawIndexed(const VertexArrayRef& vertexArray) = 0;
+			virtual void DrawIndexed(const VertexArrayRef& vertexArray, unsigned int indexCount = 0) = 0;
 
 			static inline API GetAPI() { return _rendererAPI; }
 	};

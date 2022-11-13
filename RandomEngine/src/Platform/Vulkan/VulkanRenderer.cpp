@@ -23,7 +23,7 @@ namespace RandomEngine::Graphics {
 
 	}
 
-	void VulkanRenderer::DrawIndexed(const VertexArrayRef& vertexArray) {
+	void VulkanRenderer::DrawIndexed(const VertexArrayRef& vertexArray, unsigned int indexCount) {
 
 	}
 

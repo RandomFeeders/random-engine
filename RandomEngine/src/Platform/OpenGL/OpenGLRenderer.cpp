@@ -65,10 +65,10 @@ namespace RandomEngine::Graphics {
 		glViewport(x, y, width, height);
 	}
 
-	void OpenGLRenderer::DrawIndexed(const VertexArrayRef& vertexArray) {
+	void OpenGLRenderer::DrawIndexed(const VertexArrayRef& vertexArray, unsigned int indexCount) {
 		glDrawElements(
 			GL_TRIANGLES,
-			vertexArray->GetIndexBuffer()->GetCount(),
+			indexCount == 0 ? vertexArray->GetIndexBuffer()->GetCount() : indexCount,
 			GL_UNSIGNED_INT,
 			nullptr
 		);

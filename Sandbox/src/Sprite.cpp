@@ -22,10 +22,18 @@ namespace Sandbox {
 	Sprite::Sprite(const RandomEngine::String& name) {
 		using namespace RandomEngine::Graphics;
 
-		auto vertexBuffer = VertexBuffer::Create(_vertices, sizeof(_vertices) / sizeof(*_vertices));
+		auto vertexBufferSize = sizeof(_vertices) / sizeof(*_vertices);
+		auto vertexBufferData = RandomEngine::CreateRef<float[]>(vertexBufferSize);
+		for (int i = 0; i < vertexBufferSize; i++) vertexBufferData[i] = _vertices[i];
+
+		auto vertexBuffer = VertexBuffer::Create(vertexBufferData, vertexBufferSize);
 		vertexBuffer->SetLayout(_layout);
 
-		auto indexBuffer = IndexBuffer::Create(_indices, sizeof(_indices) / sizeof(*_indices));
+		auto indexBufferSize = sizeof(_indices) / sizeof(*_indices);
+		auto indexBufferData = RandomEngine::CreateRef<unsigned int[]>(indexBufferSize);
+		for (int i = 0; i < indexBufferSize; i++) indexBufferData[i] = _indices[i];
+
+		auto indexBuffer = IndexBuffer::Create(indexBufferData, indexBufferSize);
 
 		_vertexArray = VertexArray::Create();
 		_vertexArray->AddVertexBuffer(vertexBuffer);

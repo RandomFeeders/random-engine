@@ -7,10 +7,25 @@
 
 namespace RandomEngine::Graphics {
 
-	IndexBuffer::IndexBuffer(unsigned int* data, unsigned int count)
+	IndexBuffer::IndexBuffer(unsigned int count)
+		: Buffer(count) { }
+
+	IndexBuffer::IndexBuffer(const Ref<unsigned int[]>& data, unsigned int count)
 		: Buffer(data, count) { }
 
-	IndexBufferRef IndexBuffer::Create(unsigned int* data, unsigned int count) {
+	IndexBufferRef IndexBuffer::Create(unsigned int count) {
+		switch (RendererAPI::GetAPI()) {
+			case RendererAPI::API::OpenGL:
+				return CreateRef<OpenGLIndexBuffer>(count);
+			case RendererAPI::API::Vulkan:
+				return CreateRef<VulkanIndexBuffer>(count);
+			default:
+				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
+				return nullptr;
+		}
+	}
+
+	IndexBufferRef IndexBuffer::Create(const Ref<unsigned int[]>& data, unsigned int count) {
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
 				return CreateRef<OpenGLIndexBuffer>(data, count);

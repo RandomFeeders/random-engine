@@ -7,14 +7,29 @@
 
 namespace RandomEngine::Graphics {
 
-	VertexBuffer::VertexBuffer(float* data, unsigned int count)
+	VertexBuffer::VertexBuffer(unsigned int count)
+		: Buffer(count) { }
+
+	VertexBuffer::VertexBuffer(const Ref<float[]>& data, unsigned int count)
 		: Buffer(data, count) { }
 
 	void VertexBuffer::SetLayout(const BufferLayout& layout) {
 		_layout = layout;
 	}
 
-	VertexBufferRef VertexBuffer::Create(float* data, unsigned int count) {
+	VertexBufferRef VertexBuffer::Create(unsigned int count) {
+		switch (RendererAPI::GetAPI()) {
+			case RendererAPI::API::OpenGL:
+				return CreateRef<OpenGLVertexBuffer>(count);
+			case RendererAPI::API::Vulkan:
+				return CreateRef<VulkanVertexBuffer>(count);
+			default:
+				RE_CORE_ASSERT(false, "Renderer API selected not supported!");
+				return nullptr;
+		}
+	}
+
+	VertexBufferRef VertexBuffer::Create(const Ref<float[]>& data, unsigned int count) {
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
 				return CreateRef<OpenGLVertexBuffer>(data, count);

@@ -5,11 +5,18 @@
 
 namespace RandomEngine::Graphics {
 
-	OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned int* data, unsigned int count)
+	OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned int count)
+		: IndexBuffer(count) {
+		glCreateBuffers(1, &_rendererId);
+		glBindBuffer(GL_ARRAY_BUFFER, _rendererId);
+		glBufferData(GL_ARRAY_BUFFER, GetSize(), nullptr, GL_DYNAMIC_DRAW);
+	}
+
+	OpenGLIndexBuffer::OpenGLIndexBuffer(const Ref<unsigned int[]>& data, unsigned int count)
 		: IndexBuffer(data, count) {
 		glCreateBuffers(1, &_rendererId);
 		glBindBuffer(GL_ARRAY_BUFFER, _rendererId);
-		glBufferData(GL_ARRAY_BUFFER, GetSize(), data, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, GetSize(), data.get(), GL_STATIC_DRAW);
 	}
 
 	OpenGLIndexBuffer::~OpenGLIndexBuffer() {

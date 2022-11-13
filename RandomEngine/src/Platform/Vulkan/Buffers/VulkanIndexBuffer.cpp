@@ -3,7 +3,12 @@
 
 namespace RandomEngine::Graphics {
 
-	VulkanIndexBuffer::VulkanIndexBuffer(unsigned int* data, unsigned int count)
+	VulkanIndexBuffer::VulkanIndexBuffer(unsigned int count)
+		: IndexBuffer(count) {
+
+	}
+
+	VulkanIndexBuffer::VulkanIndexBuffer(const Ref<unsigned int[]>& data, unsigned int count)
 		: IndexBuffer(data, count) {
 
 	}

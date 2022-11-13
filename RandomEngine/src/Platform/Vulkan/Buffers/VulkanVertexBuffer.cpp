@@ -3,7 +3,12 @@
 
 namespace RandomEngine::Graphics {
 
-	VulkanVertexBuffer::VulkanVertexBuffer(float* data, unsigned int count)
+	VulkanVertexBuffer::VulkanVertexBuffer(unsigned int count)
+		: VertexBuffer(count) {
+
+	}
+
+	VulkanVertexBuffer::VulkanVertexBuffer(const Ref<float[]>& data, unsigned int count)
 		: VertexBuffer(data, count) {
 
 	}

@@ -11,7 +11,8 @@ namespace RandomEngine::Graphics {
 			unsigned int _rendererId;
 
 		public:
-			OpenGLIndexBuffer(unsigned int* data, unsigned int count);
+			OpenGLIndexBuffer(unsigned int count);
+			OpenGLIndexBuffer(const Ref<unsigned int[]>& data, unsigned int count);
 			virtual ~OpenGLIndexBuffer();
 
 			void Bind() const override;

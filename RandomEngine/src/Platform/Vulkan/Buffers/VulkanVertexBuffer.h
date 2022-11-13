@@ -11,7 +11,8 @@ namespace RandomEngine::Graphics {
 
 
 		public:
-			VulkanVertexBuffer(float* data, unsigned int count);
+			VulkanVertexBuffer(unsigned int count);
+			VulkanVertexBuffer(const Ref<float[]>& data, unsigned int count);
 			virtual ~VulkanVertexBuffer();
 
 			void Bind() const override;

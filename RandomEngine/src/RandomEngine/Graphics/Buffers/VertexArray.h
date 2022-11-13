@@ -27,6 +27,7 @@ namespace RandomEngine::Graphics {
 			virtual void SetIndexBuffer(const IndexBufferRef buffer);
 
 			virtual inline const List<VertexBufferRef>& GetVertexBuffers() const { return _vertexBuffers; }
+			virtual inline const VertexBufferRef& GetVertexBuffer(unsigned int index) const { return _vertexBuffers[index]; }
 			virtual inline const IndexBufferRef& GetIndexBuffer() const { return _indexBuffer; }
 
 			static VertexArrayRef Create();

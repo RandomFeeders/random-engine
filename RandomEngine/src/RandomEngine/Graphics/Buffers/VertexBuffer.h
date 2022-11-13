@@ -16,7 +16,8 @@ namespace RandomEngine::Graphics {
 			BufferLayout _layout;
 
 		public:
-			VertexBuffer(float* data, unsigned int count);
+			VertexBuffer(unsigned int count);
+			VertexBuffer(const Ref<float[]>& data, unsigned int count);
 			virtual ~VertexBuffer() = default;
 
 			void Bind() const override = 0;
@@ -25,7 +26,8 @@ namespace RandomEngine::Graphics {
 			virtual void SetLayout(const BufferLayout& layout);
 			inline const BufferLayout& GetLayout() const { return _layout; }
 
-			static VertexBufferRef Create(float* data, unsigned int count);
+			static VertexBufferRef Create(unsigned int count);
+			static VertexBufferRef Create(const Ref<float[]>& data, unsigned int count);
 	};
 
 }

@@ -11,7 +11,8 @@ namespace RandomEngine::Graphics {
 
 
 		public:
-			VulkanIndexBuffer(unsigned int* data, unsigned int count);
+			VulkanIndexBuffer(unsigned int count);
+			VulkanIndexBuffer(const Ref<unsigned int[]>& data, unsigned int count);
 			virtual ~VulkanIndexBuffer();
 
 			void Bind() const override;

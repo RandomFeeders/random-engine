@@ -11,11 +11,13 @@ namespace RandomEngine::Graphics {
 			unsigned int _rendererId;
 
 		public:
-			OpenGLVertexBuffer(float* data, unsigned int count);
+			OpenGLVertexBuffer(unsigned int count);
+			OpenGLVertexBuffer(const Ref<float[]>& data, unsigned int count);
 			virtual ~OpenGLVertexBuffer();
 
 			void Bind() const override;
 			void Unbind() const override;
+			void SetData(const Ref<float[]>& data, unsigned int count) override;
 
 			void SetLayout(const BufferLayout& layout) override;
 	};

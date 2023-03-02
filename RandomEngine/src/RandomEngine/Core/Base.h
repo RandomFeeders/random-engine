@@ -22,3 +22,5 @@
 
 #define BIT(n) (1 << n)
 #define HAS_FLAG(e, f) ((e & f) == f)
+#define FLAG(f, t) constexpr friend f operator|(f left, f right) { return static_cast<f>(static_cast<t>(left) | static_cast<t>(right)); }\
+                   constexpr friend f operator&(f left, f right) { return static_cast<f>(static_cast<t>(left) & static_cast<t>(right)); }

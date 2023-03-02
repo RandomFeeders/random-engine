@@ -11,6 +11,18 @@ int main(int argc, char** argv);
 
 namespace RandomEngine {
 
+	struct ApplicationProps {
+
+		public:
+			String Title;
+			uint Width;
+			uint Height;
+			bool TransparentWindow;
+
+			ApplicationProps(const String& title = "Random Engine", uint width = 1280, uint height = 720, bool transparentWindow = false)
+				: Title(title), Width(width), Height(height), TransparentWindow(transparentWindow) { }
+	};
+
 	class Application {
 		
 		private:
@@ -31,7 +43,7 @@ namespace RandomEngine {
 			void Run();
 
 		public:
-			Application();
+			Application(const ApplicationProps& props = ApplicationProps());
 			virtual ~Application();
 
 			void OnEvent(Event& e);

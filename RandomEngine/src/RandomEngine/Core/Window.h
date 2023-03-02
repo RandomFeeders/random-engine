@@ -11,12 +11,14 @@ namespace RandomEngine {
 			String Title;
 			unsigned int Width;
 			unsigned int Height;
+			bool Transparent;
 
 			WindowProps(
 				const String& title = "Random Engine",
 				unsigned int width = 1280,
-				unsigned int height = 720) 
-				: Title(title), Width(width), Height(height) { }
+				unsigned int height = 720,
+				bool transparent = false) 
+				: Title(title), Width(width), Height(height), Transparent(transparent) { }
 	};
 
 	class Window {

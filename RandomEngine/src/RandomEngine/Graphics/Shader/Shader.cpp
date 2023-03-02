@@ -51,17 +51,19 @@ namespace RandomEngine::Graphics {
 	}
 
 	ShaderRef Shader::Create(const String& filePath, const String& name) {
-		IO::File file(filePath);
+		IO::File file(filePath, IO::File::Mode::Open, IO::File::Access::Read);
+		if (!file.Read()) return nullptr;
+
 		Shader::Dictionary dict;
 		ShaderRef shader;
 
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::OpenGL:
-				dict = PreProcessFile(file.Read(), OpenGLShader::GetMapper());
+				dict = PreProcessFile(file.GetContent(), OpenGLShader::GetMapper());
 				shader = CreateRef<OpenGLShader>(dict);
 				break;
 			case RendererAPI::API::Vulkan:
-				dict = PreProcessFile(file.Read(), VulkanShader::GetMapper());
+				dict = PreProcessFile(file.GetContent(), VulkanShader::GetMapper());
 				shader = CreateRef<VulkanShader>(dict);
 				break;
 			default:

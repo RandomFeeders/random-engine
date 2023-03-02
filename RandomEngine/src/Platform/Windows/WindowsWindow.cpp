@@ -29,6 +29,7 @@ namespace RandomEngine {
 		_data.Title = props.Title;
 		_data.Width = props.Width;
 		_data.Height = props.Height;
+		_data.Transparent = props.Transparent;
 		_data.Minimized = false;
 
 		RE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
@@ -42,6 +43,8 @@ namespace RandomEngine {
 
 			glfwSetErrorCallback(GLFWErrorCallback);
 		}
+
+		glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, _data.Transparent ? GLFW_TRUE : GLFW_FALSE);
 
 		#ifdef RE_ENV_DEBUG
 		switch (Graphics::RendererAPI::GetAPI()) {

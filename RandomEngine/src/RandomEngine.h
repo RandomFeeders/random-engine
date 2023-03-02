@@ -20,6 +20,14 @@
 #include "RandomEngine/GUI/GuiLayer.h"
 // -------------------------------------
 
+// ----------------- IO ----------------
+#include "RandomEngine/IO/File.h"
+#include "RandomEngine/IO/Asset.h"
+#include "RandomEngine/IO/AssetBundle.h"
+#include "RandomEngine/IO/BinaryReader.h"
+#include "RandomEngine/IO/BinaryWriter.h"
+// -------------------------------------
+
 // ------------- Graphics --------------
 #include "RandomEngine/Graphics/Buffers/VertexArray.h"
 #include "RandomEngine/Graphics/Buffers/IndexBuffer.h"

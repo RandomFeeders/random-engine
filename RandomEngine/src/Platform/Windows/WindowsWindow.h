@@ -15,6 +15,7 @@ namespace RandomEngine {
 				unsigned int Height = 0;
 				bool VSync = false;
 				bool Minimized = false;
+				bool Transparent = false;
 
 				EventCallbackFn EventCallback;
 			};

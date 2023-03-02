@@ -6,6 +6,15 @@
 
 namespace RandomEngine {
 
+	typedef unsigned char byte;
+	typedef unsigned short ushort;
+	typedef unsigned int uint;
+	typedef unsigned long ulong;
+	typedef long long llong;
+	typedef unsigned long long ullong;
+
+	using String = std::string;
+
 	template<typename T>
 	using Scope = std::unique_ptr<T>;
 
@@ -42,8 +51,6 @@ namespace RandomEngine {
 
 	template<typename T>
 	using ConstReverseIterator = std::vector<T>::const_reverse_iterator;
-
-	using String = std::string;
 
 	template<typename TKey, typename TValue>
 	using Dictionary = std::unordered_map<TKey, TValue>;

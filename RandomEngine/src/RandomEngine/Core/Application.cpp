@@ -22,7 +22,8 @@ namespace RandomEngine {
 				props.Title, 
 				props.Width, 
 				props.Height, 
-				props.TransparentWindow
+				props.TransparentWindow,
+				props.BorderWindow
 			)
 		);
 		_window->SetEventCallback(RE_BIND_EVENT_FN(Application::OnEvent));
@@ -93,6 +94,10 @@ namespace RandomEngine {
 
 	void Application::PushOverlay(Layer* overlay) {
 		_layerStack.PushOverlay(overlay);
+	}
+
+	void Application::Close() {
+		_running = false;
 	}
 
 }

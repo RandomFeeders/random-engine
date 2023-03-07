@@ -16,6 +16,7 @@ namespace RandomEngine {
 				bool VSync = false;
 				bool Minimized = false;
 				bool Transparent = false;
+				bool Border = true;
 
 				EventCallbackFn EventCallback;
 			};

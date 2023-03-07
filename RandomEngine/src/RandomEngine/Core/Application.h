@@ -18,9 +18,15 @@ namespace RandomEngine {
 			uint Width;
 			uint Height;
 			bool TransparentWindow;
+			bool BorderWindow;
 
-			ApplicationProps(const String& title = "Random Engine", uint width = 1280, uint height = 720, bool transparentWindow = false)
-				: Title(title), Width(width), Height(height), TransparentWindow(transparentWindow) { }
+			ApplicationProps(
+				const String& title = "Random Engine", 
+				uint width = 1280, 
+				uint height = 720, 
+				bool transparentWindow = false,
+				bool borderWindow = true
+			) : Title(title), Width(width), Height(height), TransparentWindow(transparentWindow), BorderWindow(borderWindow) { }
 	};
 
 	class Application {
@@ -45,6 +51,8 @@ namespace RandomEngine {
 		public:
 			Application(const ApplicationProps& props = ApplicationProps());
 			virtual ~Application();
+
+			void Close();
 
 			void OnEvent(Event& e);
 

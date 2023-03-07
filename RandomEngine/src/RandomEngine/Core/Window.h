@@ -12,13 +12,19 @@ namespace RandomEngine {
 			unsigned int Width;
 			unsigned int Height;
 			bool Transparent;
+			bool Border;
 
 			WindowProps(
 				const String& title = "Random Engine",
 				unsigned int width = 1280,
 				unsigned int height = 720,
-				bool transparent = false) 
-				: Title(title), Width(width), Height(height), Transparent(transparent) { }
+				bool transparent = false,
+				bool border = true) 
+				  : Title(title), 
+				    Width(width), 
+				    Height(height), 
+				    Transparent(transparent), 
+				    Border(border) { }
 	};
 
 	class Window {

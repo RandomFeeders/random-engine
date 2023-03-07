@@ -11,6 +11,8 @@
 
 namespace RandomEngine {
 
+	const ImWchar GuiLayer::iconsRanges[] = { RE_ICON_MIN, RE_ICON_MAX_16, 0 };
+
 	GuiLayer::GuiLayer()
 		: Layer("GuiLayer") { }
 
@@ -20,13 +22,30 @@ namespace RandomEngine {
 		// Base ImGui initialization
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		ImGuiIO& io = ImGui::GetIO();
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;		// Enable keyboard controls
 		// io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;		// Enable keyboard controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;			// Enable docking
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;			// Enable multi-viewport / platform windows
 		// io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		// io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
+
+		float baseFontSize = 13.0f;
+		float iconFontSize = baseFontSize * 2.0f / 3.0f;
+
+		io.Fonts->AddFontDefault();
+
+		ImFontConfig iconsConfig;
+		iconsConfig.MergeMode = true;
+		iconsConfig.PixelSnapH = true;
+		iconsConfig.GlyphMinAdvanceX = iconFontSize;
+
+		io.Fonts->AddFontFromFileTTF(
+			"./fonts/" RE_FONT_ICON_FILE_NAME_FAS,
+			iconFontSize, 
+			&iconsConfig, 
+			iconsRanges
+		);
 
 		// Setup ImGui Style
 		ImGui::StyleColorsDark();

@@ -17,6 +17,7 @@
 #include "RandomEngine/Core/Input.h"
 #include "RandomEngine/Core/KeyCodes.h"
 
+#include "RandomEngine/GUI/FontIcon.h"
 #include "RandomEngine/GUI/GuiLayer.h"
 // -------------------------------------
 

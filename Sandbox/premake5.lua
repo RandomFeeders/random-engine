@@ -32,6 +32,12 @@ project "Sandbox"
 		"RandomEngine"
 	}
 
+	fontsfolder = "%{wks.location}/RandomEngine/vendor/Fonts"
+
+	postbuildcommands {
+		("{COPYDIR} \"" .. fontsfolder .. "/*.ttf\" \"%{cfg.targetdir}/fonts\"")
+	}
+
 	filter "system:windows"
 		systemversion "latest"
 
@@ -39,6 +45,7 @@ project "Sandbox"
 		defines "RE_ENV_DEBUG"
 		runtime "Debug"
 		symbols "on"
+		debugdir ("%{wks.location}/Binaries/" .. outputdir .. "/%{prj.name}")
 
 	filter "configurations:Release"
 		defines "RE_ENV_RELEASE"

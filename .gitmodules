@@ -1,22 +1,22 @@
-[submodule "RandomEngine/vendor/spdlog"]
-	path = RandomEngine/vendor/spdlog
-	url = https://github.com/RandomFeeders/spdlog
+[submodule "RandomEngine/vendor/Spdlog"]
+	path = RandomEngine/vendor/Spdlog
+	url = https://github.com/RandomFeeders/spdlog.git
 	branch = v1.x
 [submodule "RandomEngine/vendor/GLFW"]
 	path = RandomEngine/vendor/GLFW
-	url = https://github.com/RandomFeeders/glfw
+	url = https://github.com/RandomFeeders/glfw.git
 	branch = 3.3-stable
 [submodule "RandomEngine/vendor/ImGui"]
 	path = RandomEngine/vendor/ImGui
-	url = https://github.com/RandomFeeders/imgui
+	url = https://github.com/RandomFeeders/imgui.git
 	branch = docking
-[submodule "RandomEngine/vendor/glm"]
-	path = RandomEngine/vendor/glm
-	url = https://github.com/RandomFeeders/glm
+[submodule "RandomEngine/vendor/GLM"]
+	path = RandomEngine/vendor/GLM
+	url = https://github.com/RandomFeeders/glm.git
 	branch = master
 [submodule "RandomEngine/vendor/stb"]
 	path = RandomEngine/vendor/stb
-	url = https://github.com/RandomFeeders/stb
+	url = https://github.com/RandomFeeders/stb.git
 	branch = master
 [submodule "RandomEngine/vendor/fmt"]
 	path = RandomEngine/vendor/fmt

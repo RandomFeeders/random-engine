@@ -34,7 +34,6 @@ group "Dependencies"
 	include "RandomEngine/vendor/Glad"
 	include "RandomEngine/vendor/imgui"
 	include "RandomEngine/vendor/Spdlog"
-	include "RandomEngine/vendor/fmt"
 	
 group ""
 	include "RandomEngine"

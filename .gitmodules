@@ -18,7 +18,3 @@
 	path = RandomEngine/vendor/stb
 	url = https://github.com/RandomFeeders/stb.git
 	branch = master
-[submodule "RandomEngine/vendor/fmt"]
-	path = RandomEngine/vendor/fmt
-	url = https://github.com/RandomFeeders/fmt
-	branch = master

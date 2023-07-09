@@ -9,6 +9,8 @@ IncludeDir["Glad"] = "%{wks.location}/RandomEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "%{wks.location}/RandomEngine/vendor/ImGui"
 IncludeDir["glm"] = "%{wks.location}/RandomEngine/vendor/glm"
 IncludeDir["stb"] = "%{wks.location}/RandomEngine/vendor/stb"
+IncludeDir["Spdlog"] = "%{wks.location}/RandomEngine/vendor/spdlog/include"
+IncludeDir["fmt"] = "%{wks.location}/RandomEngine/vendor/fmt/include"
 IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
 
 LibraryDir = {}

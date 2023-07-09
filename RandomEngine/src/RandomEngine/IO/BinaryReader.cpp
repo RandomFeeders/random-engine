@@ -6,7 +6,7 @@ namespace RandomEngine::IO {
 	BinaryReader::BinaryReader(const String& content)
 		: _content(content), _cursor(0) { }
 
-	ulong BinaryReader::GetCursor() {
+	ullong BinaryReader::GetCursor() {
 		auto cursor = _cursor++;
 		if (_cursor > _content.size()) {
 			RE_CORE_ASSERT(false, "Index {0} out of contents bounds", _cursor);
@@ -65,7 +65,7 @@ namespace RandomEngine::IO {
 	}
 
 	String BinaryReader::ReadString() {
-		auto size = InternalRead<size_t>();
+		auto size = InternalRead<ulong>();
 		return ReadString(size);
 	}
 

@@ -8,7 +8,7 @@
 extern RandomEngine::Application* RandomEngine::CreateApplication();
 
 int main(int argc, char** argv) {
-	RandomEngine::Log::Init();
+	RandomEngine::Logger::Init();
 
 	auto app = RandomEngine::CreateApplication();
 	app->Run();

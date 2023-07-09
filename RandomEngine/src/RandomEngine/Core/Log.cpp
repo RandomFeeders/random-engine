@@ -5,11 +5,11 @@
 
 namespace RandomEngine {
 
-	bool Log::_hasInit = false;
-	Ref<spdlog::logger> Log::_coreLogger;
-	Ref<spdlog::logger> Log::_clientLogger;
+	bool Logger::_hasInit = false;
+	Ref<spdlog::logger> Logger::_coreLogger;
+	Ref<spdlog::logger> Logger::_clientLogger;
 
-	void Log::Init() {
+	String GetLogFileName() {
 		time_t now = time(0);
 		tm* ltm = localtime(&now);
 		std::stringstream date;
@@ -20,11 +20,13 @@ namespace RandomEngine {
 		date << std::setfill('0') << std::setw(2) << ltm->tm_min << "-";
 		date << std::setfill('0') << std::setw(2) << ltm->tm_sec;
 
-		String filename = "logs/" + date.str() + ".log";
+		return "logs/" + date.str() + ".log";
+	}
 
+	void Logger::Init() {
 		List<Ref<spdlog::sinks::sink>> logSinks;
 		logSinks.emplace_back(CreateRef<spdlog::sinks::stdout_color_sink_mt>());
-		logSinks.emplace_back(CreateRef<spdlog::sinks::basic_file_sink_mt>(filename, true));
+		logSinks.emplace_back(CreateRef<spdlog::sinks::basic_file_sink_mt>(GetLogFileName(), true));
 
 		logSinks[0]->set_pattern("%^[%d/%m/%C %H:%M:%S] %n: %v%$");
 		logSinks[1]->set_pattern("%^[%d/%m/%C %H:%M:%S] [%l] %n: %v%$");
@@ -41,5 +43,4 @@ namespace RandomEngine {
 
 		_hasInit = true;
 	}
-
 }

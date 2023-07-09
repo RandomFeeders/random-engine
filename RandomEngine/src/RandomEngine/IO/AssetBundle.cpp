@@ -43,7 +43,7 @@ namespace RandomEngine::IO {
 
 		if (table.size() > 0) {
 			BinaryReader brTable(table);
-			for (auto i = 0; i < tableLength; i++) {
+			for (uint i = 0; i < tableLength; i++) {
 				auto index = brTable.ReadInt();
 				auto name = brTable.ReadString();
 				auto type = brTable.ReadUShort();

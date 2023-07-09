@@ -2,6 +2,7 @@
 
 #include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Events/Event.h"
+#include "RandomEngine/Core/WindowMode.h"
 
 namespace RandomEngine {
 
@@ -9,20 +10,26 @@ namespace RandomEngine {
 
 		public:
 			String Title;
-			unsigned int Width;
-			unsigned int Height;
+			uint Width;
+			uint Height;
+			WindowMode Mode;
+			int MonitorIndex;
 			bool Transparent;
 			bool Border;
 
 			WindowProps(
 				const String& title = "Random Engine",
-				unsigned int width = 1280,
-				unsigned int height = 720,
+				uint width = 1280,
+				uint height = 720,
+				WindowMode mode = WindowMode::Windowed,
+				int monitorIndex = 0,
 				bool transparent = false,
 				bool border = true) 
 				  : Title(title), 
 				    Width(width), 
-				    Height(height), 
+				    Height(height),
+					Mode(mode),
+					MonitorIndex(monitorIndex),
 				    Transparent(transparent), 
 				    Border(border) { }
 	};
@@ -30,6 +37,7 @@ namespace RandomEngine {
 	class Window {
 
 		public:
+
 			using EventCallbackFn = Func<void(Event&)>;
 
 			virtual ~Window() { }
@@ -41,6 +49,9 @@ namespace RandomEngine {
 
 			virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 			virtual void SetVSync(bool enabled) = 0;
+			virtual void SetMonitor(int index) = 0;
+			virtual void SetMode(WindowMode mode) = 0;
+			virtual WindowMode GetMode() const = 0;
 			virtual bool IsVSync() const = 0;
 			virtual bool IsMinimized() const = 0;
 

@@ -1,4 +1,4 @@
-project "Sandbox"
+project "AssetManager"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++20"
@@ -10,8 +10,7 @@ project "Sandbox"
 	files
 	{
 		"src/**.h",
-		"src/**.cpp",
-		"assets/**"
+		"src/**.cpp"
 	}
 
 	includedirs
@@ -33,7 +32,7 @@ project "Sandbox"
 		"RandomEngine"
 	}
 
-	fontsfolder = "%{wks.location}/RandomEngine/vendor/Fonts"
+	fontsfolder = "%{wks.location}RandomEngine/vendor/Fonts"
 
 	postbuildcommands {
 		("{COPYDIR} \"" .. fontsfolder .. "/*.ttf\" \"%{cfg.targetdir}/fonts\"")

@@ -17,15 +17,22 @@ namespace RandomEngine {
 		RE_CORE_ASSERT(!_instance, "Application already exists!");
 		_instance = this;
 
+		_monitorList = GetMonitors(&_monitorCount);
+		if (props.MonitorIndex > 0 && props.MonitorIndex < _monitorCount)
+			_monitorIndex = props.MonitorIndex;
+
 		_window = Window::Create(
 			WindowProps(
 				props.Title, 
 				props.Width, 
 				props.Height, 
+				props.WindowMode,
+				props.MonitorIndex,
 				props.TransparentWindow,
 				props.BorderWindow
 			)
 		);
+
 		_window->SetEventCallback(RE_BIND_EVENT_FN(Application::OnEvent));
 
 		Graphics::Renderer::Init();

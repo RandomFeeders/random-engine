@@ -17,7 +17,7 @@ namespace RandomEngine::Profiling {
 		std::lock_guard lock(_mutex);
 
 		if (_currentSession) {
-			if (Log::HasInit()) {
+			if (Logger::HasInit()) {
 				RE_CORE_ERROR(
 					"Instrumentor::BeginSession('{0}') when session '{1}' already open.", 
 					name, 
@@ -32,7 +32,7 @@ namespace RandomEngine::Profiling {
 		if (_outputStream.is_open()) {
 			_currentSession = new InstrumentationSession{ name };
 			WriteHeader();
-		} else if (Log::HasInit()) {
+		} else if (Logger::HasInit()) {
 			RE_CORE_ERROR("Instrumentor could not open results file '{0}'.", filePath);
 		}		
 	}

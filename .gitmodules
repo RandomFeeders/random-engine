@@ -5,7 +5,7 @@
 [submodule "RandomEngine/vendor/GLFW"]
 	path = RandomEngine/vendor/GLFW
 	url = https://github.com/RandomFeeders/glfw
-	branch = 3.3
+	branch = 3.3-stable
 [submodule "RandomEngine/vendor/ImGui"]
 	path = RandomEngine/vendor/ImGui
 	url = https://github.com/RandomFeeders/imgui
@@ -17,4 +17,8 @@
 [submodule "RandomEngine/vendor/stb"]
 	path = RandomEngine/vendor/stb
 	url = https://github.com/RandomFeeders/stb
+	branch = master
+[submodule "RandomEngine/vendor/fmt"]
+	path = RandomEngine/vendor/fmt
+	url = https://github.com/RandomFeeders/fmt
 	branch = master

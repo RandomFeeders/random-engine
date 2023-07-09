@@ -31,6 +31,8 @@ project "RandomEngine"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb}",
+		"%{IncludeDir.Spdlog}",
+		"%{IncludeDir.fmt}",
 		"%{IncludeDir.VulkanSDK}"
 	}
 
@@ -38,7 +40,8 @@ project "RandomEngine"
 	{
 		"GLFW",
 		"Glad",
-		"ImGui"
+		"ImGui",
+		"Spdlog"
 	}
 
 	filter "system:windows"

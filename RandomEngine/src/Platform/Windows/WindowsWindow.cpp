@@ -25,10 +25,21 @@ namespace RandomEngine {
 		Shutdown();
 	}
 
+	GLFWmonitor* GetMonitor(int index) {
+		int count;
+		auto monitors = glfwGetMonitors(&count);
+
+		if (index < 0 || index >= count) return nullptr;
+
+		return monitors[index];
+	}
+
 	void WindowsWindow::Init(const WindowProps& props) {
 		_data.Title = props.Title;
 		_data.Width = props.Width;
 		_data.Height = props.Height;
+		_data.Mode = props.Mode;
+		_data.MonitorIndex = props.MonitorIndex;
 		_data.Transparent = props.Transparent;
 		_data.Minimized = false;
 		_data.Border = props.Border;
@@ -61,8 +72,16 @@ namespace RandomEngine {
 		}
 		#endif
 
-		_window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
+		_window = glfwCreateWindow(
+			props.Width, 
+			props.Height, 
+			props.Title.c_str(), 
+			nullptr, 
+			nullptr
+		);
 		_glfwWindowCount++;
+
+		SetMonitor(props.MonitorIndex);
 
 		_context = Graphics::Context::Create(_window);
 		_context->Init();
@@ -71,6 +90,36 @@ namespace RandomEngine {
 		SetVSync(true);
 
 		SetEvents();
+	}
+
+	void WindowsWindow::SetMode(WindowMode mode) {
+		_data.Mode = mode;
+		if (mode == WindowMode::Windowed) _data.MonitorIndex = -1;
+		SetMonitor(_data.MonitorIndex);
+	}
+
+	void WindowsWindow::SetMonitor(int index) {
+		_data.MonitorIndex = index;
+		auto monitor = GetMonitor(index);
+
+		if (monitor == nullptr || _data.Mode == WindowMode::Windowed) {
+			_data.Mode = WindowMode::Windowed;
+			_data.MonitorIndex = -1;
+			glfwSetWindowMonitor(_window, nullptr, 0, 0, _data.Width, _data.Height, GLFW_DONT_CARE);
+			return;
+		}
+
+		auto mode = glfwGetVideoMode(monitor);
+
+		if (_data.Mode == WindowMode::Fullscreen) {
+			_data.Width = mode->width;
+			_data.Height = mode->height;
+			glfwSetWindowMonitor(_window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+			glfwSetWindowSize(_window, mode->width, mode->height);
+			return;
+		}
+
+		glfwSetWindowMonitor(_window, nullptr, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
 	}
 
 	void WindowsWindow::SetEvents() {

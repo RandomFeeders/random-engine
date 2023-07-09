@@ -8,12 +8,12 @@ namespace RandomEngine::IO {
 
 		private:
 			String _content;
-			ulong _cursor;
+			ullong _cursor;
 
 			template<typename T>
 			T InternalRead(ulong count = sizeof(T));
 
-			ulong GetCursor();
+			ullong GetCursor();
 
 		public:
 			BinaryReader(const String& content);

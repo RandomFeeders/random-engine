@@ -13,6 +13,8 @@ namespace RandomEngine {
 				String Title;
 				unsigned int Width = 0;
 				unsigned int Height = 0;
+				int MonitorIndex = 0;
+				WindowMode Mode = WindowMode::Windowed;
 				bool VSync = false;
 				bool Minimized = false;
 				bool Transparent = false;
@@ -40,6 +42,9 @@ namespace RandomEngine {
 
 			inline void SetEventCallback(const EventCallbackFn& callback) override { _data.EventCallback = callback; }
 			void SetVSync(bool enabled) override;
+			void SetMonitor(int index) override;
+			void SetMode(WindowMode mode) override;
+			inline WindowMode GetMode() const override { return _data.Mode; }
 			inline bool IsVSync() const override { return _data.VSync; }
 			inline bool IsMinimized() const override { return _data.Minimized; }
 

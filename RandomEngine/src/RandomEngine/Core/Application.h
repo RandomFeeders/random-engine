@@ -2,6 +2,7 @@
 
 #include "RandomEngine/Core/Types.h"
 #include "RandomEngine/Core/Window.h"
+#include "RandomEngine/Core/Monitor.h"
 #include "RandomEngine/Core/LayerStack.h"
 #include "RandomEngine/Core/Timestep.h"
 #include "RandomEngine/Events/ApplicationEvent.h"
@@ -38,26 +39,6 @@ namespace RandomEngine {
 				MonitorIndex(monitorIndex),
 				TransparentWindow(transparentWindow), 
 				BorderWindow(borderWindow) { }
-	};
-
-	struct Monitor {
-
-		public:
-			int Index;
-			String Name;
-			uint Width;
-			uint Height;
-
-		Monitor() { }
-		Monitor(
-			int index,
-			String name,
-			uint width,
-			uint height
-		) : Index(index),
-			Name(name),
-			Width(width),
-			Height(height) { }
 	};
 
 	class Application {

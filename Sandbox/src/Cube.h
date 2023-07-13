@@ -16,7 +16,7 @@ namespace Sandbox {
 			static RandomEngine::Graphics::BufferLayout _layout;
 
 		public:
-			Cube(const RandomEngine::String& name);
+			Cube(const String& name);
 
 			void SetPosition(RandomEngine::Maths::Vector3f position);
 			void SetRotation(RandomEngine::Maths::Vector3f rotation);

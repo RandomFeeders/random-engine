@@ -3,6 +3,7 @@
 // ---------------- Core ---------------
 #include "RandomEngine/Core/Base.h"
 #include "RandomEngine/Core/Types.h"
+#include "RandomEngine/Core/Parse.h"
 #include "RandomEngine/Profiling/Profiling.h"
 
 #include "RandomEngine/Maths/Maths.h"
@@ -39,7 +40,6 @@
 #include "RandomEngine/Graphics/Cameras/OrthographicCameraController.h"
 
 #include "RandomEngine/Graphics/Renderer/Renderer.h"
-#include "RandomEngine/Graphics/Renderer/Renderer2D.h"
 #include "RandomEngine/Graphics/Shader/Shader.h"
 #include "RandomEngine/Graphics/Shader/ShaderLibrary.h"
 #include "RandomEngine/Graphics/Shader/ShaderDataType.h"

@@ -8,14 +8,14 @@ namespace Sandbox {
 	class Simple2DLayer : public RandomEngine::Layer {
 
 		struct ProfileResult {
-			RandomEngine::String Name;
+			String Name;
 			float Duration;
 		};
 
 		private:
 			RandomEngine::Graphics::ShaderRef _shader;
-			RandomEngine::Scope<RandomEngine::Graphics::OrthographicCameraController> _cameraController;
-			RandomEngine::Scope<Cube> _cube;
+			Scope<RandomEngine::Graphics::OrthographicCameraController> _cameraController;
+			Scope<Cube> _cube;
 			std::vector<RandomEngine::Profiling::Timer::Result> _results;
 
 		public:

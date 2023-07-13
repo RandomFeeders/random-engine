@@ -26,19 +26,19 @@ namespace Sandbox {
 		{ "_color", ShaderDataType::Vector4f }
 	};
 
-	Cube::Cube(const RandomEngine::String& name) {
+	Cube::Cube(const String& name) {
 		using namespace RandomEngine::Graphics;
 
-		auto vertexBufferSize = sizeof(_vertices) / sizeof(*_vertices);
-		auto vertexBufferData = RandomEngine::CreateRef<float[]>(vertexBufferSize);
-		for (int i = 0; i < vertexBufferSize; i++) vertexBufferData[i] = _vertices[i];
+		uint vertexBufferSize = (uint)sizeof(_vertices) / (uint)sizeof(*_vertices);
+		auto vertexBufferData = CreateRef<float[]>(vertexBufferSize);
+		for (uint i = 0; i < vertexBufferSize; i++) vertexBufferData[i] = _vertices[i];
 
 		auto vertexBuffer = VertexBuffer::Create(vertexBufferData, vertexBufferSize);
 		vertexBuffer->SetLayout(_layout);		
 		
-		auto indexBufferSize = sizeof(_indices) / sizeof(*_indices);
-		auto indexBufferData = RandomEngine::CreateRef<unsigned int[]>(indexBufferSize);
-		for (int i = 0; i < indexBufferSize; i++) indexBufferData[i] = _indices[i];
+		uint indexBufferSize = (uint)sizeof(_indices) / (uint)sizeof(*_indices);
+		auto indexBufferData = CreateRef<unsigned int[]>(indexBufferSize);
+		for (uint i = 0; i < indexBufferSize; i++) indexBufferData[i] = _indices[i];
 
 		auto indexBuffer = IndexBuffer::Create(indexBufferData, indexBufferSize);
 

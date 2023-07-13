@@ -34,9 +34,11 @@ project "Sandbox"
 	}
 
 	fontsfolder = "%{wks.location}/RandomEngine/vendor/Fonts"
+	assetsfolder = "{wks.location}/Sandbox/assets"
 
 	postbuildcommands {
-		("{COPYDIR} \"" .. fontsfolder .. "/*.ttf\" \"%{cfg.targetdir}/fonts\"")
+		("{COPYDIR} \"" .. fontsfolder .. "/*.ttf\" \"%{cfg.targetdir}/fonts\"")		
+		("{COPYDIR} \"" .. assetsfolder .. "/*.*\" \"%{cfg.targetdir}/assets\"")
 	}
 
 	filter "system:windows"

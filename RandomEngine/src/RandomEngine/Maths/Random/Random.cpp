@@ -1,8 +1,7 @@
 #include "REPCH.h"
+#include "Random.h"
 
 #include <glm/ext.hpp>
-
-#include "Random.h"
 
 namespace RandomEngine::Maths {
 

@@ -1,6 +1,8 @@
 #include "REPCH.h"
 #include "PerlinNoise.h"
 
+#include <glm/ext.hpp>
+
 namespace RandomEngine::Maths {
 
 	float PerlinNoise(const Vector2f& position) {
